@@ -71,18 +71,8 @@
                           <a href="{{ item.url }}" class="h6 text-body">
                             {{ item.product.title }}
                           </a>
-                          {% comment %} {% unless item.variant.title contains 'Default' %}
-                            <p>{{ item.variant.title }}</p>
-                          {% endunless %} {% endcomment %}
                           {% unless item.variant.title contains 'Default' %}
-                          <div class="cart__item-options">
-                          {% for option in item.product.options_with_values %}
-                          {% assign option_index = forloop.index0 %}
-                          <p class="mb-0 small">
-                          <strong>{{ option.name }}:</strong> {{ item.variant.options[option_index] }}
-                          </p>
-                          {% endfor %}
-                          </div>
+                            <p>{{ item.variant.title }}</p>
                           {% endunless %}
                           {%- liquid
                             assign property_size = item.properties | size
@@ -126,19 +116,9 @@
                       <a href="{{ item.url }}" class="h6 text-body">
                         {{ item.product.title }}
                       </a>
-                      {% comment %} {% unless item.variant.title contains 'Default' %}
+                      {% unless item.variant.title contains 'Default' %}
                         <p>{{ item.variant.title }}</p>
-                      {% endunless %} {% endcomment %}
-                       {% unless item.variant.title contains 'Default' %}
-  <div class="cart__item-options">
-    {% for option in item.product.options_with_values %}
-      {% assign option_index = forloop.index0 %}
-      <p class="mb-0 small">
-        <strong>{{ option.name }}:</strong> {{ item.variant.options[option_index] }}
-      </p>
-    {% endfor %}
-  </div>
-{% endunless %}
+                      {% endunless %}
     
                       {%- liquid
                         assign property_size = item.properties | size

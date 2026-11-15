@@ -1,1 +1,130 @@
-{"sections":{"collection-promo":{"type":"main-coupon_code","disabled":true,"settings":{"coupon_time":3}},"scrolling_text_XTgaax":{"type":"scrolling-text","blocks":{"item_jUBAYj":{"type":"item","settings":{"code":"","image":"shopify:\/\/shop_images\/top_header_banner.webp"}}},"block_order":["item_jUBAYj"],"name":"Scrolling Text","settings":{"animation":"","size_text":"h3","text_style":"solid","size_icon":300,"speed":20,"scroll_type":"from-right","background":"rgba(0,0,0,0)","gradient_bg":"","text":"#ffffff","paddingsection":"0px 0px 0px 0px","paddingmobile":"0px 0px 0px 0px","marginsection":"0px 0px 0px 0px","marginmobile":"0px 0px 0px 0px"}},"custom_liquid_rWXz66":{"type":"custom-liquid","name":"Custom Liquid Code","settings":{"custom_liquid":"<nav class=\" breadcrumb g-breadcrumb text-center text-md-left text-{{ settings.align_bread }}\" role=\"navigation\" aria-label=\"breadcrumbs\" style=\"background:transparent;\">\n  <div class=\"{{ settings.layout_bread }}\">\n    <a href=\"\/\" title=\"{{ 'general.breadcrumb.home' | t }}\">{{ 'general.breadcrumb.home' | t }}<\/a>\n    {% if template contains 'page' %}\n    <span aria-hidden=\"true\">\/<\/span>\n    <span>{{ page.title }}<\/span>\n    {% elsif template contains 'product' %}\n    {% if collection.url %}\n    <span aria-hidden=\"true\">\/<\/span>\n    {{ collection.title | link_to: collection.url }}\n    {% endif %}\n    <span aria-hidden=\"true\">\/<\/span>\n    <span>{{ product.title }}<\/span>\n    {% elsif template contains 'collection' and collection.handle %}\n    <span aria-hidden=\"true\">\/<\/span>\n    {% if current_tags %}\n    {% capture url %}\/collections\/{{ collection.handle }}{% endcapture %}\n    {{ collection.title | link_to: url }}\n    <span aria-hidden=\"true\">\/<\/span>\n    <span>{{ current_tags | join: \" + \" }}<\/span>\n    {% else %}\n    <span>{{ collection.title }}<\/span>\n    {% endif %}\n    {% elsif template == 'blog' %}\n    <span aria-hidden=\"true\">\/<\/span>\n    {% if current_tags %}\n    {{ blog.title | link_to: blog.url }}\n    <span aria-hidden=\"true\">\/<\/span>\n    <span>{{ current_tags | join: \" + \" }}<\/span>\n    {% else %}\n    <span>{{ blog.title }}<\/span>\n    {% endif %}\n    {% elsif template == 'article' %}\n    <span aria-hidden=\"true\">\/<\/span>\n    {{ blog.title | link_to: blog.url }}\n    <span aria-hidden=\"true\">\/<\/span>\n    <span>{{ article.title }}<\/span>\n    {% else %}\n    <span aria-hidden=\"true\">\/<\/span>\n    <span>{{ page_title }}<\/span>\n    {% endif %}\n  <\/div>\n<\/nav>","width_type":"full","custom_width":1200,"padding_top":0,"padding_bottom":0}},"collection-banner":{"type":"main-collection-banner","custom_css":[],"settings":{"show_collection_description":false,"show_collection_image":false,"style_banner":"full","heading_size":"h2","img_height":"250px","bg_color":"#111111","image_text_color":"#ffffff","image_overlay_color":"#000000","image_overlay_opacity":40,"enable_collection":true,"enable_count":true,"link_list_head":""}},"line_94CYmU":{"type":"line","name":"Divider","settings":{"animation":"","paddingsection":"0px 0px 0px 0px","marginsection":"0px 0px 0px 0px","bgsection":"rgba(0,0,0,0)","setwidth":"container","bgborder":"#c5a880","wborder":"1px"}},"goat_collection_tabs_GYt4D3":{"type":"goat-collection-tabs","name":"Sub Collections (Custom)","settings":{"metafield_namespace":"custom","metafield_key":"sub_collection","aria_label":"Sub collections navigation","outer_bg_color":"#121212","outer_border_color":"#d4af37","enable_border_animation":true,"beam_color_1":"#d4af37","beam_color_2":"#ffe066","animation_shadow_color":"rgba(255, 224, 102, 0.4)","animation_speed":3.5,"outer_border_width":1,"outer_border_radius":16,"outer_box_padding_vertical":18,"outer_box_padding_horizontal":24,"outer_box_padding_vertical_mobile":12,"outer_box_padding_horizontal_mobile":14,"show_hint_text":true,"hint_text":"VISIT BY COLLECTIONS","show_header_icon":true,"custom_header_svg":"<svg viewbox=\"0 0 24 24\"><path d=\"M3 3h8v8H3V3zm10 0h8v8h-8V3zM3 13h8v8H3v-8zm10 0h8v8h-8v-8z\"><\/path><\/svg>","hint_font_size":12,"hint_font_weight":"600","hint_letter_spacing":1,"hint_text_color":"#f5f5f5","hint_icon_color":"#d4af37","hint_icon_size":18,"show_header_line":true,"divider_color":"#332912","divider_height":1,"header_margin_bottom":16,"mobile_arrow_bg_color":"#1a1a1a","mobile_arrow_color":"#d4af37","mobile_arrow_border_color":"#d4af37","scrollbar_track_color":"#2C2B27","scrollbar_thumb_color":"#d4af37","scrollbar_thumb_hover_color":"#ffe066","scrollbar_height":4,"hide_scrollbar_until_overflow":true,"layout_style":"scroll","mobile_layout_style":"scroll","alignment":"flex-start","tabs_gap":12,"show_tab_icon":true,"tab_icon_color":"#d4af37","tab_icon_size":18,"image_width":32,"image_height":32,"image_width_mobile":28,"image_height_mobile":28,"image_fit":"contain","image_position":"center","image_radius":0,"image_padding":0,"image_background":"rgba(0,0,0,0)","image_border_width":0,"image_border_color":"#d4af37","image_opacity":100,"image_rotation":0,"image_scale":100,"image_shadow_y":0,"image_shadow_blur":0,"image_shadow_color":"#000000","image_hover_opacity":100,"image_hover_scale":100,"image_active_opacity":100,"image_active_scale":100,"image_transition":200,"min_height":42,"padding_vertical":8,"padding_horizontal":20,"border_radius":24,"border_width":1,"text_color":"#f5f5f5","bg_color":"#1a1a1a","border_color":"#3d3215","hover_text_color":"#ffffff","hover_bg_color":"#262214","hover_border_color":"#d4af37","hover_tab_icon_color":"#d4af37","active_text_color":"#ffffff","active_bg_color":"#2b2311","active_border_color":"#d4af37","active_tab_icon_color":"#d4af37","use_theme_typography":true,"font_size":14,"font_size_mobile":13,"font_weight":"500","text_transform":"none","letter_spacing":0,"section_bg":"rgba(0,0,0,0)","enable_section_border":false,"section_border_width":1,"section_border_color":"#333333","padding_top":24,"padding_bottom":0,"padding_top_mobile":24,"padding_bottom_mobile":16}},"custom_liquid_iyw7fy":{"type":"custom-liquid","disabled":true,"name":"Custom Liquid Code","settings":{"custom_liquid":"{% if collection != blank %}\n  {% assign sub_collections = collection.metafields.custom.sub_collection.value %}\n\n  {% if sub_collections != blank %}\n    <nav class=\"goat-collection-tabs\" aria-label=\"Sub collections\">\n      {% for item in sub_collections %}\n        {% if item.url != blank %}\n          <a class=\"goat-collection-tab\" href=\"{{ item.url | escape }}\">\n            {{ item.title | escape }}\n          <\/a>\n        {% endif %}\n      {% endfor %}\n    <\/nav>\n  {% else %}\n    <p style=\"padding:16px;text-align:center;\">\n      \"{{ collection.title | escape }}\" collection-এর\n      custom.sub_collection ফিল্ড থেকে কোনো collection পাওয়া যাচ্ছে না।\n    <\/p>\n  {% endif %}\n{% else %}\n  <p style=\"padding:16px;text-align:center;\">\n    এই জায়গায় collection পাওয়া যাচ্ছে না।\n    Collection page-এ কোডটি ব্যবহার করো।\n  <\/p>\n{% endif %}\n\n<style>\n  .goat-collection-tabs {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: center;\n    gap: 12px;\n    margin: 24px auto;\n    padding: 8px 20px;\n    max-width: 1200px;\n  }\n\n  .goat-collection-tabs .goat-collection-tab {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    min-height: 44px;\n    padding: 10px 22px;\n    border: 1px solid #222;\n    border-radius: 30px;\n    background: #fff;\n    color: #222;\n    font: inherit;\n    font-weight: 600;\n    text-decoration: none;\n  }\n\n  .goat-collection-tabs .goat-collection-tab:hover {\n    background: #222;\n    color: #fff;\n  }\n\n  .goat-collection-tabs .goat-collection-tab:focus-visible {\n    outline: 2px solid #222;\n    outline-offset: 3px;\n  }\n\n  @media screen and (max-width: 749px) {\n    .goat-collection-tabs {\n      flex-wrap: nowrap;\n      justify-content: flex-start;\n      overflow-x: auto;\n    }\n\n    .goat-collection-tabs .goat-collection-tab {\n      flex: 0 0 auto;\n    }\n  }\n<\/style>","width_type":"full","custom_width":1200,"padding_top":0,"padding_bottom":0}},"ea7af2bd-7a4c-4129-ae32-bacb42814742":{"type":"featured-collections-3","blocks":{"2f3b8aad-10de-480a-a5d8-f03f00650840":{"type":"collection","settings":{"collection":"tops"}},"template--17739035869502__ea7af2bd-7a4c-4129-ae32-bacb42814742-167584089359f62679-1":{"type":"collection","settings":{"collection":"jean"}},"template--17739035869502__ea7af2bd-7a4c-4129-ae32-bacb42814742-167584089359f62679-2":{"type":"collection","settings":{"collection":"jewelry"}},"1e3656fa-e08a-43ca-ab4a-ae2571025870":{"type":"collection","settings":{"collection":"handbags"}}},"block_order":["2f3b8aad-10de-480a-a5d8-f03f00650840","template--17739035869502__ea7af2bd-7a4c-4129-ae32-bacb42814742-167584089359f62679-1","template--17739035869502__ea7af2bd-7a4c-4129-ae32-bacb42814742-167584089359f62679-2","1e3656fa-e08a-43ca-ab4a-ae2571025870"],"disabled":true,"settings":{"animation":"fade-up","setwidth":"container","bgsection":"rgba(0,0,0,0)","title_top":"","title":"","des":"","align-heading":"center","stylecollection":"nameanditem","size_image_col":"square","color":"#ffffff","bg_overlay":"#222222","enable_gradient":false,"opacity_overlay":0.2,"size_title":"h5","button_link":"","button":"","perviewDesktop":5,"spaceBetween":30,"nowrap":false,"arrows":false,"scrollbar":false,"paddingsection":"40px 0px 0px 0px","paddingmobile":"40px 0px 0px 0px","marginsection":"0px 0px 0px 0px","marginmobile":"0px 0px 0px 0px"}},"product-grid":{"type":"main-collection-template","custom_css":[],"settings":{"collection_width":"container","products_per_page":12,"collection_perrow":"2","type_pagination":"pagi","enable_viewcolumn":true,"enable_filtering":true,"enable_sorting":true,"filter_type":"vertical","first_group":false,"open_group":true,"enable_color":true,"type_color":true,"style_color":"color_grid","style_size":"grid","enable_edit_item":false,"select_item":"product-7","enable_list_collection":false,"link_list_head":"","padding_top":48,"padding_bottom":48}}},"order":["collection-promo","scrolling_text_XTgaax","custom_liquid_rWXz66","collection-banner","line_94CYmU","goat_collection_tabs_GYt4D3","custom_liquid_iyw7fy","ea7af2bd-7a4c-4129-ae32-bacb42814742","product-grid"]}
+{
+  "sections": {
+    "collection-promo": {
+      "type": "main-coupon_code",
+      "disabled": true,
+      "settings": {
+        "coupon_time": 3
+      }
+    },
+    "collection-banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": true,
+        "img_bannercollection": "shopify:\/\/shop_images\/s2.webp",
+        "style_banner": "full",
+        "heading_size": "h2",
+        "img_height": "350px",
+        "bg_color": "#f3f3f3",
+        "image_text_color": "#ffffff",
+        "image_overlay_color": "#000000",
+        "image_overlay_opacity": 40,
+        "enable_collection": true,
+        "enable_count": true,
+        "link_list_head": "collections"
+      }
+    },
+    "ea7af2bd-7a4c-4129-ae32-bacb42814742": {
+      "type": "featured-collections-3",
+      "blocks": {
+        "template--17739035869502__ea7af2bd-7a4c-4129-ae32-bacb42814742-167584089359f62679-0": {
+          "type": "collection",
+          "settings": {
+            "collection": "shirts"
+          }
+        },
+        "2f3b8aad-10de-480a-a5d8-f03f00650840": {
+          "type": "collection",
+          "settings": {
+            "collection": "tops"
+          }
+        },
+        "template--17739035869502__ea7af2bd-7a4c-4129-ae32-bacb42814742-167584089359f62679-1": {
+          "type": "collection",
+          "settings": {
+            "collection": "jean"
+          }
+        },
+        "template--17739035869502__ea7af2bd-7a4c-4129-ae32-bacb42814742-167584089359f62679-2": {
+          "type": "collection",
+          "settings": {
+            "collection": "jewelry"
+          }
+        },
+        "1e3656fa-e08a-43ca-ab4a-ae2571025870": {
+          "type": "collection",
+          "settings": {
+            "collection": "handbags"
+          }
+        }
+      },
+      "block_order": [
+        "template--17739035869502__ea7af2bd-7a4c-4129-ae32-bacb42814742-167584089359f62679-0",
+        "2f3b8aad-10de-480a-a5d8-f03f00650840",
+        "template--17739035869502__ea7af2bd-7a4c-4129-ae32-bacb42814742-167584089359f62679-1",
+        "template--17739035869502__ea7af2bd-7a4c-4129-ae32-bacb42814742-167584089359f62679-2",
+        "1e3656fa-e08a-43ca-ab4a-ae2571025870"
+      ],
+      "disabled": true,
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "title_top": "",
+        "title": "",
+        "des": "",
+        "align-heading": "center",
+        "stylecollection": "button",
+        "size_image_col": "square",
+        "color": "#ffffff",
+        "bg_overlay": "#222222",
+        "enable_gradient": false,
+        "opacity_overlay": 0.2,
+        "size_title": "h5",
+        "button_link": "",
+        "button": "",
+        "perviewDesktop": 5,
+        "spaceBetween": 30,
+        "nowrap": false,
+        "arrows": false,
+        "scrollbar": false,
+        "paddingsection": "40px 0px 0px 0px",
+        "paddingmobile": "40px 0px 0px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-template",
+      "settings": {
+        "collection_width": "container",
+        "products_per_page": 12,
+        "collection_perrow": "3",
+        "type_pagination": "pagi",
+        "enable_viewcolumn": true,
+        "enable_filtering": true,
+        "enable_sorting": true,
+        "filter_type": "vertical",
+        "first_group": false,
+        "open_group": true,
+        "enable_color": true,
+        "type_color": true,
+        "style_color": "color_grid",
+        "style_size": "grid",
+        "enable_edit_item": false,
+        "select_item": "product-7",
+        "enable_list_collection": false,
+        "link_list_head": "",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "collection-promo",
+    "collection-banner",
+    "ea7af2bd-7a4c-4129-ae32-bacb42814742",
+    "product-grid"
+  ]
+}

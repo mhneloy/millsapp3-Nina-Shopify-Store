@@ -34,7 +34,7 @@
       endif 
     -%}
 
- <input type="radio"
+  <input type="radio"
         {% if option.selected_value == value -%} checked="checked"{%- endif %}
         
          value="{{ value | escape }}"
@@ -52,9 +52,6 @@
           for="ProductSelect-option-{{ option.name | handleize }}-{{ value | escape }}"{% unless variant_label_state %} class="disabled"{% endunless %}>
       {%- unless hasImage -%}{{ value | escape }}{%- endunless -%}
     </label>
-
-   
-
   {%- endfor -%}
 </fieldset>
 {%- else -%}

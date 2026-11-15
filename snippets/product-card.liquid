@@ -23,8 +23,6 @@
       {%- endif -%}
 {% endcapture %}
 
-
-
 {%- comment -%} price {%- endcomment -%}
 {% capture price %}
   <div class="product-card__price {% if product.compare_at_price > product.price %} product-card__pricesale {% endif %}">
@@ -49,8 +47,6 @@
   {%- endif -%}
   </div>
 {% endcapture %}
-
-
 {% capture review %}
   {%- if settings.enable_review -%}
   <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
@@ -466,7 +462,6 @@
     <div class="product-card__info  {% unless product.available %} disabled {% endunless %}">
       {{ vendor }}
       <a href="{{ product.url | within: collection }}" title="{{ product.title }}" class="product-card__name d-block {% if settings.t_product %} text-uppercase {% endif %}">{{ product.title }}</a>
-      
       {{ review }}
       {{ price }}
     </div>
@@ -730,15 +725,7 @@
         -%}
       </div>
       <div class="product-card__info text-left">
-        {% comment %} short info start {% endcomment %}
-            {%- if product.metafields.custom.short_info != blank -%}
-              <div style="color: #ccc; font-size: 14px; margin-top: 5px; ">
-                {{ product.metafields.custom.short_info }}
-              </div>
-            {%- endif -%}
-        {% comment %} short info end {% endcomment %}
-
-        {% comment %} {{ vendor }} {% endcomment %}
+        {{ vendor }}
         <a href="{{ product.url | within: collection }}" title="{{ product.title }}" class=" d-block product-card__name {% if settings.t_product %} text-uppercase {% endif %}">{{ product.title }}</a>
         {{ review }}
         {{ price }}

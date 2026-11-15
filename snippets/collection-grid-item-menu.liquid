@@ -1,7 +1,7 @@
 
 
 {%- liquid
-    capture current
+    capture current cycle 1, 2, 3, 4, 5, 6
     endcapture
     assign collectionTitle = featured_collection.title | default: 'Collection title'
 
@@ -50,13 +50,4 @@
  {%- endif -%}</p>
   {%- endif -%}
   
-</div>{%- comment -%}
-
-This file has been rewritten to preserve the original behavior.
-
----
-Changes:
-- from: capture current cycle 1, 2, 3, 4, 5, 6
-  to: capture current
-  position: 17..32
-{%- endcomment -%}
+</div>

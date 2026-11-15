@@ -485,10 +485,7 @@ slate.Variants = (function() {
       'change',
       this._onSelectChange.bind(this)
     );
-
-   
   }
-
 
   Variants.prototype = _.assignIn({}, Variants.prototype, {
     /**
@@ -550,13 +547,10 @@ slate.Variants = (function() {
       return found;
     },
 
-
-
     /**
      * Event handler for when a variant input changes.
      */
     _onSelectChange: function() {
-
       var variant = this._getVariantFromOptions();
 
       this.$container.trigger({
@@ -1538,69 +1532,58 @@ theme.HeaderSection = (function() {
     },
     // Stickyheader
     stickyHeader: function() {
-      var stickHeaderClass = this.selectors.headerID;
-      var stickyHeader = this.selectors.typeHeader;
-      var headerEl = document.querySelector(stickHeaderClass);
-      if (!headerEl) return;
-
-      var ticking = false;
-      var prevScrollpos = window.pageYOffset || document.documentElement.scrollTop;
-      var isActive = headerEl.classList.contains("active");
-
-      function updateSticky() {
-        var currentScrollPos = window.pageYOffset || document.documentElement.scrollTop;
-        if (currentScrollPos < 0) currentScrollPos = 0;
-
-        if (stickyHeader === 'sticky') {
-          // Hysteresis buffer (50px / 15px) prevents rapid toggle jitter on mobile
-          if (currentScrollPos > 50) {
-            if (!isActive) {
-              headerEl.classList.add("active");
-              isActive = true;
-            }
-          } else if (currentScrollPos < 15) {
-            if (isActive) {
-              headerEl.classList.remove("active");
-              isActive = false;
-            }
+      var stickHeaderClass = this.selectors.headerID ;
+      var stickyHeader =  this.selectors.typeHeader;
+      var offsetHeight = document.querySelector(stickHeaderClass).clientHeight.toString();
+      var prevScrollpos = window.pageYOffset;
+      if( stickyHeader === 'sticky' ){
+        window.onscroll = function() {
+          var currentScrollPos = window.pageYOffset;
+          if (prevScrollpos > 30) {
+            document.querySelector(stickHeaderClass).classList.add("active");
+          } else {
+            document.querySelector(stickHeaderClass).classList.remove("active");
           }
+          prevScrollpos = currentScrollPos;
         }
-        else if (stickyHeader === 'sticky-top') {
-          var offsetHeight = headerEl.clientHeight;
-          if (currentScrollPos <= 0) {
-            headerEl.style.top = "0";
-            if (isActive) {
-              headerEl.classList.remove("active");
-              isActive = false;
-            }
-          } else if (prevScrollpos > currentScrollPos) {
-            headerEl.style.top = "0";
-            if (!isActive) {
-              headerEl.classList.add("active");
-              isActive = true;
-            }
-          } else if (currentScrollPos > 100) {
-            headerEl.style.top = "-" + offsetHeight + "px";
-            if (isActive) {
-              headerEl.classList.remove("active");
-              isActive = false;
-            }
-          }
-        }
-        prevScrollpos = currentScrollPos;
-        ticking = false;
       }
-
-      // Initial check on load
-      updateSticky();
-
-      // High-performance, passive scroll listener throttled with requestAnimationFrame
-      window.addEventListener('scroll', function() {
-        if (!ticking) {
-          window.requestAnimationFrame(updateSticky);
-          ticking = true;
+      else if (stickyHeader === 'sticky-top' ){ 
+        const mediaQuery = window.matchMedia('(min-width: 1000px)')
+        
+        window.onscroll = function() {
+          var currentScrollPos = window.pageYOffset;
+          if (prevScrollpos > currentScrollPos) {
+            function responsiveHeader(){
+              if (mediaQuery.matches) {
+                document.querySelector(stickHeaderClass).style.top = "0";
+              }
+            }
+            responsiveHeader();
+            document.addEventListener("resize", event => {responsiveHeader()});
+            if(currentScrollPos == 0){
+              document.querySelector(stickHeaderClass).classList.remove("active");
+            }
+            else{
+              document.querySelector(stickHeaderClass).classList.add("active");
+            }
+            
+          } else {
+            function responsiveHeader2(){
+              if (mediaQuery.matches) {
+                document.querySelector(stickHeaderClass).style.top = `-${offsetHeight}px`;
+              }
+            }
+            responsiveHeader2();
+            document.addEventListener("resize", event => {responsiveHeader2()});
+            document.querySelector(stickHeaderClass).classList.remove("active");
+          }
+          prevScrollpos = currentScrollPos;
         }
-      }, { passive: true });
+        
+      }
+      else{
+        return null;
+      }
     }
   });
 
