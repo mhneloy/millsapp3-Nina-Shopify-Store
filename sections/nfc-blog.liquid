@@ -1,0 +1,14 @@
+<section class="content-page page-width"><header class="content-page__heading"><p class="eyebrow">{{ section.settings.eyebrow | escape }}</p><h1>{{ blog.title | escape }}</h1></header>{% paginate blog.articles by 12 %}<div class="journal-grid">{% for article in blog.articles %}<article>{% if article.image %}<a href="{{ article.url }}">{{ article.image | image_url: width: 900 | image_tag: loading: 'lazy', alt: article.title }}</a>{% endif %}<p class="eyebrow">{{ article.published_at | date: '%B %d, %Y' }}</p><h2><a href="{{ article.url }}">{{ article.title | escape }}</a></h2><div class="rte">{{ article.excerpt_or_content | strip_html | truncatewords: 28 }}</div><a class="nfc-button nfc-button--line" href="{{ article.url }}">Read story {% render 'nfc-icon', name: 'arrow' %}</a></article>{% endfor %}</div>{% render 'nfc-pagination', paginate: paginate %}{% endpaginate %}</section>
+{% schema %}
+{
+  "name": "NFC blog",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "THE JOURNAL"
+    }
+  ]
+}
+{% endschema %}

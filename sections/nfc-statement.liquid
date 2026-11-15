@@ -1,0 +1,54 @@
+<section class="brand-statement"><div class="brand-statement__inner page-width"><p class="eyebrow">{{ section.settings.eyebrow | escape }}</p><h2>{{ section.settings.heading | escape | newline_to_br }}<br><span>{{ section.settings.accent_heading | escape }}</span></h2><div class="statement-copy">{{ section.settings.copy }}</div><a class="hero-text-link" href="{{ section.settings.link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }} {% render 'nfc-icon', name: 'arrow' %}</a></div><span class="brand-statement__mark" aria-hidden="true">{{ section.settings.watermark | escape }}</span></section>
+{% schema %}
+{
+  "name": "NFC brand statement",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "A DIFFERENT KIND OF STATEMENT"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "MORE THAN CLOTHING."
+    },
+    {
+      "type": "text",
+      "id": "accent_heading",
+      "label": "Accent heading",
+      "default": "A STATEMENT OF FAITH."
+    },
+    {
+      "type": "richtext",
+      "id": "copy",
+      "label": "Description",
+      "default": "<p>Nuts for Christ brings bold expression and faith-inspired style together through everyday streetwear.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Link label",
+      "default": "Explore the collection"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "watermark",
+      "label": "Watermark",
+      "default": "NFC"
+    }
+  ],
+  "presets": [
+    {
+      "name": "NFC brand statement"
+    }
+  ]
+}
+{% endschema %}

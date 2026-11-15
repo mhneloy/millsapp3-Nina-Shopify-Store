@@ -1,94 +1,34 @@
 <!doctype html>
-<html class="no-js " lang="{{ shop.locale }}">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="{{ settings.color_header_bg }}">
-    <link rel="preconnect" href="//cdn.shopify.com" crossorigin>
-    <link rel="dns-prefetch" href="//cdn.shopify.com">
-    <link rel="preconnect" href="//fonts.shopify.com" crossorigin>
-    <link rel="dns-prefetch" href="//fonts.shopify.com">
-    <link rel="canonical" href="{{ canonical_url }}">
-    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
-    {%- if settings.favicon != blank -%}
-      <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 32, height: 32 }}" type="image/png">
-    {%- endif -%}
-
-    <title>
-      {{ page_title }}
-      {% if current_tags %}
-        {% assign meta_tags = current_tags | join: ', ' %}
-        &ndash;
-        {{ 'general.meta.tags' | t: tags: meta_tags }}
-      {% endif %}
-      {% if current_page != 1 %}
-        &ndash;
-        {{ 'general.meta.page' | t: page: current_page }}
-      {% endif %}
-      {% unless page_title contains shop.name %}
-        &ndash;
-        {{ shop.name }}
-      {% endunless %}
-    </title>
-   
-    {%- if page_description -%}
-      <meta name="description" content="{{ page_description | escape }}">
-      {% else %}
-      <meta name="description" content="{{ settings.meta_description | escape }}">
-    {%- endif -%}
-    
-    {%- render 'social-meta-tags' -%}
-    {%- render 'header-css' -%}
-      <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
-    {{ content_for_header }}
-  </head>
-  <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }} body-theme {% if settings.productpage == 'product-2' or settings.productpage == 'product-6' or settings.productpage == 'product-7' %} product-hide-breadcrumb {% endif %}">
-   {% assign lazy = false %}
-    <img {% if lazy %} loading = "lazy" {% endif %} width="99998" height="99999" alt="index" style="pointer-events: none; position: absolute; top: 0; left: 0; width: 98vw; height: 99vh; max-width: 98vw; max-height: 99vh;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSI5OTk5OXB4IiBoZWlnaHQ9Ijk5OTk5cHgiIHZpZXdCb3g9IjAgMCA5OTk5OSA5OTk5OSIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48ZyBzdHJva2U9Im5vbmUiIGZpbGw9Im5vbmUiIGZpbGwtb3BhY2l0eT0iMCI+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9Ijk5OTk5IiBoZWlnaHQ9Ijk5OTk5Ij48L3JlY3Q+IDwvZz4gPC9zdmc+">
-    {%- render 'loading' -%}
-    {%- section 'announcement-bar-slide' -%}
-    {%- section 'header' -%}
-    {%- section 'store-messages' -%}
-    <div class="page-container page-element is-moved-by-drawer">
-      {%- render 'breadcrumb' -%}
-      <main class="main-content" id="MainContent" role="main">
-        {%- if settings.enable_animationscroll -%}
-          <div id="js-scroll">
-          {% endif %}
-          {%- if settings.enable_animationscroll -%}
-            <div data-scroll-section>
-            {% endif %}
-            {%- render 'slideshow' -%}
-            {%- if settings.enable_animationscroll -%}
-            </div>
-          {% endif %}
-          {{ content_for_layout }}
-          {%- if settings.enable_animationscroll -%}
-          </div>
-        {% endif %}
-      </main>
-
-     {%- liquid
-      section 'banner-footer'
-      section 'newsletter-footer'
-      section 'footer'
-      if template == 'index' or request.design_mode
-      section 'pnewsletter'
-      endif
-      section 'product-suggest'
-      section 'cookie-policy'
-      section 'custom-color'
-     -%}
-    </div>
-    {%- liquid
-      render 'back-to-top' 
-      render 'menu-mobile' 
-      render 'bottom-contents' 
-      render 'quickview' 
-      render 'popup-compare' 
-      render 'header-js' 
-    -%}
-   
-  </body>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.nfc_background }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+  {% if settings.favicon != blank %}<link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32 }}">{% endif %}
+  <title>{{ page_title }}{% if current_tags %} — {{ current_tags | join: ', ' }}{% endif %}{% if current_page != 1 %} — Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} — {{ shop.name }}{% endunless %}</title>
+  {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
+  {% render 'social-meta-tags' %}
+  {% style %}
+    {{ settings.nfc_body_font | font_face: font_display: 'swap' }}
+    {{ settings.nfc_heading_font | font_face: font_display: 'swap' }}
+    {% assign body_bold = settings.nfc_body_font | font_modify: 'weight', '700' %}
+    {{ body_bold | font_face: font_display: 'swap' }}
+    :root{--background:{{ settings.nfc_background | default: '#faf9f6' }};--paper:{{ settings.nfc_paper | default: '#f5f3ee' }};--ink:{{ settings.nfc_ink | default: '#171717' }};--gold:{{ settings.nfc_gold | default: '#bca476' }};--blue:{{ settings.nfc_blue | default: '#357c9a' }};--line:{{ settings.nfc_line | default: "#deddd7" }};--soft-ink:{{ settings.nfc_muted | default: "#737373" }};--on-dark:{{ settings.nfc_on_dark | default: "#fafafa" }};--font-sans:{{ settings.nfc_body_font.family | default: 'DM Sans' }},{{ settings.nfc_body_font.fallback_families | default: 'sans-serif' }};--font-display:{{ settings.nfc_heading_font.family | default: 'Space Grotesk' }},{{ settings.nfc_heading_font.fallback_families | default: 'sans-serif' }};--page-width:{{ settings.nfc_page_width | default: 1440 }}px}
+  {% endstyle %}
+  {{ 'nfc-storefront.css' | asset_url | stylesheet_tag }}
+  {{ 'nfc-custom.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'nfc-storefront.js' | asset_url }}" defer></script>
+  {{ content_for_header }}
+</head>
+<body class="nfc-storefront template-{{ request.page_type | handle }}">
+  <a class="skip-link" href="#MainContent">Skip to content</a>
+  {% sections 'nfc-header-group' %}
+  <main id="MainContent" class="storefront-content" tabindex="-1">{{ content_for_layout }}</main>
+  {% sections 'nfc-footer-group' %}
+  {% render 'nfc-dialogs' %}
+  <script type="application/json" id="NfcConfig">{"root":{{ routes.root_url | json }},"cartUrl":{{ routes.cart_url | json }},"moneyFormat":{{ shop.money_format | json }},"currency":{{ cart.currency.iso_code | default: shop.currency | json }},"addLabel":{{ settings.nfc_add_label | default: 'Add to bag' | json }},"soldOutLabel":{{ settings.nfc_sold_out_label | default: 'Sold out' | json }},"cartHeading":{{ settings.nfc_cart_heading | default: 'YOUR BAG' | json }},"emptyCart":{{ settings.nfc_empty_cart | default: 'Your bag is waiting.' | json }}}</script>
+</body>
 </html>

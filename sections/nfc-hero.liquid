@@ -1,0 +1,93 @@
+<section class="campaign-hero" style="--hero-height:{{ section.settings.height }}px;--hero-shade:{{ section.settings.overlay | divided_by: 100.0 }}" aria-labelledby="HeroTitle-{{ section.id }}">
+{% render 'nfc-image', image: section.settings.image, fallback: 'nfc-campaign-hero.jpg', class: 'campaign-hero__image', alt: section.settings.image_alt, loading: 'eager', sizes: '100vw' %}<div class="campaign-hero__shade"></div>
+<div class="campaign-hero__content page-width"><p class="eyebrow campaign-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p><h1 id="HeroTitle-{{ section.id }}">{{ section.settings.heading | escape | newline_to_br }}</h1><p class="campaign-hero__copy">{{ section.settings.copy | escape }}</p><div class="campaign-hero__actions"><a class="nfc-button nfc-button--hero" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }} {% render 'nfc-icon', name: 'arrow' %}</a><a class="hero-text-link" href="{{ section.settings.secondary_link | default: routes.all_products_collection_url }}">{{ section.settings.secondary_label | escape }} {% render 'nfc-icon', name: 'arrow' %}</a></div></div>
+<a class="campaign-hero__scroll" href="#collection" aria-label="Explore the collection">{% render 'nfc-icon', name: 'down' %}</a><span class="campaign-hero__index">{{ section.settings.index_label | escape }}</span></section>
+{% schema %}
+{
+  "name": "NFC campaign hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "NUTS FOR CHRIST · STREETWEAR"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "WEAR\nYOUR FAITH."
+    },
+    {
+      "type": "text",
+      "id": "copy",
+      "label": "Description",
+      "default": "Bold streetwear. Powerful messages. Faith expressed through every fit."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Campaign image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image description",
+      "default": "Streetwear editorial campaign showing models in black and white apparel"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop the collection"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary link label",
+      "default": "Explore hoodies"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "Secondary link"
+    },
+    {
+      "type": "text",
+      "id": "index_label",
+      "label": "Campaign index",
+      "default": "01 / 03"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Desktop height",
+      "min": 500,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "default": 800
+    },
+    {
+      "type": "range",
+      "id": "overlay",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 85
+    }
+  ],
+  "presets": [
+    {
+      "name": "NFC campaign hero"
+    }
+  ]
+}
+{% endschema %}

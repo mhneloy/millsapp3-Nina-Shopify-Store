@@ -1,168 +1,56 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "9b4458af-c37d-4761-827f-0fa27c9a8102": {
-      "type": "featured-products",
-      "custom_css": [
-        "@media (max-width: 749px) {.row .footer-column:nth-child(3) {order: -1; }}"
-      ],
-      "settings": {
-        "animation": "fade-up",
-        "setwidth": "full",
-        "bgsection": "#fdf8f6",
-        "title_top": "FEATURED PRODUCT",
-        "title": "What’s Hot",
-        "des": "",
-        "align-heading": "center",
-        "collection": "bridal-dresses",
-        "style_product_info": "style-1",
-        "enable_creative": false,
-        "padding": true,
-        "colgrid": "col-lg-3",
-        "rows": 8,
-        "txtbutton": "",
-        "urlbtn": "",
-        "paddingsection": "80px 30px 40px 30px",
-        "paddingmobile": "40px 20px 40px 20px",
-        "marginsection": "0px 0px 0px 0px",
-        "marginmobile": "0px 0px 0px 0px"
-      }
+    "hero": {
+      "type": "nfc-hero",
+      "settings": {}
     },
-    "1660900735d9374b53": {
-      "type": "line",
-      "settings": {
-        "animation": "fade",
-        "paddingsection": "0px 0px 0px 0px",
-        "marginsection": "0px 0px 0px 0px",
-        "bgsection": "#ffffff",
-        "setwidth": "full",
-        "bgborder": "#e1e1e1",
-        "wborder": "1px"
-      }
-    },
-    "58d0d90a-a918-4101-8910-c8a4601175fa": {
-      "type": "line",
-      "settings": {
-        "animation": "",
-        "paddingsection": "0px 0px 0px 0px",
-        "marginsection": "0px 0px 0px 0px",
-        "bgsection": "#ffffff",
-        "setwidth": "full",
-        "bgborder": "#dddddd",
-        "wborder": "1px"
-      }
-    },
-    "cb37f1f7-eb4f-4770-a43a-10875f426471": {
-      "type": "line",
-      "settings": {
-        "animation": "",
-        "paddingsection": "0px 0px 0px 0px",
-        "marginsection": "0px 0px 0px 0px",
-        "bgsection": "#ffffff",
-        "setwidth": "full",
-        "bgborder": "#dddddd",
-        "wborder": "1px"
-      }
-    },
-    "479fac02-6391-406f-bd09-61ef156be3b6": {
-      "type": "service",
+    "categories": {
+      "type": "nfc-categories",
+      "settings": {},
       "blocks": {
-        "template--14964948434998__479fac02-6391-406f-bd09-61ef156be3b6-service-1": {
-          "type": "service",
+        "tees": {
+          "type": "collection",
           "settings": {
-            "bgblock": "#ffffff",
-            "title": "Worldwide shippng",
-            "description": "Businesses with worldwide shipping capabilities",
-            "icon": "<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" viewbox=\"0 0 100 100\"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class=\"a\" d=\"M82.19 69.25a13.09 13.09 0 0 1-3.54-3 1.86 1.86 0 0 1 0-2.38c1.29-1.52 3.08-5-4.17-7.52a5.28 5.28 0 0 0-2.24 0 12.36 12.36 0 0 1-5.49 0 9.78 9.78 0 0 1-4.1-2.16c-.23-.2-.44-.41-.65-.63a10.08 10.08 0 0 1-2.17-10l.15-.46a8.09 8.09 0 0 0-3.92-9.55l-1.83-1c-3.54-1.58-5.69-3.88-6.39-6.83-1-4-.14-7.55 4.46-13.15M32 17.1a13 13 0 0 1 3.52 7.23 9.74 9.74 0 0 1-.52 4.76 11.74 11.74 0 0 1-2.16 3.61 10.49 10.49 0 0 0-1.72 2.73c-.62 1.51-1.12 3.44-.61 4.91a4 4 0 0 0 2.75 2.33c.25.08.52.16.8.23a5.11 5.11 0 0 1 4.24 4.65c.13 2-.82 4.29-2.68 6.44a17.84 17.84 0 0 1-6.76 4.78A15.87 15.87 0 0 1 23 59.93a14.39 14.39 0 0 1-3.14-.35c-3.45-.77-3.73-1.39-6.86-3.58M32.12 83c-.18-2.75-2.68-8.09.69-13.4a22.33 22.33 0 0 1 8.36-7.36c3.48-1.79 6.77-2.37 9-1.58a4.61 4.61 0 0 1 3.08 5.12v.83a4 4 0 0 0 1.21 3.3c1.49 1.26 4.42 1.3 6.66.91a2.55 2.55 0 0 0 .59-.18A12.09 12.09 0 0 1 67 69.43a9.74 9.74 0 0 1 4.51 1.2 12.61 12.61 0 0 1 5.41 5.51\"></path><circle class=\"a\" cx=\"50\" cy=\"50\" r=\"37.5\"></circle></svg>",
-            "button": "See Details",
-            "link": "",
-            "style_btn": "btn-underline btn-underline-white"
+            "eyebrow": "01 — EVERYDAY STATEMENTS",
+            "heading": "Graphic tees"
           }
         },
-        "template--14964948434998__479fac02-6391-406f-bd09-61ef156be3b6-service-2": {
-          "type": "service",
+        "hoodies": {
+          "type": "collection",
           "settings": {
-            "bgblock": "#ffffff",
-            "title": "Lowest price",
-            "description": "Find a dress at a lower price?  <br> We will match it.",
-            "icon": "<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" viewbox=\"0 0 100 100\"><defs><style>.a{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class=\"a\" d=\"M16.96 11.72h66.08v70.76l-6.62 5.8-6.61-5.8-6.61 5.8-6.61-5.8-6.61 5.8-6.6-5.8-6.61 5.8-6.61-5.8-6.6 5.8-6.6-5.8V11.72zM23.97 34.6h49.36M23.97 46.28h49.01M23.97 57.96h28.57M23.97 69.64h28.57\"></path><path class=\"a\" d=\"M61.63 66.87c0 2.69 4.18 2.51 4.18 2.51s4.19.27 4.19-3.23c0-2.27-4.16-2.25-4.16-2.25-4.85 0-4.16-3.33-4.16-3.33 0-3.74 4.22-3.43 4.22-3.43 4.51 0 4.08 3.43 4.08 3.43M65.8 53.03v20.46M23.97 23.41h49.36\"></path></svg>",
-            "button": "See Details",
-            "link": "",
-            "style_btn": "btn-underline btn-underline-white"
-          }
-        },
-        "template--14964948434998__479fac02-6391-406f-bd09-61ef156be3b6-service-3": {
-          "type": "service",
-          "settings": {
-            "bgblock": "#ffffff",
-            "title": "Free Shipping",
-            "description": "Free shipping may be offered with standard shipping times",
-            "icon": "<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" viewbox=\"0 0 100 100\"><defs><style>.a{fill:none;stroke:#000;stroke-width:2.16px}</style></defs><path class=\"a\" d=\"M50 89.87L15.33 69.86V30.08l34.78-19.95 34.56 19.95v39.78L50 89.87z\"></path><path class=\"a\" d=\"M67.33 50.78V40.09L32.76 20.14M15.33 30.08L50 50.09\"></path><path class=\"a\" d=\"M50 89.87V50.09l34.67-20.01\"></path></svg>",
-            "button": "See Details",
-            "link": "",
-            "style_btn": "btn-underline btn-underline-white"
-          }
-        },
-        "63da76fb-6255-4173-834b-4eca273010a4": {
-          "type": "service",
-          "settings": {
-            "bgblock": "#ffffff",
-            "title": "Shopping safely",
-            "description": "Prioritize the use of secure payment methods such as credit cards, PayPal",
-            "icon": "<svg aria-hidden=\"true\" focusable=\"false\" role=\"presentation\" viewbox=\"0 0 64 64\"><defs><style>.b{fill:none;stroke:#000;stroke-width:1.6px}</style></defs><path class=\"b\" d=\"M19.45 23.6v-3.2c0-7 5.89-11.75 12.55-11.75 7.21 0 12.55 5.49 12.55 11.75v3.2M10 23.6h44v31.75H10zM32 37.47v7.47\"></path><circle class=\"b\" cx=\"32\" cy=\"35.87\" r=\"1.6\"></circle></svg>",
-            "button": "See Details",
-            "link": "",
-            "style_btn": "btn-underline btn-underline-white"
+            "eyebrow": "02 — LAYER WITH PURPOSE",
+            "heading": "Statement hoodies"
           }
         }
       },
       "block_order": [
-        "template--14964948434998__479fac02-6391-406f-bd09-61ef156be3b6-service-1",
-        "template--14964948434998__479fac02-6391-406f-bd09-61ef156be3b6-service-2",
-        "template--14964948434998__479fac02-6391-406f-bd09-61ef156be3b6-service-3",
-        "63da76fb-6255-4173-834b-4eca273010a4"
-      ],
-      "settings": {
-        "animation": "fade-up",
-        "setwidth": "container",
-        "bgsection": "#ffffff",
-        "title_top": "",
-        "title": "",
-        "des": "",
-        "align-heading": "center",
-        "e_border": false,
-        "paddingbox": "0px 0px 0px 0px",
-        "iconcolor": "#282828",
-        "titlecolor": "#282828",
-        "subcolor": "#4b5955",
-        "size": 52,
-        "service_heading": "h5",
-        "layout": "style-2",
-        "enable_carousel": false,
-        "arrows": false,
-        "draggable": true,
-        "dots": true,
-        "infinite": true,
-        "paddingsection": "40px 0px 40px 0px",
-        "paddingmobile": "40px 0px 40px 0px",
-        "marginsection": "0px 0px 0px 0px",
-        "marginmobile": "0px 0px 0px 0px"
-      }
+        "tees",
+        "hoodies"
+      ]
+    },
+    "featured": {
+      "type": "nfc-featured",
+      "settings": {}
+    },
+    "statement": {
+      "type": "nfc-statement",
+      "settings": {}
+    },
+    "editorial": {
+      "type": "nfc-editorial",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "nfc-newsletter",
+      "settings": {}
     }
   },
   "order": [
-    "9b4458af-c37d-4761-827f-0fa27c9a8102",
-    "1660900735d9374b53",
-    "58d0d90a-a918-4101-8910-c8a4601175fa",
-    "cb37f1f7-eb4f-4770-a43a-10875f426471",
-    "479fac02-6391-406f-bd09-61ef156be3b6"
+    "hero",
+    "categories",
+    "featured",
+    "statement",
+    "editorial",
+    "newsletter"
   ]
 }

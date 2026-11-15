@@ -1,0 +1,7 @@
+<dialog id="NfcCart" class="nfc-dialog cart-sheet" aria-labelledby="NfcCartHeading">
+  <div class="dialog-heading"><div><p class="cart-sheet__eyebrow">FAITH IN EVERY FIT</p><h2 id="NfcCartHeading">{{ settings.nfc_cart_heading | escape }}</h2></div><button class="nfc-button nfc-button--icon" data-close-dialog aria-label="Close bag">{% render 'nfc-icon', name: 'close' %}</button></div>
+  <p class="dialog-status" data-cart-status role="status"></p>
+  <div data-cart-content></div>
+  <div class="cart-summary" data-cart-summary hidden><div class="cart-summary__total"><span>Subtotal</span><span data-cart-total></span></div><p>{{ settings.nfc_shipping_note | escape }}</p><form action="{{ routes.cart_url }}" method="post"><button class="nfc-button nfc-button--dark cart-checkout" name="checkout" type="submit">Checkout {% render 'nfc-icon', name: 'arrow' %}</button></form><a class="nfc-button nfc-button--line" href="{{ routes.cart_url }}">View bag</a></div>
+</dialog>
+<dialog id="NfcQuickView" class="nfc-dialog quick-view-sheet" aria-labelledby="QuickViewHeading"><div class="dialog-heading"><p class="eyebrow">A CLOSER LOOK</p><button class="nfc-button nfc-button--icon" data-close-dialog aria-label="Close quick view">{% render 'nfc-icon', name: 'close' %}</button></div><div data-quick-content><h2 id="QuickViewHeading">Product details</h2></div></dialog>

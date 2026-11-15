@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "nfc-page",
+      "settings": {
+        "eyebrow": "STORE INFORMATION",
+        "heading": "Returns & refunds"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

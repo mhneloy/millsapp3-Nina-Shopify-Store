@@ -1,0 +1,14 @@
+<article class="content-page page-width"><header class="content-page__heading"><p class="eyebrow">{{ article.published_at | date: '%B %d, %Y' }}{% if section.settings.show_author %} / {{ article.author | escape }}{% endif %}</p><h1>{{ article.title | escape }}</h1></header>{% if article.image %}<div class="article-image">{{ article.image | image_url: width: 1600 | image_tag: loading: 'eager', alt: article.title }}</div>{% endif %}<div class="content-page__body rte">{{ article.content }}</div>{% if blog.comments_enabled? %}<div class="content-page__body">{% paginate article.comments by 10 %}{% for comment in article.comments %}<blockquote><div>{{ comment.content }}</div><cite>{{ comment.author | escape }}</cite></blockquote>{% endfor %}{% render 'nfc-pagination', paginate: paginate %}{% endpaginate %}{% form 'new_comment', article, class: 'contact-form' %}<h2>Leave a comment</h2>{% if form.posted_successfully? %}<p role="status">Thank you. Your comment has been submitted for review.</p>{% endif %}{{ form.errors | default_errors }}<label for="CommentName">Name<input id="CommentName" name="comment[author]" value="{{ form.author | escape }}" required></label><label for="CommentEmail">Email<input type="email" id="CommentEmail" name="comment[email]" value="{{ form.email | escape }}" required></label><label for="CommentBody">Comment<textarea id="CommentBody" name="comment[body]" rows="5" required>{{ form.body | escape }}</textarea></label><button class="nfc-button nfc-button--dark">Post comment</button>{% endform %}</div>{% endif %}</article>
+{% schema %}
+{
+  "name": "NFC article",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "Show author",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

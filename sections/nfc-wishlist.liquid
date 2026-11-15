@@ -1,0 +1,4 @@
+<section class="shop-page page-width"><header class="shop-heading"><p class="eyebrow">{{ section.settings.eyebrow | escape }}</p><h1>{{ section.settings.heading | escape }}</h1><p>{{ section.settings.copy | escape }}</p></header><div data-wishlist-content><p>Enable JavaScript to view the pieces saved in this browser.</p></div><p role="status" data-wishlist-status></p></section>
+{% schema %}
+{"name":"NFC saved pieces","settings":[{"type":"text","id":"eyebrow","label":"Eyebrow","default":"YOUR NEXT STATEMENT"},{"type":"text","id":"heading","label":"Heading","default":"SAVED PIECES"},{"type":"text","id":"copy","label":"Description","default":"Your favorites, saved on this device."}]}
+{% endschema %}

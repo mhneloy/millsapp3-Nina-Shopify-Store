@@ -4,7 +4,7 @@
     "theme_name": "Bridey",
     "theme_author": "Shopifytemplate",
     "theme_version": "OS2.0",
-    "theme_documentation_url": "https:\/\/shopifytemplate.gitbook.io\/december-os2.0\/",
+    "theme_documentation_url": "https://shopifytemplate.gitbook.io/december-os2.0/",
     "theme_support_email": "shopifytemplate@gmail.com"
   },
   {
@@ -294,7 +294,7 @@
         "type": "text",
         "id": "font_family_google",
         "label": "Google font",
-        "info": "💡 [Find more Google fonts](https:\/\/fonts.google.com)",
+        "info": "💡 [Find more Google fonts](https://fonts.google.com)",
         "default": "Staatliches"
       },
       {
@@ -315,7 +315,7 @@
         "type": "text",
         "id": "font_family2_google",
         "label": "Google font",
-        "info": "💡 [Find more Google fonts](https:\/\/fonts.google.com)",
+        "info": "💡 [Find more Google fonts](https://fonts.google.com)",
         "default": "Staatliches"
       },
       {
@@ -1217,7 +1217,7 @@
         "type": "image_picker",
         "id": "share_image",
         "label": "Image",
-        "info": "Shown when sharing a link on social media. [Learn more](https:\/\/help.shopify.com\/manual\/using-themes\/troubleshooting\/showing-social-media-thumbnail-images\/) about image thumbnails."
+        "info": "Shown when sharing a link on social media. [Learn more](https://help.shopify.com/manual/using-themes/troubleshooting/showing-social-media-thumbnail-images/) about image thumbnails."
       },
       {
         "type": "header",
@@ -1227,55 +1227,55 @@
         "type": "text",
         "id": "social_facebook_link",
         "label": "Facebook",
-        "info": "https:\/\/www.facebook.com\/shopify"
+        "info": "https://www.facebook.com/shopify"
       },
       {
         "type": "text",
         "id": "social_twitter_link",
         "label": "Twitter",
-        "info": "https:\/\/twitter.com\/shopify"
+        "info": "https://twitter.com/shopify"
       },
       {
         "type": "text",
         "id": "social_pinterest_link",
         "label": "Pinterest",
-        "info": "https:\/\/www.pinterest.com\/shopify"
+        "info": "https://www.pinterest.com/shopify"
       },
       {
         "type": "text",
         "id": "social_instagram_link",
         "label": "Instagram",
-        "info": "https:\/\/instagram.com\/shopify"
+        "info": "https://instagram.com/shopify"
       },
       {
         "type": "text",
         "id": "social_tumblr_link",
         "label": "Tumblr",
-        "info": "http:\/\/shopify.tumblr.com"
+        "info": "http://shopify.tumblr.com"
       },
       {
         "type": "text",
         "id": "social_snapchat_link",
         "label": "Snapchat",
-        "info": "https:\/\/www.snapchat.com\/add\/shopify"
+        "info": "https://www.snapchat.com/add/shopify"
       },
       {
         "type": "text",
         "id": "social_youtube_link",
         "label": "YouTube",
-        "info": "https:\/\/www.youtube.com\/user\/shopify"
+        "info": "https://www.youtube.com/user/shopify"
       },
       {
         "type": "text",
         "id": "social_vimeo_link",
         "label": "Vimeo",
-        "info": "https:\/\/vimeo.com\/shopify"
+        "info": "https://vimeo.com/shopify"
       },
       {
         "type": "text",
         "id": "social_tiktok_link",
         "label": "Tiktok",
-        "info": "https:\/\/tiktok.com\/shopify"
+        "info": "https://tiktok.com/shopify"
       },
       {
         "type": "header",
@@ -1318,7 +1318,7 @@
         "type": "textarea",
         "id": "sidebar_html_top",
         "label": "HTML code",
-        "info": "[💡 Build HTML](https:\/\/ap2020.myshopify.com\/pages\/html-builder)"
+        "info": "[💡 Build HTML](https://ap2020.myshopify.com/pages/html-builder)"
       },
       {
         "type": "header",
@@ -1369,7 +1369,7 @@
         "type": "textarea",
         "id": "sidebar_html",
         "label": "HTML code",
-        "info": "[💡 Build HTML](https:\/\/ap2020.myshopify.com\/pages\/html-builder)"
+        "info": "[💡 Build HTML](https://ap2020.myshopify.com/pages/html-builder)"
       }
     ]
   },
@@ -1398,7 +1398,7 @@
         "type": "page",
         "id": "page_wishlist",
         "label": "Wishlist page",
-        "info": "[Create new page](\/admin\/pages\/new) and select template suffix is page.wishlist"
+        "info": "[Create new page](/admin/pages/new) and select template suffix is page.wishlist"
       }
     ]
   },
@@ -2197,7 +2197,7 @@
         "type": "richtext",
         "id": "coupon_code_content",
         "label": "Content",
-        "default": "<p>Discount Code<\/p>"
+        "default": "<p>Discount Code</p>"
       },
       {
         "type": "header",
@@ -2227,7 +2227,7 @@
       {
         "type": "text",
         "id": "free_end",
-        "default": "for <b>FREE SHIPPING<\/b>",
+        "default": "for <b>FREE SHIPPING</b>",
         "label": "End Text Price"
       },
       {
@@ -2276,7 +2276,7 @@
       },
       {
         "type": "paragraph",
-        "content": "Do not forget to include the snippet shipping-calculator in your cart.liquid template where you want the shipping calculator to appear. You can get the snippet here: [shipping-calculator.liquid](https:\/\/github.com\/carolineschnapp\/shipping-calculator\/blob\/master\/shipping-calculator.liquid) ."
+        "content": "Do not forget to include the snippet shipping-calculator in your cart.liquid template where you want the shipping calculator to appear. You can get the snippet here: [shipping-calculator.liquid](https://github.com/carolineschnapp/shipping-calculator/blob/master/shipping-calculator.liquid) ."
       },
       {
         "type": "header",
@@ -2284,7 +2284,7 @@
       },
       {
         "type": "paragraph",
-        "content": "💡 [Find safe checkout image?](http:\/\/bit.ly\/2ZLhS4V)"
+        "content": "💡 [Find safe checkout image?](http://bit.ly/2ZLhS4V)"
       },
       {
         "type": "image_picker",
@@ -2295,6 +2295,111 @@
         "type": "image_picker",
         "id": "safe_checkout_cart",
         "label": "Image in cart page"
+      }
+    ]
+  },
+  {
+    "name": "NFC storefront",
+    "settings": [
+      {
+        "type": "color",
+        "id": "nfc_background",
+        "label": "Background",
+        "default": "#faf9f6"
+      },
+      {
+        "type": "color",
+        "id": "nfc_paper",
+        "label": "Alternate background",
+        "default": "#f5f3ee"
+      },
+      {
+        "type": "color",
+        "id": "nfc_ink",
+        "label": "Text and dark sections",
+        "default": "#171717"
+      },
+      {
+        "type": "color",
+        "id": "nfc_gold",
+        "label": "Gold accent",
+        "default": "#bca476"
+      },
+      {
+        "type": "color",
+        "id": "nfc_blue",
+        "label": "Button hover",
+        "default": "#357c9a"
+      },
+      {
+        "type": "font_picker",
+        "id": "nfc_body_font",
+        "label": "Body font",
+        "default": "dm_sans_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "nfc_heading_font",
+        "label": "Heading font",
+        "default": "space_grotesk_n7"
+      },
+      {
+        "type": "range",
+        "id": "nfc_page_width",
+        "label": "Page width",
+        "min": 1000,
+        "max": 1600,
+        "step": 20,
+        "unit": "px",
+        "default": 1440
+      },
+      {
+        "type": "text",
+        "id": "nfc_add_label",
+        "label": "Add button label",
+        "default": "Add to bag"
+      },
+      {
+        "type": "text",
+        "id": "nfc_sold_out_label",
+        "label": "Sold out label",
+        "default": "Sold out"
+      },
+      {
+        "type": "text",
+        "id": "nfc_cart_heading",
+        "label": "Cart heading",
+        "default": "YOUR BAG"
+      },
+      {
+        "type": "text",
+        "id": "nfc_empty_cart",
+        "label": "Empty cart message",
+        "default": "Your bag is waiting."
+      },
+      {
+        "type": "text",
+        "id": "nfc_shipping_note",
+        "label": "Cart shipping note",
+        "default": "Shipping and taxes calculated at checkout."
+      },
+      {
+        "type": "color",
+        "id": "nfc_line",
+        "label": "Borders",
+        "default": "#deddd7"
+      },
+      {
+        "type": "color",
+        "id": "nfc_muted",
+        "label": "Secondary text",
+        "default": "#737373"
+      },
+      {
+        "type": "color",
+        "id": "nfc_on_dark",
+        "label": "Text on dark backgrounds",
+        "default": "#fafafa"
       }
     ]
   }

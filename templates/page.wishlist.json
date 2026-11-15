@@ -1,1 +1,4 @@
-{"sections":{"main":{"type":"main-wishlist","settings":{}}},"order":["main"]}
+{
+  "sections": {"main": {"type": "nfc-wishlist", "settings": {}}},
+  "order": ["main"]
+}

@@ -1,0 +1,51 @@
+{% assign featured = section.settings.collection | default: collections.all %}<section class="collection-section"><div class="page-width"><div class="collection-heading"><div><div class="section-heading"><p class="eyebrow">{{ section.settings.eyebrow | escape }}</p><h2>{{ section.settings.heading | escape | newline_to_br }}</h2></div><p class="section-heading__description">{{ section.settings.copy | escape }}</p></div><a class="nfc-button nfc-button--line" href="{{ featured.url | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }} {% render 'nfc-icon', name: 'arrow' %}</a></div>{% if featured.products.size > 0 %}<div class="product-grid">{% for product in featured.products limit: section.settings.limit %}{% render 'nfc-product-card', product: product %}{% endfor %}</div>{% else %}{% render 'nfc-empty' %}{% endif %}</div></section>
+{% schema %}
+{
+  "name": "NFC featured collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "MADE TO MAKE A STATEMENT"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "FAITH IN EVERY FIT"
+    },
+    {
+      "type": "text",
+      "id": "copy",
+      "label": "Description",
+      "default": "Discover statement pieces designed to express what you believe."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "View all products"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Products to show",
+      "min": 4,
+      "max": 24,
+      "step": 4,
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "NFC featured collection"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,87 @@
+{
+  "sections": {
+    "main": {
+      "type": "nfc-faq",
+      "settings": {},
+      "blocks": {
+        "q0": {
+          "type": "question",
+          "settings": {
+            "group": "01 / ORDERS & PAYMENTS",
+            "question": "What payment methods do you accept?",
+            "answer": "<p>Available payment methods are shown at checkout.</p>"
+          }
+        },
+        "q1": {
+          "type": "question",
+          "settings": {
+            "group": "01 / ORDERS & PAYMENTS",
+            "question": "How can I track my order?",
+            "answer": "<p>When your order ships, check your shipping confirmation email for tracking information. Contact us if you need help with your order.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "group": "02 / SHIPPING & DELIVERY",
+            "question": "How long does shipping take?",
+            "answer": "<p>Please check our shipping policy for confirmed processing and delivery information.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "group": "02 / SHIPPING & DELIVERY",
+            "question": "Do you offer international shipping?",
+            "answer": "<p>Enter your delivery address at checkout to see available shipping options.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "group": "03 / RETURNS & SIZING",
+            "question": "What is your return policy?",
+            "answer": "<p>Please review our return policy before purchasing, or contact us with questions.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "group": "03 / RETURNS & SIZING",
+            "question": "Can I exchange an item for another size?",
+            "answer": "<p>Contact us with your order number and the size you need so we can help.</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "group": "04 / PRODUCTS & CARE",
+            "question": "How do I care for my apparel?",
+            "answer": "<p>Follow the care instructions on the garment label and product page.</p>"
+          }
+        },
+        "q7": {
+          "type": "question",
+          "settings": {
+            "group": "04 / PRODUCTS & CARE",
+            "question": "How do I choose my size?",
+            "answer": "<p>Check the product description and size guide, or contact us for help before ordering.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q0",
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

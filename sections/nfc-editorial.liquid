@@ -1,0 +1,47 @@
+<section class="editorial-banner">{% render 'nfc-image', image: section.settings.image, fallback: 'nfc-campaign-hero.jpg', alt: section.settings.image_alt, loading: 'lazy', sizes: '100vw' %}<div class="editorial-banner__overlay"></div><div class="editorial-banner__content page-width"><p class="eyebrow">{{ section.settings.eyebrow | escape }}</p><h2>{{ section.settings.heading | escape | newline_to_br }}</h2><a class="nfc-button nfc-button--hero" href="{{ section.settings.link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }} {% render 'nfc-icon', name: 'arrow' %}</a></div></section>
+{% schema %}
+{
+  "name": "NFC editorial banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "BOLD BY BELIEF"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "FAITH NEVER\nGOES OUT OF STYLE."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Campaign image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image description",
+      "default": "Nuts for Christ streetwear campaign"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "NFC editorial banner"
+    }
+  ]
+}
+{% endschema %}

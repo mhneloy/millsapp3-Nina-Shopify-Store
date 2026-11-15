@@ -1,0 +1,102 @@
+<footer class="site-footer"><div class="site-footer__main page-width"><div class="site-footer__brand"><a class="wordmark wordmark--footer" href="{{ routes.root_url }}"><span>{{ section.settings.brand_top | escape }}</span><span>{{ section.settings.brand_bottom | escape }}</span><small>{{ section.settings.tagline | escape }}</small></a><div class="footer-description">{{ section.settings.description }}</div></div>
+<div class="site-footer__column"><p class="eyebrow">{{ section.settings.explore_heading | escape }}</p>{% if section.settings.menu != blank %}{% for link in section.settings.menu.links %}<a href="{{ link.url }}">{{ link.title | escape }}</a>{% endfor %}{% else %}<a href="{{ routes.all_products_collection_url }}">Shop all</a><a href="{{ routes.root_url }}pages/faq">FAQ</a><a href="{{ routes.root_url }}pages/contact">Contact</a>{% endif %}</div>
+<div class="site-footer__column"><p class="eyebrow">{{ section.settings.information_heading | escape }}</p>{% if section.settings.policy_menu != blank %}{% for link in section.settings.policy_menu.links %}<a href="{{ link.url }}">{{ link.title | escape }}</a>{% endfor %}{% else %}{% for policy in shop.policies %}{% if policy.body != blank %}<a href="{{ policy.url }}">{{ policy.title | escape }}</a>{% endif %}{% endfor %}{% endif %}</div>
+<div class="site-footer__newsletter"><p class="eyebrow">{{ section.settings.newsletter_heading | escape }}</p><p>{{ section.settings.newsletter_copy | escape }}</p>{% assign newsletter_id = section.id | append: '-footer' %}{% render 'nfc-newsletter', id: newsletter_id, compact: true %}
+<div class="social-links">{% for block in section.blocks %}<a href="{{ block.settings.url }}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</a>{% endfor %}</div></div></div>
+<div class="site-footer__bottom page-width"><span>© {{ 'now' | date: '%Y' }} {{ shop.name | escape }}</span><span>{{ section.settings.bottom_text | escape }}</span>{% if section.settings.show_payment_icons %}<div class="payment-icons">{% for type in shop.enabled_payment_types %}{{ type | payment_type_svg_tag }}{% endfor %}</div>{% endif %}</div></footer>
+{% schema %}
+{
+  "name": "NFC footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_top",
+      "label": "Wordmark first line",
+      "default": "NUTS"
+    },
+    {
+      "type": "text",
+      "id": "brand_bottom",
+      "label": "Wordmark second line",
+      "default": "FOR CHRIST"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "FAITH IN EVERY FIT"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Bold streetwear. Powerful messages. Faith expressed through every fit.</p>"
+    },
+    {
+      "type": "text",
+      "id": "explore_heading",
+      "label": "Explore heading",
+      "default": "EXPLORE"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Explore menu"
+    },
+    {
+      "type": "text",
+      "id": "information_heading",
+      "label": "Information heading",
+      "default": "INFORMATION"
+    },
+    {
+      "type": "link_list",
+      "id": "policy_menu",
+      "label": "Information menu"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter heading",
+      "default": "STAY IN THE LOOP"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_copy",
+      "label": "Newsletter description",
+      "default": "Updates on new drops from Nuts for Christ."
+    },
+    {
+      "type": "text",
+      "id": "bottom_text",
+      "label": "Bottom text",
+      "default": "Faith in every fit."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "social",
+      "name": "Social link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Instagram"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

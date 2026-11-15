@@ -1,0 +1,87 @@
+NUTS FOR CHRIST STOREFRONT
+
+The storefront is implemented as Shopify Online Store 2.0 Liquid sections.
+Push this checkout to the GitHub branch connected to your draft theme. Nothing
+has been pushed or published by this implementation.
+
+AFTER THE GITHUB SYNC
+
+1. Open Online Store > Themes > your draft theme > Customize.
+2. Open Theme settings > NFC storefront for the new colors, fonts, page width,
+   cart labels, and shopping messages. The older theme settings remain available
+   for the retained legacy sections; the new storefront uses NFC settings.
+3. In the Header group, choose your navigation menu and logo, and edit the
+   announcement, wordmark, and tagline. Without a selected menu, the header
+   links to Home, Shop all, /pages/contact, and /pages/faq.
+4. On the home page, edit and reorder the NFC sections. Replace campaign images
+   using the image pickers. Each collection tile supports a collection picker,
+   image override, title, caption, and link override. Set the hoodie link in the
+   hero to the correct collection. Until you select collections, collection
+   links and featured products use Shopify's all-products collection.
+5. Select the featured collection and product count. Products, prices, images,
+   discounts, variants, availability, and descriptions come from Shopify.
+6. Create or update your Contact and FAQ pages in Shopify. Use the handles
+   contact and faq for the default navigation, or choose your own menu links.
+   Assign the contact template to Contact and the faq (or faqs) template to FAQ.
+   Edit FAQ questions and answers as blocks in the theme editor. The included
+   answers are neutral starting points; confirm your actual store policies.
+7. Enter your actual policies in Shopify Settings > Policies. The footer
+   automatically links to published policies. You can override the Information
+   menu in the Footer group. Policy content is managed in Shopify admin; its
+   presentation follows the new storefront. Optional page templates named
+   shipping-policy, returns-policy, privacy, and terms can display normal page
+   content if you prefer separate information pages.
+8. Edit the footer menus, copy, newsletter heading, social-link blocks, and
+   payment-icon visibility. Newsletter forms submit to Shopify's customer form;
+   contact messages submit through Shopify's contact form. Confirm your store
+   contact email and marketing settings, and test submissions in your preview.
+9. Configure collection filters in Shopify Search & Discovery. The catalog
+   displays Shopify's configured filters, sorting, and pagination. Filtering
+   submits to Shopify and works without JavaScript.
+10. Product settings control vendor display, availability copy, accelerated
+    checkout, related collection, and the optional save button. Product detail
+    accordions support editable rich text or a Shopify page. App blocks are
+    supported in the product section. Create a page using the wishlist template
+    and handle wishlist if you use Saved pieces. Favorites stay on that browser
+    and device; they do not synchronize with customer accounts.
+
+TEMPLATES AND CONTENT
+
+Default and existing alternate product, collection, blog, and standard content
+page templates now use the new NFC sections. This also covers resources already
+assigned one of the old demo template names. The wishlist template uses saved
+pieces; contact and FAQ templates have their specialized sections. Existing
+Shopify product/page content is read dynamically. Custom content formerly saved
+only in old demo template sections is replaced by the new layout; it remains
+recoverable from Git history. Add any required content to the resource in Shopify
+or to an editable NFC section. Original legacy section and asset files remain in
+the repository, but their old global scripts/styles are not loaded by the new
+storefront layout.
+
+Search, collection listings, cart, blog, articles, 404, and classic customer
+account templates have matching designs. Shopify's new customer accounts and
+checkout are hosted by Shopify and use Shopify's own branding controls. The
+existing password and issued gift-card templates retain their original behavior.
+
+BEFORE PUBLISHING
+
+Preview your actual products and variants, inventory states, store currency,
+filters, discounts, cart quantities, checkout, subscription/app integrations if
+used, contact and newsletter submissions, and the theme editor on mobile and
+desktop. Selling plans use Shopify data, but their app-specific pricing and
+purchase flows should be verified with your actual catalog. Products and pages
+must be published to the Online Store sales channel to appear.
+
+LOCAL VERIFICATION
+
+Shopify Theme Check reported no issues in the new NFC Liquid files, new layout,
+or global settings schema. The original checkout had 98 Theme Check errors in
+legacy files; these remain and are not introduced by the new storefront.
+
+Local browser checks used a LiquidJS preview with sample products and mocked
+Shopify cart responses. Verified variant/price/URL changes, unavailable variants,
+quick view, add to cart, quantity changes, removal, mobile navigation, keyboard
+dismissal, FAQ expansion, and overflow at 390, 768, and 1440 pixels. These checks
+do not replace rendering and transaction checks in a real Shopify draft theme.
+
+Source reference: https://pdf-to-shopfront.lovable.app/

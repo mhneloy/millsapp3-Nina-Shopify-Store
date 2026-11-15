@@ -1,0 +1,9 @@
+{% if image != blank %}
+  {% if loading == 'eager' %}
+    {{ image | image_url: width: 2400 | image_tag: class: class, widths: '360, 540, 750, 1100, 1500, 1920, 2400', sizes: sizes, loading: loading, alt: alt, fetchpriority: 'high' }}
+  {% else %}
+    {{ image | image_url: width: 2400 | image_tag: class: class, widths: '360, 540, 750, 1100, 1500, 1920, 2400', sizes: sizes, loading: loading, alt: alt }}
+  {% endif %}
+{% elsif fallback != blank %}
+  <img class="{{ class }}" src="{{ fallback | asset_url }}" alt="{{ alt | escape }}" width="{% if fallback contains 'editorial' %}1104{% else %}1920{% endif %}" height="1200" loading="{{ loading | default: 'lazy' }}" {% if loading == 'eager' %}fetchpriority="high"{% endif %}>
+{% endif %}
