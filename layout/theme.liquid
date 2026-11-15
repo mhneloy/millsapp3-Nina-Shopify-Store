@@ -20,7 +20,9 @@
   {% endstyle %}
   {{ 'nfc-storefront.css' | asset_url | stylesheet_tag }}
   {{ 'nfc-custom.css' | asset_url | stylesheet_tag }}
+  {{ 'nfc-search.css' | asset_url | stylesheet_tag }}
   <script src="{{ 'nfc-storefront.js' | asset_url }}" defer></script>
+  <script src="{{ 'nfc-search.js' | asset_url }}" defer></script>
   {{ content_for_header }}
 </head>
 <body class="nfc-storefront template-{{ request.page_type | handle }}">

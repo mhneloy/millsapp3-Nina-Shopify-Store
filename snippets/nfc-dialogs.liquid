@@ -1,3 +1,12 @@
+<dialog id="NfcSearch" class="nfc-dialog search-dialog" aria-labelledby="NfcSearchHeading">
+  <div class="dialog-heading"><h2 id="NfcSearchHeading">Search products</h2><button class="nfc-button nfc-button--icon" data-close-dialog aria-label="Close search">{% render 'nfc-icon', name: 'close' %}</button></div>
+  <form class="search-dialog__form" data-header-search role="search" action="{{ routes.all_products_collection_url }}" method="get">
+    <label class="sr-only" for="NfcSearchInput">Product name</label><input id="NfcSearchInput" type="search" name="q" placeholder="Search by product name" autocomplete="off" autofocus aria-controls="NfcSearchResults" aria-describedby="NfcSearchStatus">
+    <button class="nfc-button nfc-button--icon" type="submit" aria-label="Search products">{% render 'nfc-icon', name: 'search' %}</button>
+  </form>
+  <p id="NfcSearchStatus" class="form-note" role="status">Type a product name to find your next piece.</p>
+  <div id="NfcSearchResults" class="search-suggestions"></div>
+</dialog>
 <dialog id="NfcCart" class="nfc-dialog cart-sheet" aria-labelledby="NfcCartHeading">
   <div class="dialog-heading"><div><p class="cart-sheet__eyebrow">FAITH IN EVERY FIT</p><h2 id="NfcCartHeading">{{ settings.nfc_cart_heading | escape }}</h2></div><button class="nfc-button nfc-button--icon" data-close-dialog aria-label="Close bag">{% render 'nfc-icon', name: 'close' %}</button></div>
   <p class="dialog-status" data-cart-status role="status"></p>
