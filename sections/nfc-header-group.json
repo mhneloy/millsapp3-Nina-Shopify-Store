@@ -1,10 +1,28 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "header",
   "name": "Header",
   "sections": {
     "header": {
       "type": "nfc-header",
-      "settings": {}
+      "settings": {
+        "announcement": "FAITH-INSPIRED STREETWEAR",
+        "announcement_cta": "Explore the collection",
+        "announcement_link": "",
+        "logo": "shopify://shop_images/NFC_Logo-Blue_Male.jpg",
+        "brand_top": "NUTS",
+        "brand_bottom": "FOR CHRIST",
+        "tagline": "FAITH IN EVERY FIT",
+        "menu": ""
+      }
     }
   },
   "order": [
