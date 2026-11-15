@@ -1,0 +1,928 @@
+{% comment %}
+  Section: The GOAT Gallery (Fine Art & Posters with Edge-to-Edge Media)
+  Author: Custom Shopify 2.0 Section
+  Theme: GOAT CHRISTMAS - Luxury Black & Gold
+{% endcomment %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+{%- assign g_color = section.settings.btn1_glow_color | default: '#DCB14F' -%}
+{%- assign g_intensity = section.settings.btn1_glow_intensity | default: 45 | divided_by: 100.0 -%}
+{%- assign g_size = section.settings.btn1_glow_size | default: 25 -%}
+
+{%- assign btn2_alpha = section.settings.btn2_bg_opacity | default: 0 | divided_by: 100.0 -%}
+{%- assign btn2_bg_color = section.settings.btn2_bg | default: '#D9BA77' -%}
+{%- assign btn2h_alpha = section.settings.btn2_hover_bg_opacity | default: 14 | divided_by: 100.0 -%}
+{%- assign btn2h_bg_color = section.settings.btn2_bg_hover | default: '#DCB14F' -%}
+
+<style>
+  .goat-gallery-{{ section.id }} {
+    --bg-color: {{ section.settings.bg_color | default: '#080605' }};
+    --eyebrow-color: {{ section.settings.eyebrow_color | default: '#C89F55' }};
+    --heading-gradient: {{ section.settings.heading_gradient | default: 'linear-gradient(105deg, #C69E58 0%, #F3DD99 25%, #AF874D 50%, #EDD696 75%, #C69E58 100%)' }};
+    --text-color: {{ section.settings.text_color | default: '#9A8D80' }};
+    --divider-color: {{ section.settings.divider_color | default: '#241C14' }};
+    --accent-gold: {{ section.settings.accent_gold | default: '#DCB14F' }};
+    --overlay-color: {{ section.settings.image_overlay_color | default: '#000000' }};
+    --overlay-opacity: {{ section.settings.image_overlay_opacity | default: 0 | divided_by: 100.0 }};
+
+    /* Primary Button: 100% Dynamic Linear Gradient Matching Hero */
+    --btn1-bg: {{ section.settings.btn1_bg | default: '#DCB14F' }};
+    --btn1-border: {{ section.settings.btn1_border | default: '#D9BA77' }};
+    --btn1-text-color: {{ section.settings.btn1_text_color | default: '#0E0C09' }};
+    --btn1-bg-hover: {{ section.settings.btn1_bg_hover | default: '#DCB14F' }};
+    --btn1-border-hover: {{ section.settings.btn1_border_hover | default: '#D9BA77' }};
+    --btn1-text-hover: {{ section.settings.btn1_text_hover | default: '#0E0C09' }};
+    --btn1-glow: {% if section.settings.btn1_enable_glow %}0 4px 15px rgba(0, 0, 0, 0.4), 0 0 {{ g_size }}px {% if g_color != blank and g_color.red != blank %}rgba({{ g_color.red }}, {{ g_color.green }}, {{ g_color.blue }}, {{ g_intensity }}){% else %}rgba(220, 177, 79, {{ g_intensity }}){% endif %}, 0 0 {{ g_size | times: 1.8 | round }}px {% if g_color != blank and g_color.red != blank %}rgba({{ g_color.red }}, {{ g_color.green }}, {{ g_color.blue }}, {{ g_intensity | times: 0.5 }}){% else %}rgba(220, 177, 79, {{ g_intensity | times: 0.5 }}){% endif %}{% else %}none{% endif %};
+
+    /* Secondary Button: Frosted Glass Effect Matching Hero */
+    --btn2-bg: {% if btn2_bg_color != blank and btn2_bg_color.red != blank %}rgba({{ btn2_bg_color.red }}, {{ btn2_bg_color.green }}, {{ btn2_bg_color.blue }}, {{ btn2_alpha }}){% elsif btn2_bg_color != blank %}{{ btn2_bg_color | color_modify: 'alpha', btn2_alpha }}{% else %}rgba(217, 186, 119, {{ btn2_alpha }}){% endif %};
+    --btn2-border: {{ section.settings.btn2_border | default: '#D9BA77' }};
+    --btn2-text-color: {{ section.settings.btn2_text_color | default: '#EAD297' }};
+    --btn2-bg-hover: {% if btn2h_bg_color != blank and btn2h_bg_color.red != blank %}rgba({{ btn2h_bg_color.red }}, {{ btn2h_bg_color.green }}, {{ btn2h_bg_color.blue }}, {{ btn2h_alpha }}){% elsif btn2h_bg_color != blank %}{{ btn2h_bg_color | color_modify: 'alpha', btn2h_alpha }}{% else %}rgba(220, 177, 79, {{ btn2h_alpha }}){% endif %};
+    --btn2-border-hover: {{ section.settings.btn2_border_hover | default: '#DCB14F' }};
+    --btn2-text-hover: {{ section.settings.btn2_text_hover | default: '#F3DD99' }};
+
+    background-color: var(--bg-color);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  /* Container: Dynamic Width & 50/50 Equal Split Layout */
+  .goat-gallery-{{ section.id }} .goat-gallery__container {
+    width: 100%;
+    {% if section.settings.full_width %}
+      max-width: 100%;
+      padding-left: clamp(20px, 4vw, 60px);
+      padding-right: 0;
+    {% else %}
+      max-width: {{ section.settings.max_width | default: 1540 }}px;
+      margin: 0 auto;
+      padding-left: clamp(20px, 3.5vw, 40px);
+      padding-right: clamp(20px, 3.5vw, 40px);
+    {% endif %}
+    display: grid;
+    grid-template-columns: calc(100% - {{ section.settings.image_width_desktop | default: 50 }}%) {{ section.settings.image_width_desktop | default: 50 }}%;
+    gap: clamp(35px, 4.5vw, 75px);
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  /* Left Column: Content */
+  .goat-gallery-{{ section.id }} .goat-gallery__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    max-width: 640px;
+  }
+
+  .goat-gallery-{{ section.id }} .goat-gallery__eyebrow {
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--eyebrow-color);
+    font-weight: 500;
+    margin-bottom: 20px;
+    display: inline-block;
+  }
+
+  /* Shimmer Animated Heading */
+  .goat-gallery-{{ section.id }} .goat-gallery__heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 4vw, 54px);
+    line-height: 1.15;
+    font-weight: 600;
+    margin: 0 0 24px 0;
+    letter-spacing: -0.3px;
+    background: {%- if section.settings.heading_gradient != blank -%}{{ section.settings.heading_gradient }}{%- else -%}linear-gradient(105deg, #C69E58 0%, #F3DD99 25%, #AF874D 50%, #EDD696 75%, #C69E58 100%){%- endif -%};
+    background-size: 250% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.4));
+    {% if section.settings.enable_heading_shimmer != false %}
+      animation: galleryHeadingShimmer {{ section.settings.heading_shimmer_speed | default: 6 }}s ease-in-out infinite alternate;
+    {% endif %}
+  }
+
+  @keyframes galleryHeadingShimmer {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+
+  .goat-gallery-{{ section.id }} .goat-gallery__description {
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    font-size: 14.5px;
+    line-height: 1.8;
+    color: var(--text-color);
+    font-weight: 300;
+    margin: 0 0 35px 0;
+    max-width: 540px;
+  }
+
+  /* Action Buttons */
+  .goat-gallery-{{ section.id }} .goat-gallery__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .goat-gallery-{{ section.id }} .goat-btn {
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 13px 28px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    box-sizing: border-box;
+    position: relative;
+    white-space: nowrap;
+  }
+
+  .goat-gallery-{{ section.id }} .goat-btn--primary {
+    background: {%- if section.settings.btn1_gradient != blank -%}{{ section.settings.btn1_gradient }}{%- else -%}var(--btn1-bg){%- endif -%};
+    background-size: 200% auto;
+    background-position: left center;
+    color: var(--btn1-text-color);
+    border: 1px solid var(--btn1-border, transparent);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-position 0.5s ease;
+  }
+
+  .goat-gallery-{{ section.id }} .goat-btn--primary:hover {
+    background-position: right center;
+    color: var(--btn1-text-hover);
+    border-color: var(--btn1-border-hover);
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: var(--btn1-glow);
+  }
+
+  .goat-gallery-{{ section.id }} .goat-btn--secondary {
+    background: var(--btn2-bg);
+    color: var(--btn2-text-color);
+    border: 1px solid var(--btn2-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 4px 20px rgba(0, 0, 0, 0.35);
+  }
+
+  .goat-gallery-{{ section.id }} .goat-btn--secondary:hover {
+    background: var(--btn2-bg-hover);
+    color: var(--btn2-text-hover);
+    border-color: var(--btn2-border-hover);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(220, 177, 79, 0.45);
+  }
+
+  .goat-gallery-{{ section.id }} .goat-btn__play-triangle {
+    width: 0;
+    height: 0;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 7px solid currentColor;
+    display: inline-block;
+    transition: transform 0.25s ease;
+  }
+
+  .goat-gallery-{{ section.id }} .goat-btn--secondary:hover .goat-btn__play-triangle {
+    transform: scale(1.15);
+  }
+
+  /* Highlights Area (Museum-grade, Hand-finished) */
+  .goat-gallery-{{ section.id }} .goat-gallery__highlights {
+    width: 100%;
+    max-width: 480px;
+    border-top: 1px solid var(--divider-color);
+    padding-top: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+  }
+
+  .goat-gallery-{{ section.id }} .goat-gallery__highlight-item {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .goat-gallery-{{ section.id }} .goat-gallery__highlight-item:first-child {
+    border-right: 1px solid var(--divider-color);
+    padding-right: 20px;
+  }
+
+  .goat-gallery-{{ section.id }} .goat-gallery__highlight-diamond {
+    width: 5px;
+    height: 5px;
+    background-color: var(--accent-gold);
+    transform: rotate(45deg);
+    display: inline-block;
+    margin-bottom: 7px;
+    opacity: 0.85;
+    box-shadow: 0 0 6px rgba(220, 177, 79, 0.4);
+  }
+
+  .goat-gallery-{{ section.id }} .goat-gallery__highlight-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    background: var(--heading-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+  }
+
+  .goat-gallery-{{ section.id }} .goat-gallery__highlight-sub {
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-color);
+    font-weight: 500;
+    opacity: 0.9;
+    line-height: 1.35;
+  }
+
+  /* Right Column: Edge-to-Edge Image with Seamless Fade (Gifting Experience Style) */
+  .goat-gallery-{{ section.id }} .goat-gallery__media-col {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: {{ section.settings.desktop_height | default: 480 }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .goat-gallery-{{ section.id }} .goat-gallery__media-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: {{ section.settings.desktop_height | default: 480 }}px;
+    display: flex;
+    overflow: hidden;
+    border-radius: {% if section.settings.full_width %}0{% else %}4px{% endif %};
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  }
+
+  .goat-gallery-{{ section.id }} .goat-gallery__image {
+    width: 100%;
+    height: 100%;
+    min-height: {{ section.settings.desktop_height | default: 480 }}px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .goat-gallery-{{ section.id }} .goat-gallery__media-wrapper:hover .goat-gallery__image {
+    transform: scale(1.02);
+  }
+
+  /* Image Overlay Tint */
+  .goat-gallery-{{ section.id }} .goat-gallery__media-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: var(--overlay-color);
+    opacity: var(--overlay-opacity);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Left-edge Seamless Gradient Blend (Exact Gifting Experience Match) */
+  {% if section.settings.enable_edge_fade %}
+    .goat-gallery-{{ section.id }} .goat-gallery__media-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: clamp(60px, 22%, 180px);
+      background: linear-gradient(to right, var(--bg-color) 0%, rgba(8, 6, 5, 0) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+  {% endif %}
+
+  /* Floating Play Badge */
+  .goat-gallery-{{ section.id }} .goat-gallery__play-badge {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    z-index: 3;
+    background: rgba(14, 11, 8, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 6px 18px 6px 6px;
+    border-radius: 30px;
+    border: 1px solid rgba(207, 164, 87, 0.3);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  }
+
+  .goat-gallery-{{ section.id }} .goat-gallery__play-badge:hover {
+    background: rgba(14, 11, 8, 0.85);
+    border-color: var(--accent-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(220, 177, 79, 0.35);
+  }
+
+  .goat-gallery-{{ section.id }} .goat-gallery__play-circle {
+    width: 36px;
+    height: 36px;
+    background-color: var(--accent-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  }
+
+  .goat-gallery-{{ section.id }} .goat-gallery__play-icon-inner {
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 8px solid #000;
+    margin-left: 2px;
+  }
+
+  .goat-gallery-{{ section.id }} .goat-gallery__play-text {
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #f7eedb;
+    font-weight: 600;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 989px) {
+    .goat-gallery-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top | divided_by: 1.5 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | divided_by: 1.5 | round }}px;
+    }
+
+    .goat-gallery-{{ section.id }} .goat-gallery__container {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .goat-gallery-{{ section.id }} .goat-gallery__content {
+      max-width: 100%;
+    }
+
+    .goat-gallery-{{ section.id }} .goat-gallery__media-col,
+    .goat-gallery-{{ section.id }} .goat-gallery__media-wrapper,
+    .goat-gallery-{{ section.id }} .goat-gallery__image {
+      min-height: 320px;
+      height: 320px;
+    }
+
+    {% if section.settings.enable_edge_fade %}
+      .goat-gallery-{{ section.id }} .goat-gallery__media-wrapper::after {
+        top: 0;
+        bottom: auto;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 30%;
+        background: linear-gradient(to bottom, var(--bg-color) 0%, rgba(8, 6, 5, 0) 100%);
+      }
+    {% endif %}
+  }
+
+  @media (max-width: 480px) {
+    .goat-gallery-{{ section.id }} .goat-gallery__media-col,
+    .goat-gallery-{{ section.id }} .goat-gallery__media-wrapper,
+    .goat-gallery-{{ section.id }} .goat-gallery__image {
+      min-height: 260px;
+      height: 260px;
+    }
+
+    .goat-gallery-{{ section.id }} .goat-gallery__actions {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .goat-gallery-{{ section.id }} .goat-btn {
+      width: 100%;
+      max-width: 280px;
+    }
+  }
+</style>
+
+<div class="goat-gallery-{{ section.id }}">
+  <div class="goat-gallery__container">
+    
+    <!-- Left Column: Content -->
+    <div class="goat-gallery__content">
+      {% if section.settings.eyebrow != blank %}
+        <span class="goat-gallery__eyebrow">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="goat-gallery__heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+
+      {% if section.settings.description != blank %}
+        <p class="goat-gallery__description">{{ section.settings.description }}</p>
+      {% endif %}
+
+      <!-- Buttons -->
+      <div class="goat-gallery__actions">
+        {% if section.settings.btn1_text != blank %}
+          <a href="{{ section.settings.btn1_link | default: '#' }}" class="goat-btn goat-btn--primary">
+            {{ section.settings.btn1_text }}
+          </a>
+        {% endif %}
+
+        {% if section.settings.btn2_text != blank %}
+          <a href="{{ section.settings.btn2_link | default: '#' }}" class="goat-btn goat-btn--secondary">
+            <span class="goat-btn__play-triangle"></span>
+            {{ section.settings.btn2_text }}
+          </a>
+        {% endif %}
+      </div>
+
+      <!-- Highlights / Details -->
+      {% if section.settings.show_highlights %}
+        <div class="goat-gallery__highlights">
+          <div class="goat-gallery__highlight-item">
+            <span class="goat-gallery__highlight-diamond"></span>
+            <span class="goat-gallery__highlight-title">{{ section.settings.feat1_title }}</span>
+            <span class="goat-gallery__highlight-sub">{{ section.settings.feat1_sub }}</span>
+          </div>
+          <div class="goat-gallery__highlight-item">
+            <span class="goat-gallery__highlight-diamond"></span>
+            <span class="goat-gallery__highlight-title">{{ section.settings.feat2_title }}</span>
+            <span class="goat-gallery__highlight-sub">{{ section.settings.feat2_sub }}</span>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Right Column: Edge-to-Edge Media with Seamless Fade (Gifting Experience Style) -->
+    <div class="goat-gallery__media-col">
+      <div class="goat-gallery__media-wrapper">
+        {% if section.settings.media_image != blank %}
+          <img
+            src="{{ section.settings.media_image | image_url: width: 1400 }}"
+            alt="{{ section.settings.media_image.alt | default: 'The GOAT Gallery frames preview' }}"
+            class="goat-gallery__image"
+            loading="lazy"
+            width="800"
+            height="550"
+          >
+        {% else %}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'goat-gallery__image' }}
+        {% endif %}
+
+        <!-- Image Overlay -->
+        <div class="goat-gallery__media-overlay"></div>
+
+        <!-- Play Badge Overlay -->
+        {% if section.settings.show_play_badge %}
+          <a href="{{ section.settings.video_link | default: '#' }}" class="goat-gallery__play-badge">
+            <span class="goat-gallery__play-circle">
+              <span class="goat-gallery__play-icon-inner"></span>
+            </span>
+            <span class="goat-gallery__play-text">{{ section.settings.badge_text }}</span>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "The GOAT Gallery",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full Width Section",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 1100,
+      "max": 1800,
+      "step": 20,
+      "unit": "px",
+      "label": "Container Maximum Width",
+      "default": 1540
+    },
+    {
+      "type": "range",
+      "id": "image_width_desktop",
+      "min": 40,
+      "max": 65,
+      "step": 1,
+      "unit": "%",
+      "label": "Image Width Desktop (50% = 1fr 1fr)",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "min": 350,
+      "max": 650,
+      "step": 10,
+      "unit": "px",
+      "label": "Image Desktop Height",
+      "default": 480
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 30,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 30,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 70
+    },
+    {
+      "type": "header",
+      "content": "Media Settings (Gifting Experience Style)"
+    },
+    {
+      "type": "image_picker",
+      "id": "media_image",
+      "label": "Gallery Preview Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_edge_fade",
+      "label": "Enable Seamless Edge Blend",
+      "info": "Softly fades image edge into section background like Gifting Experience",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "image_overlay_color",
+      "label": "Image Overlay Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "%",
+      "label": "Image Overlay Opacity",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "show_play_badge",
+      "label": "Show Floating Play Badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "BRAND FILM · 1:24"
+    },
+    {
+      "type": "url",
+      "id": "video_link",
+      "label": "Video Link / Modal URL"
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow / Subheading",
+      "default": "FINE ART & POSTERS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The GOAT Gallery"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_heading_shimmer",
+      "label": "Enable Heading Shimmer Animation",
+      "default": true
+    },
+    {
+      "type": "color_background",
+      "id": "heading_gradient",
+      "label": "Heading Gradient",
+      "default": "linear-gradient(105deg, #C69E58 0%, #F3DD99 25%, #AF874D 50%, #EDD696 75%, #C69E58 100%)"
+    },
+    {
+      "type": "range",
+      "id": "heading_shimmer_speed",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Shimmer Animation Speed",
+      "default": 6
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Museum-grade fine art works and posters in gold and midnight black — crafted to hang on the wall where your greatest memories live. Watch the film, then bring a piece of the story home."
+    },
+    {
+      "type": "header",
+      "content": "Primary Button"
+    },
+    {
+      "type": "text",
+      "id": "btn1_text",
+      "label": "Button Label",
+      "default": "VIEW THE GALLERY"
+    },
+    {
+      "type": "url",
+      "id": "btn1_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Secondary Button"
+    },
+    {
+      "type": "text",
+      "id": "btn2_text",
+      "label": "Button Label",
+      "default": "WATCH THE FILM"
+    },
+    {
+      "type": "url",
+      "id": "btn2_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Highlights / Features"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_highlights",
+      "label": "Show Highlights",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "feat1_title",
+      "label": "Feature 1 Title",
+      "default": "Museum-grade"
+    },
+    {
+      "type": "text",
+      "id": "feat1_sub",
+      "label": "Feature 1 Subtitle",
+      "default": "archival prints"
+    },
+    {
+      "type": "text",
+      "id": "feat2_title",
+      "label": "Feature 2 Title",
+      "default": "Hand-finished"
+    },
+    {
+      "type": "text",
+      "id": "feat2_sub",
+      "label": "Feature 2 Subtitle",
+      "default": "frames & mounts"
+    },
+    {
+      "type": "header",
+      "content": "Color Settings"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#080605"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#C89F55"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Description Text Color",
+      "default": "#9A8D80"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider Lines Color",
+      "default": "#241C14"
+    },
+    {
+      "type": "color",
+      "id": "accent_gold",
+      "label": "Accent Gold Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "header",
+      "content": "Primary Button Colors (Dynamic)"
+    },
+    {
+      "type": "color",
+      "id": "btn1_bg",
+      "label": "Base Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "color_background",
+      "id": "btn1_gradient",
+      "label": "Button Gradient",
+      "default": "linear-gradient(90deg, #C69E58 0%, #F3DD99 25%, #AF874D 50%, #EDD696 75%, #C69E58 100%)"
+    },
+    {
+      "type": "color",
+      "id": "btn1_border",
+      "label": "Border Color",
+      "default": "#D9BA77"
+    },
+    {
+      "type": "color",
+      "id": "btn1_text_color",
+      "label": "Text Color",
+      "default": "#0E0C09"
+    },
+    {
+      "type": "color",
+      "id": "btn1_bg_hover",
+      "label": "Hover Background Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "color",
+      "id": "btn1_border_hover",
+      "label": "Hover Border Color",
+      "default": "#D9BA77"
+    },
+    {
+      "type": "color",
+      "id": "btn1_text_hover",
+      "label": "Hover Text Color",
+      "default": "#0E0C09"
+    },
+    {
+      "type": "checkbox",
+      "id": "btn1_enable_glow",
+      "label": "Enable Hover Glow",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "btn1_glow_color",
+      "label": "Hover Glow Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "range",
+      "id": "btn1_glow_intensity",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Hover Glow Intensity",
+      "default": 45
+    },
+    {
+      "type": "range",
+      "id": "btn1_glow_size",
+      "min": 5,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Hover Glow Size",
+      "default": 25
+    },
+    {
+      "type": "header",
+      "content": "Secondary Button Glass Colors (Dynamic)"
+    },
+    {
+      "type": "color",
+      "id": "btn2_bg",
+      "label": "Glass Base Color",
+      "default": "#D9BA77"
+    },
+    {
+      "type": "range",
+      "id": "btn2_bg_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Glass Base Opacity",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "btn2_border",
+      "label": "Glass Border Color",
+      "default": "#D9BA77"
+    },
+    {
+      "type": "color",
+      "id": "btn2_text_color",
+      "label": "Glass Text Color",
+      "default": "#EAD297"
+    },
+    {
+      "type": "color",
+      "id": "btn2_bg_hover",
+      "label": "Hover Glass Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "range",
+      "id": "btn2_hover_bg_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "%",
+      "label": "Hover Glass Opacity",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "btn2_border_hover",
+      "label": "Hover Border Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "color",
+      "id": "btn2_text_hover",
+      "label": "Hover Text Color",
+      "default": "#F3DD99"
+    }
+  ],
+  "presets": [
+    {
+      "name": "The GOAT Gallery"
+    }
+  ]
+}
+{% endschema %}

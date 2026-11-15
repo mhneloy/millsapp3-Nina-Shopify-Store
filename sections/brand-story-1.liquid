@@ -1,0 +1,656 @@
+{% comment %}
+  Section: Brand Story (The Story Behind The Store)
+  Author: Custom Shopify 2.0 Section
+  Theme: GOAT CHRISTMAS - Luxury Black & Gold
+{% endcomment %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+{%- liquid
+  assign btn_bg_color = section.settings.btn_bg
+  assign btn_alpha = section.settings.btn_bg_opacity | default: 16 | divided_by: 100.0
+  assign btnh_bg_color = section.settings.btn_bg_hover
+  assign btnh_alpha = section.settings.btn_hover_bg_opacity | default: 22 | divided_by: 100.0
+-%}
+
+<style>
+  .brand-story-{{ section.id }} {
+    --bg-color: {{ section.settings.bg_color | default: '#060504' }};
+    --eyebrow-color: {{ section.settings.eyebrow_color | default: '#DCB14F' }};
+    --heading-gradient: {{ section.settings.heading_gradient | default: 'linear-gradient(105deg, #C69E58 0%, #F3DD99 25%, #AF874D 50%, #EDD696 75%, #C69E58 100%)' }};
+    --text-color: {{ section.settings.text_color | default: '#9D9083' }};
+    --divider-color: {{ section.settings.divider_color | default: 'rgba(213, 171, 94, 0.25)' }};
+    --frame-color: {{ section.settings.frame_color | default: '#544229' }};
+    --pillar-gradient: {{ section.settings.pillar_gradient | default: 'linear-gradient(105deg, #C69E58 0%, #F3DD99 25%, #AF874D 50%, #EDD696 75%, #C69E58 100%)' }};
+    --pillar-sub-color: {{ section.settings.pillar_sub_color | default: '#9D9083' }};
+
+    --btn-bg: {% if btn_bg_color != blank and btn_bg_color.red != blank %}rgba({{ btn_bg_color.red }}, {{ btn_bg_color.green }}, {{ btn_bg_color.blue }}, {{ btn_alpha }}){% elsif btn_bg_color != blank %}{{ btn_bg_color | color_modify: 'alpha', btn_alpha }}{% else %}rgba(217, 186, 119, {{ btn_alpha }}){% endif %};
+    --btn-border: {{ section.settings.btn_border | default: '#D9BA77' }};
+    --btn-text-color: {{ section.settings.btn_text_color | default: '#EAD297' }};
+    --btn-bg-hover: {% if btnh_bg_color != blank and btnh_bg_color.red != blank %}rgba({{ btnh_bg_color.red }}, {{ btnh_bg_color.green }}, {{ btnh_bg_color.blue }}, {{ btnh_alpha }}){% elsif btnh_bg_color != blank %}{{ btnh_bg_color | color_modify: 'alpha', btnh_alpha }}{% else %}rgba(220, 177, 79, {{ btnh_alpha }}){% endif %};
+    --btn-border-hover: {{ section.settings.btn_border_hover | default: '#DCB14F' }};
+    --btn-text-hover: {{ section.settings.btn_text_hover | default: '#F3DD99' }};
+
+    background-color: var(--bg-color);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    padding-left: 24px;
+    padding-right: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .brand-story-{{ section.id }} .brand-story__container {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 70px;
+    align-items: center;
+  }
+
+  /* Left Framed Image */
+  .brand-story-{{ section.id }} .brand-story__image-col {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .brand-story-{{ section.id }} .brand-story__frame-box {
+    position: relative;
+    padding: 12px;
+    border: 1px solid var(--frame-color);
+    width: 100%;
+    max-width: 520px;
+    box-sizing: border-box;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  }
+
+  .brand-story-{{ section.id }} .brand-story__image {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    filter: contrast(1.05) brightness(0.95);
+  }
+
+  /* Right Story Content */
+  .brand-story-{{ section.id }} .brand-story__content-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .brand-story-{{ section.id }} .brand-story__eyebrow {
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    font-size: 11.5px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--eyebrow-color);
+    font-weight: 500;
+    margin-bottom: 22px;
+    display: inline-block;
+  }
+
+  /* Shimmer Gradient Heading */
+  .brand-story-{{ section.id }} .brand-story__heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(30px, 3.8vw, 52px);
+    line-height: 1.22;
+    font-weight: 600;
+    margin: 0 0 25px 0;
+    letter-spacing: -0.3px;
+    background: {%- if section.settings.heading_gradient != blank -%}{{ section.settings.heading_gradient }}{%- else -%}linear-gradient(105deg, #C69E58 0%, #F3DD99 25%, #AF874D 50%, #EDD696 75%, #C69E58 100%){%- endif -%};
+    background-size: 250% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.35));
+    {% if section.settings.enable_heading_shimmer != false %}
+      animation: storyHeadingShimmer {{ section.settings.heading_shimmer_speed | default: 6 }}s ease-in-out infinite alternate;
+    {% endif %}
+  }
+
+  @keyframes storyHeadingShimmer {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .brand-story-{{ section.id }} .brand-story__text-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 35px;
+  }
+
+  .brand-story-{{ section.id }} .brand-story__paragraph {
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    font-size: 14.5px;
+    line-height: 1.85;
+    color: var(--text-color);
+    font-weight: 300;
+    margin: 0;
+  }
+
+  /* Three Columns / Pillars */
+  .brand-story-{{ section.id }} .brand-story__pillars {
+    width: 100%;
+    border-top: 1px solid var(--divider-color);
+    padding-top: 24px;
+    margin-bottom: 35px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .brand-story-{{ section.id }} .brand-story__pillar-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .brand-story-{{ section.id }} .brand-story__pillar-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 600;
+    margin: 0 0 5px 0;
+    background: var(--pillar-gradient);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    line-height: 1.2;
+    display: inline-block;
+  }
+
+  .brand-story-{{ section.id }} .brand-story__pillar-sub {
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--pillar-sub-color);
+    font-weight: 500;
+    opacity: 0.85;
+  }
+
+  /* Action Button: Frosted Glassmorphism Exactly Matching Hero Secondary Button */
+  .brand-story-{{ section.id }} .brand-story__btn {
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 30px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    box-sizing: border-box;
+    position: relative;
+    white-space: nowrap;
+    background: var(--btn-bg) !important;
+    background-color: var(--btn-bg) !important;
+    color: var(--btn-text-color) !important;
+    border: 1px solid var(--btn-border) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 4px 20px rgba(0, 0, 0, 0.35);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    isolation: isolate;
+    transform: translateZ(0);
+  }
+
+  .brand-story-{{ section.id }} .brand-story__btn:hover {
+    background: var(--btn-bg-hover) !important;
+    background-color: var(--btn-bg-hover) !important;
+    color: var(--btn-text-hover) !important;
+    border-color: var(--btn-border-hover) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transform: translateY(-2px);
+    {% if section.settings.btn_enable_glow %}
+      box-shadow: 
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.15),
+        0 0 25px rgba(220, 177, 79, 0.45),
+        0 0 50px rgba(220, 177, 79, 0.2) !important;
+    {% else %}
+      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15), 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+    {% endif %}
+  }
+
+  /* Responsive Design */
+  @media (max-width: 989px) {
+    .brand-story-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top | divided_by: 1.5 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | divided_by: 1.5 | round }}px;
+    }
+
+    .brand-story-{{ section.id }} .brand-story__container {
+      grid-template-columns: 1fr;
+      gap: 45px;
+    }
+
+    .brand-story-{{ section.id }} .brand-story__heading {
+      font-size: 34px;
+    }
+
+    .brand-story-{{ section.id }} .brand-story__frame-box {
+      max-width: 440px;
+    }
+  }
+
+  /* Mobile Responsive - Inline 3-Column Pillars & Sleek 1-Line Button */
+  @media (max-width: 768px) {
+    .brand-story-{{ section.id }} .brand-story__pillars {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 12px !important;
+      padding-top: 18px !important;
+      margin-bottom: 28px !important;
+      text-align: left !important;
+    }
+
+    .brand-story-{{ section.id }} .brand-story__pillar-title {
+      font-size: 20px !important;
+      line-height: 1.2 !important;
+      margin-bottom: 4px !important;
+    }
+
+    .brand-story-{{ section.id }} .brand-story__pillar-sub {
+      font-size: 8.5px !important;
+      letter-spacing: 1.2px !important;
+      line-height: 1.35 !important;
+    }
+
+    .brand-story-{{ section.id }} .brand-story__btn {
+      width: auto !important;
+      min-width: 240px !important;
+      max-width: 280px !important;
+      padding: 12px 20px !important;
+      font-size: 11.5px !important;
+      letter-spacing: 1.5px !important;
+      text-align: center !important;
+      box-sizing: border-box !important;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .brand-story-{{ section.id }} .brand-story__pillars {
+      gap: 8px !important;
+    }
+
+    .brand-story-{{ section.id }} .brand-story__pillar-title {
+      font-size: 18px !important;
+    }
+
+    .brand-story-{{ section.id }} .brand-story__pillar-sub {
+      font-size: 7.5px !important;
+      letter-spacing: 0.8px !important;
+    }
+
+    .brand-story-{{ section.id }} .brand-story__btn {
+      min-width: 220px !important;
+      font-size: 11px !important;
+    }
+  }
+</style>
+
+<div class="brand-story-{{ section.id }}">
+  <div class="brand-story__container">
+    
+    <!-- Left Column: Framed Image -->
+    <div class="brand-story__image-col">
+      <div class="brand-story__frame-box">
+        {% if section.settings.image != blank %}
+          <img
+            src="{{ section.settings.image | image_url: width: 1000 }}"
+            alt="{{ section.settings.image.alt | default: 'The story behind the store' }}"
+            class="brand-story__image"
+            loading="lazy"
+            width="600"
+            height="600"
+          >
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'brand-story__image' }}
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Right Column: Content -->
+    <div class="brand-story__content-col">
+      {% if section.settings.eyebrow != blank %}
+        <span class="brand-story__eyebrow">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="brand-story__heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+
+      <div class="brand-story__text-group">
+        {% if section.settings.paragraph_1 != blank %}
+          <p class="brand-story__paragraph">{{ section.settings.paragraph_1 }}</p>
+        {% endif %}
+        {% if section.settings.paragraph_2 != blank %}
+          <p class="brand-story__paragraph">{{ section.settings.paragraph_2 }}</p>
+        {% endif %}
+      </div>
+
+      <!-- 3 Pillars (Legacy, Emotion, Gratitude) -->
+      {% if section.settings.show_pillars %}
+        <div class="brand-story__pillars">
+          <div class="brand-story__pillar-item">
+            <span class="brand-story__pillar-title">{{ section.settings.pillar1_title }}</span>
+            <span class="brand-story__pillar-sub">{{ section.settings.pillar1_sub }}</span>
+          </div>
+          <div class="brand-story__pillar-item">
+            <span class="brand-story__pillar-title">{{ section.settings.pillar2_title }}</span>
+            <span class="brand-story__pillar-sub">{{ section.settings.pillar2_sub }}</span>
+          </div>
+          <div class="brand-story__pillar-item">
+            <span class="brand-story__pillar-title">{{ section.settings.pillar3_title }}</span>
+            <span class="brand-story__pillar-sub">{{ section.settings.pillar3_sub }}</span>
+          </div>
+        </div>
+      {% endif %}
+
+      <!-- Action Button -->
+      {% if section.settings.btn_text != blank %}
+        <a href="{{ section.settings.btn_link | default: '#' }}" class="brand-story__btn">
+          {{ section.settings.btn_text }}
+        </a>
+      {% endif %}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Brand Story",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 900,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "label": "Maximum Width",
+      "default": 1280
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 40,
+      "max": 160,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 40,
+      "max": 160,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 90
+    },
+    {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Story Image"
+    },
+    {
+      "type": "color",
+      "id": "frame_color",
+      "label": "Image Frame Border Color",
+      "default": "#544229"
+    },
+    {
+      "type": "header",
+      "content": "Heading & Content Settings"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow / Subheading",
+      "default": "THE STORY BEHIND THE STORE"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Use <br> for line breaks",
+      "default": "We celebrated with them.<br>We believed with them.<br>We grew up with them."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_heading_shimmer",
+      "label": "Enable Heading Shimmer Animation",
+      "default": true
+    },
+    {
+      "type": "color_background",
+      "id": "heading_gradient",
+      "label": "Heading Gradient Color",
+      "default": "linear-gradient(105deg, #C69E58 0%, #F3DD99 25%, #AF874D 50%, #EDD696 75%, #C69E58 100%)"
+    },
+    {
+      "type": "range",
+      "id": "heading_shimmer_speed",
+      "label": "Shimmer Animation Speed",
+      "min": 2,
+      "max": 15,
+      "step": 1,
+      "unit": "s",
+      "default": 6
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_1",
+      "label": "First Paragraph",
+      "default": "For so long, Number 7 and Number 10 have been part of our lives. And someday, when we look back, we won't remember only what they achieved — we'll remember how they made us feel."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_2",
+      "label": "Second Paragraph",
+      "default": "GOAT CHRISTMAS is our way of saying something simple, something millions of hearts around the world already feel. Every piece we create carries that gratitude — made to be gifted, framed, worn and remembered."
+    },
+    {
+      "type": "header",
+      "content": "Pillars Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pillars",
+      "label": "Show Pillars",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "pillar1_title",
+      "label": "Pillar 1 Title",
+      "default": "Legacy"
+    },
+    {
+      "type": "text",
+      "id": "pillar1_sub",
+      "label": "Pillar 1 Subtitle",
+      "default": "WHAT THEY GAVE"
+    },
+    {
+      "type": "text",
+      "id": "pillar2_title",
+      "label": "Pillar 2 Title",
+      "default": "Emotion"
+    },
+    {
+      "type": "text",
+      "id": "pillar2_sub",
+      "label": "Pillar 2 Subtitle",
+      "default": "HOW WE FELT"
+    },
+    {
+      "type": "text",
+      "id": "pillar3_title",
+      "label": "Pillar 3 Title",
+      "default": "Gratitude"
+    },
+    {
+      "type": "text",
+      "id": "pillar3_sub",
+      "label": "Pillar 3 Subtitle",
+      "default": "WHAT WE SAY"
+    },
+    {
+      "type": "color_background",
+      "id": "pillar_gradient",
+      "label": "Pillar Title Gradient",
+      "default": "linear-gradient(105deg, #C69E58 0%, #F3DD99 25%, #AF874D 50%, #EDD696 75%, #C69E58 100%)"
+    },
+    {
+      "type": "color",
+      "id": "pillar_sub_color",
+      "label": "Pillar Subtitle Color",
+      "default": "#9D9083"
+    },
+    {
+      "type": "header",
+      "content": "Button Settings (Frosted Glassmorphism)"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Label",
+      "default": "READ THE FULL STORY"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg",
+      "label": "Glass Base Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "range",
+      "id": "btn_bg_opacity",
+      "label": "Glass Base Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "%",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "btn_border",
+      "label": "Button Border Color",
+      "default": "#D9BA77"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Button Text Color",
+      "default": "#EAD297"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_hover",
+      "label": "Hover Glass Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "range",
+      "id": "btn_hover_bg_opacity",
+      "label": "Hover Glass Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "%",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "btn_border_hover",
+      "label": "Hover Border Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_hover",
+      "label": "Hover Text Color",
+      "default": "#F3DD99"
+    },
+    {
+      "type": "checkbox",
+      "id": "btn_enable_glow",
+      "label": "Enable Hover Glow Effect",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "General Color Settings"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background Color",
+      "default": "#060504"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Paragraph Text Color",
+      "default": "#9D9083"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider Line Color",
+      "default": "#2B2217"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Story"
+    }
+  ]
+}
+{% endschema %}

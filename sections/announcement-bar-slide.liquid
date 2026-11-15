@@ -12,16 +12,45 @@
       {%- else -%}
         {{ section.settings.background }}
       {%- endif -%};
-      color: {{ section.settings.text }}
-      ;
-      --color-body-text-rgb: {{ section.settings.text.red }}
-      , {{ section.settings.text.green }}
-      , {{ section.settings.text.blue }}
-      ;
-
+      color: {{ section.settings.text }};
+      --color-body-text-rgb: {{ section.settings.text.red }}, {{ section.settings.text.green }}, {{ section.settings.text.blue }};
+      font-family: 'Jost', var(--g-font-2), -apple-system, BlinkMacSystemFont, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: {{ section.settings.letter_spacing | default: '0.25' }}em;
+      font-weight: 500;
+      font-size: {{ section.settings.font_size | default: 11.5 }}px;
+      line-height: 1.4;
+      padding: 9px 15px;
+      position: relative;
+      z-index: 100;
+      border-bottom: 1px solid rgba(14, 12, 9, 0.15);
+      border-top: 1px solid rgba(14, 12, 9, 0.08);
+    }
+    .announcement-slide .announcement-main-text {
+      color: {{ section.settings.text }};
+      letter-spacing: {{ section.settings.letter_spacing | default: '0.25' }}em;
+      font-weight: 500;
+      display: inline-block;
+      text-align: center;
+    }
+    .announcement-slide a {
+      color: {{ section.settings.text }};
+      text-decoration: none;
+      transition: opacity 0.2s ease, color 0.2s ease;
+    }
+    .announcement-slide a:hover {
+      color: {{ section.settings.text_hover | default: section.settings.text }};
+      opacity: 0.85;
     }
     .site-announcement-bar {
       --announcement-text-hover:{{ section.settings.text_hover }};
+    }
+    .site-announcement-contain {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 100%;
     }
     .announcement-swiper {
       margin-left: auto;
@@ -40,16 +69,22 @@
     }
     .announcement-swiper .swiper-button-prev:after,
     .announcement-swiper .swiper-button-next:after {
-      color: {{ section.settings.text }}
-      ;
+      color: {{ section.settings.text }};
     }
     .announcement-swiper .rte a {
       color: rgb(var(--color-body-text-rgb));
-      /* text-decoration-color:rgba(--color-body-text-rgb, alpha); */
     }
-    @media(max-width:749px) {
+    @media(max-width:768px) {
       .announcement-slide {
-        overflow-x: hidden;
+        font-size: 10px;
+        letter-spacing: 0.16em;
+        padding: 7px 10px;
+      }
+      .announcement-slide .announcement-main-text {
+        letter-spacing: 0.16em;
+      }
+      .site-announcement-contain {
+        display: flex !important;
       }
       .announcement-swiper {
         overflow: inherit;
@@ -76,23 +111,20 @@
       grid: auto / auto-flow auto 10rem;
       place-items: center;
       display: grid;
-      animation-duration: {{ speed }}
-      s;
+      animation-duration: {{ speed }}s;
     }
     .announcement-dot {
       width: 4px;
       height: 4px;
       display: block;
       border-radius: 50%;
-      background-color: {{ section.settings.text }}
-      ;
+      background-color: {{ section.settings.text }};
     }
     .announcement-line {
       width: 32px;
       height: 1px;
       display: block;
-      background-color: {{ section.settings.text }}
-      ;
+      background-color: {{ section.settings.text }};
     }
     .announcement-item__in .image-content__image {
       width: {{ size_icon }}px;
@@ -107,7 +139,7 @@
     .site-announcement-bar__list-item {
       line-height: 1;
       padding: 0 18px;
-      border-right: 1px solid #e3e3e3;
+      border-right: 1px solid rgba(14, 12, 9, 0.2);
     }
     .site-announcement-bar__list-item:last-child {
       border: none;
@@ -117,62 +149,39 @@
     .site-announcement-bar a:hover {
       color:var(--announcement-text-hover);
     }
-    @media(max-width:749px) {
-      .site-announcement-contain {
-        display: none;
-      }
-    }
-   
   </style>
   <!-- announcement-bar-slide.liquid -->
 
   {% if type == 'default' %}
-    <div class="announcement-slide announcement-bar-carousel"  
-      data-aos="{{ section.settings.animation }}"
-      data-aos-duration="100"
-      data-section-id="{{ section.id }}"
-      data-section-id="{{ section.id }}"
-      data-section-type="announcementswiper">
-      {%- for block in section.blocks -%}
-        {%- case block.type -%}
-          {%- when 'item_default' -%}
-          <div class="{{ section.settings.setwidth }} site-announcement-contain">
-            <div class="py-2 {{ section.settings.size_text }} justify-content-between d-flex align-items-center">
-              {{ block.settings.code }}
-              <div>
-                {%- for block in section.blocks -%}
-                  {%- case block.type -%}
-                    {%- when 'item_default' -%}
-                    {%- if linklists[block.settings.link_list].links.size > 0 -%}
-                      <div class="site-announcement-bar">
-
-                        {%- if linklists[block.settings.link_list].title != blank and block.settings.enable_title -%}
-                          <h4 class="h5 site-announcement-bar-title">{{ linklists[block.settings.link_list].title }}</h4>
-                        {%- endif -%}
-
-                        <ul class="site-announcement-bar__list d-flex">
-                          {%- for link in linklists[block.settings.link_list].links -%}
-                            <li class="site-announcement-bar__list-item">
-                              <a href="{{ link.url }}">{{ link.title }}</a>
-                            </li>
-                          {%- endfor -%}
-                        </ul>
-                      </div>
-                    {%- endif -%}
-                  {%- endcase -%}
-                {%- endfor -%}
+    <div class="announcement-slide announcement-bar-default text-center"  
+      data-section-id="{{ section.id }}">
+      <div class="{{ section.settings.setwidth }} site-announcement-contain mx-auto">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'item_default' -%}
+              <div class="announcement-main-text text-center py-1" {{ block.shopify_attributes }}>
+                {%- if block.settings.button_link != blank -%}
+                  <a href="{{ block.settings.button_link }}">{{ block.settings.code }}</a>
+                {%- else -%}
+                  <span>{{ block.settings.code }}</span>
+                {%- endif -%}
               </div>
-            </div>
-          </div>
-        {%- endcase -%}
-      {%- endfor -%}
+            {%- when 'Item' -%}
+              <div class="announcement-main-text text-center py-1" {{ block.shopify_attributes }}>
+                {%- if block.settings.button_link != blank -%}
+                  <a href="{{ block.settings.button_link }}">{{ block.settings.code }}</a>
+                {%- else -%}
+                  <span>{{ block.settings.code }}</span>
+                {%- endif -%}
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
     </div>
   {%- else -%}
 
     <div
       class="announcement-bar-carousel announcement-slide d-flex {% if section.blocks.size == 1 %} announcement-single {% endif %}"
-      data-aos="{{ section.settings.animation }}"
-      data-aos-duration="100"
       data-section-id="{{ section.id }}"
       data-section-type="announcementswiper">
       {%- if type == 'carousel' -%}
@@ -447,28 +456,50 @@
         "info": "Auto - Scrolling"
       }, {
         "type": "header",
+        "content": "Typography & Style"
+      }, {
+        "type": "range",
+        "id": "font_size",
+        "label": "Font Size",
+        "min": 9,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "default": 12
+      }, {
+        "type": "range",
+        "id": "letter_spacing",
+        "label": "Letter Spacing",
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "unit": "em",
+        "default": 0.3
+      }, {
+        "type": "header",
         "content": "Color",
         "info": "Background, Color"
       }, {
         "type": "color",
         "id": "background",
         "label": "Background",
-        "default": "#000000"
+        "default": "#DCB14F"
       }, {
         "id": "gradient_bg",
         "type": "color_background",
-        "label": "Background Gradient"
+        "label": "Background Gradient",
+        "default": "linear-gradient(90deg, #C69E58 0%, #F3DD99 25%, #AF874D 50%, #EDD696 75%, #C69E58 100%)"
       }, {
         "type": "color",
         "id": "text",
         "label": "Text color",
-        "default": "#ffffff"
+        "default": "#0E0C09"
       },
       {
-      "type": "color",
-      "id": "text_hover",
-      "label": "Text Hover",
-      "default": "#FF6F2E"
+        "type": "color",
+        "id": "text_hover",
+        "label": "Text Hover",
+        "default": "#211C17"
       }
     ],
     "blocks": [

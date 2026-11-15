@@ -1,0 +1,406 @@
+{% comment %}
+  Section: Why Goat Christmas Component without Bottom Box
+{% endcomment %}
+
+<div class="why-goat-section-wrapper-{{ section.id }}">
+  <div class="why-goat-container">
+    
+    <!-- Top Icon -->
+    {%- if section.settings.top_icon_svg != blank -%}
+      <div class="why-goat-top-icon">
+        {{ section.settings.top_icon_svg }}
+      </div>
+    {%- endif -%}
+
+    <!-- Main Title -->
+    <h2 class="why-goat-title">
+      <span class="title-main">{{ section.settings.title_line1 }}</span>
+      <span class="title-highlight">{{ section.settings.title_line2 }}</span>
+    </h2>
+
+    <!-- Description Paragraph -->
+    <p class="why-goat-desc">
+      {{ section.settings.description_text }}
+    </p>
+
+    <!-- Cards Grid (Dynamic Blocks) -->
+    <div class="why-goat-cards-grid">
+      {%- for block in section.blocks -%}
+        <div class="why-goat-card" {{ block.shopify_attributes }}>
+          {%- if block.settings.card_icon_svg != blank -%}
+            <div class="card-icon">
+              {{ block.settings.card_icon_svg }}
+            </div>
+          {%- endif -%}
+          <h3 class="card-title">{{ block.settings.card_title }}</h3>
+          <p class="card-desc">{{ block.settings.card_desc }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .why-goat-section-wrapper-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    {%- if section.settings.bg_gradient != blank -%}
+      background: {{ section.settings.bg_gradient }};
+    {%- endif -%}
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+  }
+
+  .why-goat-container {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Top Icon Style */
+  .why-goat-top-icon {
+    color: {{ section.settings.accent_color }};
+    width: 36px;
+    height: 36px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .why-goat-top-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Main Title Style */
+  .why-goat-title {
+    margin: 0 0 25px 0;
+    line-height: 1.2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .title-main {
+    color: {{ section.settings.title_color }};
+    font-size: {{ section.settings.title_font_size }}px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .title-highlight {
+    color: {{ section.settings.accent_color }};
+    font-size: {{ section.settings.title_font_size }}px;
+    font-weight: 700;
+  }
+
+  /* Description Style */
+  .why-goat-desc {
+    color: {{ section.settings.desc_color }};
+    font-size: {{ section.settings.desc_font_size }}px;
+    line-height: 1.7;
+    max-width: 850px;
+    margin: 0 auto 50px auto;
+    font-weight: 300;
+  }
+
+  /* Cards Grid Style */
+  .why-goat-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    width: 100%;
+  }
+
+  .why-goat-card {
+    background-color: {{ section.settings.card_bg_color }};
+    border: 1px solid {{ section.settings.card_border_color }};
+    border-radius: 16px;
+    padding: 35px 25px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+  }
+
+  .why-goat-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .card-icon {
+    color: {{ section.settings.accent_color }};
+    width: 28px;
+    height: 28px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .card-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .card-title {
+    color: {{ section.settings.card_title_color }};
+    font-size: {{ section.settings.card_title_font_size }}px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    letter-spacing: 1px;
+  }
+
+  .card-desc {
+    color: {{ section.settings.card_desc_color }};
+    font-size: {{ section.settings.card_desc_font_size }}px;
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 300;
+  }
+
+  /* Responsive Design for Mobile Devices */
+  @media screen and (max-width: 768px) {
+    .why-goat-section-wrapper-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top | times: 0.6 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.6 }}px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    .why-goat-cards-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .title-main, .title-highlight {
+      font-size: {{ section.settings.title_font_size | times: 0.55 }}px;
+    }
+
+    .why-goat-desc {
+      font-size: {{ section.settings.desc_font_size | times: 0.85 }}px;
+      margin-bottom: 35px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Why Goat Christmas",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Top Section Content"
+    },
+    {
+      "type": "textarea",
+      "id": "top_icon_svg",
+      "label": "Top Gift SVG Icon Code",
+      "default": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M20 7h-4.05c.34-.33.65-.71.9-1.15C17.48 4.29 17.15 2.5 15.5 2c-1.12-.34-2.31.28-3.5 1.7C10.81 2.28 9.62 1.66 8.5 2 6.85 2.5 6.52 4.29 7.15 5.85c.25.44.56.82.9 1.15H4c-1.1 0-2 .9-2 2v2c0 1.1.9 2 2 2v7c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-7c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-9-3.3c.77-.9 1.58-1.2 2.02-1.07.56.17.7 1.05.21 1.95-.45.83-1.1 1.53-1.8 2.09-.7-.56-1.35-1.26-1.8-2.09-.49-.9-.35-1.78.21-1.95.44-.13 1.25.17 2.02 1.07zM4 11h8v2H4v-2zm16 9H4v-5h8v2h2v-2h8v5zm0-7h-8v-2h8v2z\"/></svg>"
+    },
+    {
+      "type": "text",
+      "id": "title_line1",
+      "label": "Title Line 1",
+      "default": "WHY"
+    },
+    {
+      "type": "text",
+      "id": "title_line2",
+      "label": "Title Line 2 (Highlighted)",
+      "default": "GOAT CHRISTMAS?"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Title Font Size (px)",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "default": 40
+    },
+    {
+      "type": "textarea",
+      "id": "description_text",
+      "label": "Description Text",
+      "default": "Christmas and Thanksgiving are seasons of warmth, reflection, and gratitude. They bring families together around hearths and memories. We realized that our fondest memories weren't just the gifts under the tree—they were the moments spent watching legendary rivalries and triumphs with our fathers, mothers, siblings, and children."
+    },
+    {
+      "type": "range",
+      "id": "desc_font_size",
+      "label": "Description Font Size (px)",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Card Section Style"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card Background Color",
+      "default": "#13120f"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card Border Color",
+      "default": "#26231d"
+    },
+    {
+      "type": "range",
+      "id": "card_title_font_size",
+      "label": "Card Title Font Size (px)",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "card_desc_font_size",
+      "label": "Card Description Font Size (px)",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Color Customization"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Gold Accent & Icon Color",
+      "default": "#d8b257"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Main Title Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "desc_color",
+      "label": "Description Text Color",
+      "default": "#cccccc"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Card Title Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_desc_color",
+      "label": "Card Description Color",
+      "default": "#b0b0b0"
+    },
+    {
+      "type": "header",
+      "content": "Section Background & Spacing"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Solid Color",
+      "default": "#070707"
+    },
+    {
+      "type": "color_background",
+      "id": "bg_gradient",
+      "label": "Background Gradient",
+      "default": "radial-gradient(circle at center, #15130f 0%, #070707 80%)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding (px)",
+      "min": 20,
+      "max": 150,
+      "step": 5,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding (px)",
+      "min": 20,
+      "max": 150,
+      "step": 5,
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature_card",
+      "name": "Feature Card",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "card_icon_svg",
+          "label": "Card SVG Icon Code",
+          "default": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z\"/></svg>"
+        },
+        {
+          "type": "text",
+          "id": "card_title",
+          "label": "Card Title",
+          "default": "EMOTION"
+        },
+        {
+          "type": "textarea",
+          "id": "card_desc",
+          "label": "Card Description",
+          "default": "Honouring feelings that defined two decades of our lives."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Why Goat Christmas",
+      "blocks": [
+        {
+          "type": "feature_card",
+          "settings": {
+            "card_title": "EMOTION",
+            "card_desc": "Honouring feelings that defined two decades of our lives."
+          }
+        },
+        {
+          "type": "feature_card",
+          "settings": {
+            "card_title": "LEGACY",
+            "card_desc": "Carrying forward timeless stories for the next generation."
+          }
+        },
+        {
+          "type": "feature_card",
+          "settings": {
+            "card_title": "GRATITUDE",
+            "card_desc": "Saying 'Thank You' during the most festive season of the year."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

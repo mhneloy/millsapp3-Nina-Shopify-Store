@@ -1,0 +1,994 @@
+{% comment %}
+  Section: Tribute Statement Banner & Luxury Trust Badges Strip (7 & 10 Stadium Finale)
+  Author: Custom Shopify 2.0 Section
+{% endcomment %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+{%- assign glow1_alpha = section.settings.btn1_glow_intensity | default: 50 | divided_by: 100.0 -%}
+{%- assign glow1_c = section.settings.btn1_glow_color | default: '#DCB14F' -%}
+{%- assign btn2_alpha = section.settings.btn2_bg_opacity | default: 0 | divided_by: 100.0 -%}
+{%- assign btn2_bg_color = section.settings.btn2_bg | default: '#D9BA77' -%}
+{%- assign btn2h_alpha = section.settings.btn2_hover_bg_opacity | default: 14 | divided_by: 100.0 -%}
+{%- assign btn2h_bg_color = section.settings.btn2_bg_hover | default: '#DCB14F' -%}
+
+{%- assign card_alpha = section.settings.trust_card_bg_opacity | default: 60 | divided_by: 100.0 -%}
+{%- assign card_bg_c = section.settings.trust_card_bg | default: '#14100C' -%}
+
+<style>
+  .tribute-stat-{{ section.id }} {
+    --bg-color: {{ section.settings.bg_color | default: '#050403' }};
+    --accent-gold: {{ section.settings.accent_gold | default: '#DCB14F' }};
+    --quote-color: {{ section.settings.quote_color | default: '#F5EFE6' }};
+    --overlay-color: {{ section.settings.overlay_color | default: '#000000' }};
+    --overlay-opacity: {{ section.settings.overlay_opacity | default: 25 | divided_by: 100.0 }};
+
+    /* Trust Section Theme Colors (Matches overall website luxury palette) */
+    --trust-bg: {{ section.settings.trust_bg | default: '#0B0907' }};
+    --trust-border: {{ section.settings.trust_border_color | default: '#241D14' }};
+    --trust-card-bg: {% if card_bg_c != blank and card_bg_c.red != blank %}rgba({{ card_bg_c.red }}, {{ card_bg_c.green }}, {{ card_bg_c.blue }}, {{ card_alpha }}){% elsif card_bg_c != blank %}{{ card_bg_c | color_modify: 'alpha', card_alpha }}{% else %}rgba(20, 16, 12, {{ card_alpha }}){% endif %};
+    --trust-card-border: {{ section.settings.trust_card_border | default: '#2A2218' }};
+    --trust-card-border-hover: {{ section.settings.trust_card_border_hover | default: '#DCB14F' }};
+    --trust-icon: {{ section.settings.trust_icon_color | default: '#DCB14F' }};
+    --icon-size: {{ section.settings.icon_size | default: 32 }}px;
+    --icon-stroke: {{ section.settings.icon_stroke | default: 2 }}px;
+    --icon-circle-bg: {{ section.settings.icon_circle_bg | default: '#1B150F' }};
+    --icon-circle-border: {{ section.settings.icon_circle_border | default: '#3D3020' }};
+    --icon-circle-bg-hover: rgba(220, 177, 79, 0.16);
+    --trust-title-color: {{ section.settings.trust_title_color | default: '#EEE7D9' }};
+    --trust-subtitle-color: {{ section.settings.trust_subtitle_color | default: '#9E9183' }};
+
+    --btn1-bg: {{ section.settings.btn1_bg | default: '#DCB14F' }};
+    --btn1-border: {{ section.settings.btn1_border | default: '#DCB14F' }};
+    --btn1-text: {{ section.settings.btn1_text_color | default: '#0E0C09' }};
+    --btn1-glow: {% if section.settings.btn1_enable_glow %}0 4px 15px rgba(0, 0, 0, 0.4), 0 0 {{ section.settings.btn1_glow_size | default: 25 }}px {% if glow1_c != blank and glow1_c.red != blank %}rgba({{ glow1_c.red }}, {{ glow1_c.green }}, {{ glow1_c.blue }}, {{ glow1_alpha }}){% else %}rgba(220, 177, 79, {{ glow1_alpha }}){% endif %}{% else %}none{% endif %};
+
+    --btn2-bg: {% if btn2_bg_color != blank and btn2_bg_color.red != blank %}rgba({{ btn2_bg_color.red }}, {{ btn2_bg_color.green }}, {{ btn2_bg_color.blue }}, {{ btn2_alpha }}){% elsif btn2_bg_color != blank %}{{ btn2_bg_color | color_modify: 'alpha', btn2_alpha }}{% else %}rgba(217, 186, 119, {{ btn2_alpha }}){% endif %};
+    --btn2-border: {{ section.settings.btn2_border | default: '#D9BA77' }};
+    --btn2-text: {{ section.settings.btn2_text_color | default: '#EAD297' }};
+    --btn2-bg-hover: {% if btn2h_bg_color != blank and btn2h_bg_color.red != blank %}rgba({{ btn2h_bg_color.red }}, {{ btn2h_bg_color.green }}, {{ btn2h_bg_color.blue }}, {{ btn2h_alpha }}){% elsif btn2h_bg_color != blank %}{{ btn2h_bg_color | color_modify: 'alpha', btn2h_alpha }}{% else %}rgba(220, 177, 79, {{ btn2h_alpha }}){% endif %};
+    --btn2-border-hover: {{ section.settings.btn2_border_hover | default: '#DCB14F' }};
+    --btn2-text-hover: {{ section.settings.btn2_text_hover | default: '#F3DD99' }};
+
+    position: relative;
+    width: 100%;
+    background-color: var(--bg-color);
+    overflow: hidden;
+  }
+
+  /* 1. Main Stadium Banner */
+  .tribute-stat-{{ section.id }} .tribute-stat__banner {
+    position: relative;
+    width: 100%;
+    min-height: {{ section.settings.banner_height_desktop | default: 360 }}px;
+    {% if section.settings.bg_image != blank %}
+      background-image: url('{{ section.settings.bg_image | image_url: width: 2500 }}');
+    {% else %}
+      background-image: url('{{ 'goat-stadium-tribute-clean-bg.jpg' | asset_url }}');
+    {% endif %}
+    background-size: cover;
+    background-position: {{ section.settings.bg_position_desktop | default: 'center center' }};
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: clamp(40px, 6vw, 70px) 20px;
+    box-sizing: border-box;
+  }
+
+  .tribute-stat-{{ section.id }} .tribute-stat__banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--overlay-color);
+    opacity: var(--overlay-opacity);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .tribute-stat-{{ section.id }} .tribute-stat__banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0.7) 100%);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .tribute-stat-{{ section.id }} .tribute-stat__content {
+    position: relative;
+    z-index: 3;
+    max-width: {{ section.settings.max_width | default: 680 }}px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tribute-stat-{{ section.id }} .tribute-stat__quote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(22px, 2.6vw, 34px);
+    line-height: 1.35;
+    color: var(--quote-color);
+    margin: 0 0 22px 0;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95), 0 0 30px rgba(0, 0, 0, 0.85);
+    letter-spacing: -0.2px;
+  }
+
+  .tribute-stat-{{ section.id }} .tribute-stat__brand-mark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: {% if section.settings.show_buttons %}28px{% else %}0{% endif %};
+  }
+
+  .tribute-stat-{{ section.id }} .tribute-stat__brand-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 4vw, 54px);
+    font-weight: 600;
+    letter-spacing: clamp(6px, 1vw, 12px);
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0;
+    padding-left: clamp(6px, 1vw, 12px);
+    background: {%- if section.settings.brand_gradient != blank -%}{{ section.settings.brand_gradient }}{%- else -%}linear-gradient(105deg, #C69E58 0%, #F3DD99 25%, #AF874D 50%, #EDD696 75%, #C69E58 100%){%- endif -%};
+    background-size: 250% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.75));
+    {% if section.settings.enable_brand_shimmer != false %}
+      animation: goatBrandShimmer 6s ease-in-out infinite alternate;
+    {% endif %}
+  }
+
+  @keyframes goatBrandShimmer {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+
+  .tribute-stat-{{ section.id }} .tribute-stat__brand-subtitle {
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    font-size: clamp(10px, 1.1vw, 13px);
+    font-weight: 500;
+    letter-spacing: clamp(6px, 1.2vw, 14px);
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    opacity: 0.92;
+    margin-top: 6px;
+    padding-left: clamp(6px, 1.2vw, 14px);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  }
+
+  .tribute-stat-{{ section.id }} .tribute-stat__actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .tribute-stat-{{ section.id }} .tribute-btn {
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 28px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+
+  .tribute-stat-{{ section.id }} .tribute-btn--primary {
+    background: {%- if section.settings.btn1_gradient != blank -%}{{ section.settings.btn1_gradient }}{%- else -%}linear-gradient(90deg, #C69E58 0%, #F3DD99 25%, #AF874D 50%, #EDD696 75%, #C69E58 100%){%- endif -%};
+    background-size: 200% auto;
+    color: var(--btn1-text);
+    border: 1px solid var(--btn1-border, transparent);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  }
+
+  .tribute-stat-{{ section.id }} .tribute-btn--primary:hover {
+    background-position: right center;
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: var(--btn1-glow);
+  }
+
+  .tribute-stat-{{ section.id }} .tribute-btn--secondary {
+    background: var(--btn2-bg);
+    color: var(--btn2-text);
+    border: 1px solid var(--btn2-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 4px 20px rgba(0, 0, 0, 0.35);
+  }
+
+  .tribute-stat-{{ section.id }} .tribute-btn--secondary:hover {
+    background: var(--btn2-bg-hover);
+    color: var(--btn2-text-hover);
+    border-color: var(--btn2-border-hover);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(220, 177, 79, 0.45);
+  }
+
+  /* 2. Bottom Value Proposition / Luxury Trust Strip */
+  .tribute-stat-{{ section.id }} .tribute-stat__trust-bar {
+    width: 100%;
+    background-color: var(--trust-bg);
+    background: radial-gradient(ellipse 90% 80% at 50% 50%, rgba(28, 20, 13, 0.45) 0%, var(--trust-bg) 100%), var(--trust-bg);
+    border-top: 1px solid var(--trust-border);
+    position: relative;
+    padding-top: {{ section.settings.trust_padding_top | default: 45 }}px;
+    padding-bottom: {{ section.settings.trust_padding_bottom | default: 45 }}px;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+  }
+
+  /* Luxurious Top Gold Glow Ribbon Divider */
+  .tribute-stat-{{ section.id }} .tribute-stat__trust-divider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(220, 177, 79, 0) 0%, rgba(220, 177, 79, 0.45) 30%, rgba(243, 221, 153, 0.75) 50%, rgba(220, 177, 79, 0.45) 70%, rgba(220, 177, 79, 0) 100%);
+    box-shadow: 0 0 10px rgba(220, 177, 79, 0.35);
+    pointer-events: none;
+  }
+
+  .tribute-stat-{{ section.id }} .tribute-stat__trust-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    align-items: stretch;
+  }
+
+  /* Luxury Card Tile */
+  .tribute-stat-{{ section.id }} .tribute-trust-item {
+    background: var(--trust-card-bg);
+    border: 1px solid var(--trust-card-border);
+    border-radius: 4px;
+    padding: 22px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tribute-stat-{{ section.id }} .tribute-trust-item:hover {
+    transform: translateY(-3px);
+    border-color: var(--trust-card-border-hover);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(220, 177, 79, 0.15);
+  }
+
+  .tribute-stat-{{ section.id }} .tribute-trust-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--trust-icon), transparent);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  .tribute-stat-{{ section.id }} .tribute-trust-item:hover::after {
+    opacity: 1;
+  }
+
+  /* Circular Badge for SVG Icon */
+  .tribute-stat-{{ section.id }} .tribute-trust-item__icon-wrapper {
+    {% if section.settings.show_icon_circle %}
+      width: calc(var(--icon-size, 32px) + 20px);
+      height: calc(var(--icon-size, 32px) + 20px);
+      border-radius: 50%;
+      background: var(--icon-circle-bg);
+      border: 1px solid var(--icon-circle-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.35s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    {% else %}
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.35s ease;
+    {% endif %}
+  }
+
+  .tribute-stat-{{ section.id }} .tribute-trust-item:hover .tribute-trust-item__icon-wrapper {
+    {% if section.settings.show_icon_circle %}
+      background: var(--icon-circle-bg-hover);
+      border-color: var(--trust-icon);
+      transform: scale(1.08);
+      box-shadow: 0 0 15px rgba(220, 177, 79, 0.3);
+    {% else %}
+      transform: scale(1.1);
+    {% endif %}
+  }
+
+  /* CRITICAL SVG OVERRIDE: Neutralize theme.css fill: currentColor */
+  .tribute-stat-{{ section.id }} .tribute-trust-item__icon-wrapper svg,
+  .tribute-stat-{{ section.id }} .tribute-trust-item__icon-wrapper svg path,
+  .tribute-stat-{{ section.id }} .tribute-trust-item__icon-wrapper svg rect,
+  .tribute-stat-{{ section.id }} .tribute-trust-item__icon-wrapper svg polygon,
+  .tribute-stat-{{ section.id }} .tribute-trust-item__icon-wrapper svg circle {
+    fill: none !important;
+    stroke: currentColor !important;
+  }
+
+  .tribute-stat-{{ section.id }} .tribute-trust-item__icon-wrapper svg {
+    width: var(--icon-size, 32px) !important;
+    height: var(--icon-size, 32px) !important;
+    min-width: var(--icon-size, 32px) !important;
+    min-height: var(--icon-size, 32px) !important;
+    max-width: var(--icon-size, 32px) !important;
+    max-height: var(--icon-size, 32px) !important;
+    stroke-width: var(--icon-stroke, 2px) !important;
+    color: var(--trust-icon);
+    display: block !important;
+    transition: filter 0.3s ease;
+  }
+
+  .tribute-stat-{{ section.id }} .tribute-trust-item:hover svg {
+    filter: drop-shadow(0 0 6px var(--trust-icon));
+  }
+
+  /* Text Details */
+  .tribute-stat-{{ section.id }} .tribute-trust-item__content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: left;
+  }
+
+  .tribute-stat-{{ section.id }} .tribute-trust-item__title {
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    color: var(--trust-title-color);
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .tribute-stat-{{ section.id }} .tribute-trust-item__subtitle {
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    font-size: 11.5px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    color: var(--trust-subtitle-color);
+    line-height: 1.35;
+    opacity: 0.85;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 989px) {
+    .tribute-stat-{{ section.id }} .tribute-stat__trust-container {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .tribute-stat-{{ section.id }} .tribute-trust-item {
+      padding: 18px 16px;
+    }
+  }
+
+  @media (max-width: 580px) {
+    .tribute-stat-{{ section.id }} .tribute-stat__trust-container {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .tribute-stat-{{ section.id }} .tribute-trust-item {
+      padding: 16px 18px;
+    }
+    .tribute-stat-{{ section.id }} .tribute-stat__banner {
+      min-height: {{ section.settings.banner_height_mobile | default: 280 }}px;
+      padding: 45px 15px;
+      {% if section.settings.bg_image_mobile != blank %}
+        background-image: url('{{ section.settings.bg_image_mobile | image_url: width: 1200 }}');
+      {% endif %}
+    }
+    .tribute-stat-{{ section.id }} .tribute-stat__actions {
+      flex-direction: column;
+      width: 100%;
+    }
+    .tribute-stat-{{ section.id }} .tribute-btn {
+      width: 100%;
+      max-width: 280px;
+    }
+  }
+</style>
+
+<div class="tribute-stat-{{ section.id }}">
+  <!-- 1. Top Cinematic Stadium Banner with Legends #7 & #10 -->
+  <div class="tribute-stat__banner">
+    <div class="tribute-stat__content">
+      {% if section.settings.quote_text != blank %}
+        <div class="tribute-stat__quote">
+          {{ section.settings.quote_text }}
+        </div>
+      {% endif %}
+
+      <div class="tribute-stat__brand-mark">
+        {% if section.settings.brand_title != blank %}
+          <h2 class="tribute-stat__brand-title">{{ section.settings.brand_title }}</h2>
+        {% endif %}
+        {% if section.settings.brand_subtitle != blank %}
+          <div class="tribute-stat__brand-subtitle">{{ section.settings.brand_subtitle }}</div>
+        {% endif %}
+      </div>
+
+      {% if section.settings.show_buttons %}
+        <div class="tribute-stat__actions">
+          {% if section.settings.btn1_text != blank %}
+            <a href="{{ section.settings.btn1_link | default: '#' }}" class="tribute-btn tribute-btn--primary">
+              {{ section.settings.btn1_text }}
+            </a>
+          {% endif %}
+          {% if section.settings.btn2_text != blank %}
+            <a href="{{ section.settings.btn2_link | default: '#' }}" class="tribute-btn tribute-btn--secondary">
+              {{ section.settings.btn2_text }}
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- 2. Bottom Value Proposition / Luxury Trust Strip -->
+  {% if section.settings.show_trust_bar %}
+    <div class="tribute-stat__trust-bar">
+      <div class="tribute-stat__trust-divider"></div>
+      <div class="tribute-stat__trust-container">
+        <!-- Trust Item 1: Premium Quality -->
+        {% if section.settings.trust_1_title != blank %}
+          <div class="tribute-trust-item">
+            <span class="tribute-trust-item__icon-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 3h12l4 6-10 12L2 9l4-6z"></path>
+                <path d="M2 9h20"></path>
+                <path d="M10 3l-2 6 4 12 4-12-2-6"></path>
+              </svg>
+            </span>
+            <div class="tribute-trust-item__content">
+              <span class="tribute-trust-item__title">{{ section.settings.trust_1_title }}</span>
+              {% if section.settings.trust_1_subtitle != blank %}
+                <span class="tribute-trust-item__subtitle">{{ section.settings.trust_1_subtitle }}</span>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        <!-- Trust Item 2: Worldwide Shipping -->
+        {% if section.settings.trust_2_title != blank %}
+          <div class="tribute-trust-item">
+            <span class="tribute-trust-item__icon-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="1" y="3" width="15" height="13"></rect>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+              </svg>
+            </span>
+            <div class="tribute-trust-item__content">
+              <span class="tribute-trust-item__title">{{ section.settings.trust_2_title }}</span>
+              {% if section.settings.trust_2_subtitle != blank %}
+                <span class="tribute-trust-item__subtitle">{{ section.settings.trust_2_subtitle }}</span>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        <!-- Trust Item 3: Secure Payments -->
+        {% if section.settings.trust_3_title != blank %}
+          <div class="tribute-trust-item">
+            <span class="tribute-trust-item__icon-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                <circle cx="12" cy="16" r="1"></circle>
+              </svg>
+            </span>
+            <div class="tribute-trust-item__content">
+              <span class="tribute-trust-item__title">{{ section.settings.trust_3_title }}</span>
+              {% if section.settings.trust_3_subtitle != blank %}
+                <span class="tribute-trust-item__subtitle">{{ section.settings.trust_3_subtitle }}</span>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        <!-- Trust Item 4: Dedicated Support -->
+        {% if section.settings.trust_4_title != blank %}
+          <div class="tribute-trust-item">
+            <span class="tribute-trust-item__icon-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+              </svg>
+            </span>
+            <div class="tribute-trust-item__content">
+              <span class="tribute-trust-item__title">{{ section.settings.trust_4_title }}</span>
+              {% if section.settings.trust_4_subtitle != blank %}
+                <span class="tribute-trust-item__subtitle">{{ section.settings.trust_4_subtitle }}</span>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Tribute Stadium Banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Banner Background & Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Stadium Banner Image (Desktop)",
+      "info": "Defaults to goat-stadium-tribute-clean-bg.jpg"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_mobile",
+      "label": "Stadium Banner Image (Mobile)"
+    },
+    {
+      "type": "select",
+      "id": "bg_position_desktop",
+      "label": "Background Position",
+      "options": [
+        { "value": "center center", "label": "Center Center" },
+        { "value": "top center", "label": "Top Center" },
+        { "value": "bottom center", "label": "Bottom Center" }
+      ],
+      "default": "center center"
+    },
+    {
+      "type": "range",
+      "id": "banner_height_desktop",
+      "min": 250,
+      "max": 650,
+      "step": 10,
+      "unit": "px",
+      "label": "Desktop Banner Height",
+      "default": 360
+    },
+    {
+      "type": "range",
+      "id": "banner_height_mobile",
+      "min": 200,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile Banner Height",
+      "default": 280
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Darkness Overlay Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay Opacity",
+      "default": 25
+    },
+    {
+      "type": "header",
+      "content": "Center Tribute Text & Logo"
+    },
+    {
+      "type": "textarea",
+      "id": "quote_text",
+      "label": "Tribute Quote",
+      "default": "For the moments.<br>For the magic.<br>For the memories."
+    },
+    {
+      "type": "text",
+      "id": "brand_title",
+      "label": "Brand Title",
+      "default": "GOAT"
+    },
+    {
+      "type": "color_background",
+      "id": "brand_gradient",
+      "label": "Brand Title Gradient",
+      "default": "linear-gradient(105deg, #C69E58 0%, #F3DD99 25%, #AF874D 50%, #EDD696 75%, #C69E58 100%)"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_brand_shimmer",
+      "label": "Enable Brand Title Shimmer",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "brand_subtitle",
+      "label": "Brand Subtitle (e.g. CHRISTMAS)",
+      "default": "CHRISTMAS"
+    },
+    {
+      "type": "color",
+      "id": "quote_color",
+      "label": "Quote Text Color",
+      "default": "#F5EFE6"
+    },
+    {
+      "type": "color",
+      "id": "accent_gold",
+      "label": "Accent Gold Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "header",
+      "content": "Luxury Trust Badges Bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_bar",
+      "label": "Show Trust Badges Bar",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "trust_bg",
+      "label": "Trust Bar Background Color",
+      "default": "#0B0907"
+    },
+    {
+      "type": "color",
+      "id": "trust_border_color",
+      "label": "Trust Bar Border Color",
+      "default": "#241D14"
+    },
+    {
+      "type": "color",
+      "id": "trust_card_bg",
+      "label": "Trust Card Background",
+      "default": "#14100C"
+    },
+    {
+      "type": "range",
+      "id": "trust_card_bg_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Card Background Opacity",
+      "default": 60
+    },
+    {
+      "type": "color",
+      "id": "trust_card_border",
+      "label": "Card Border Color",
+      "default": "#2A2218"
+    },
+    {
+      "type": "color",
+      "id": "trust_card_border_hover",
+      "label": "Card Hover Border Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "color",
+      "id": "trust_icon_color",
+      "label": "Icon Line Stroke Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 20,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon Size",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "icon_stroke",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "label": "Icon Stroke Thickness",
+      "default": 2
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon_circle",
+      "label": "Show Icon Circular Badge",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "icon_circle_bg",
+      "label": "Icon Badge Background",
+      "default": "#1B150F"
+    },
+    {
+      "type": "color",
+      "id": "icon_circle_border",
+      "label": "Icon Badge Border",
+      "default": "#3D3020"
+    },
+    {
+      "type": "color",
+      "id": "trust_title_color",
+      "label": "Trust Title Color",
+      "default": "#EEE7D9"
+    },
+    {
+      "type": "color",
+      "id": "trust_subtitle_color",
+      "label": "Trust Subtitle Color",
+      "default": "#9E9183"
+    },
+    {
+      "type": "range",
+      "id": "trust_padding_top",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Trust Bar Padding Top",
+      "default": 45
+    },
+    {
+      "type": "range",
+      "id": "trust_padding_bottom",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Trust Bar Padding Bottom",
+      "default": 45
+    },
+    {
+      "type": "header",
+      "content": "Trust Badge 1: Quality"
+    },
+    {
+      "type": "text",
+      "id": "trust_1_title",
+      "label": "Title",
+      "default": "Premium Quality"
+    },
+    {
+      "type": "text",
+      "id": "trust_1_subtitle",
+      "label": "Subtitle",
+      "default": "Crafted for Football Legends"
+    },
+    {
+      "type": "header",
+      "content": "Trust Badge 2: Shipping"
+    },
+    {
+      "type": "text",
+      "id": "trust_2_title",
+      "label": "Title",
+      "default": "Worldwide Shipping"
+    },
+    {
+      "type": "text",
+      "id": "trust_2_subtitle",
+      "label": "Subtitle",
+      "default": "Fast, Tracked & Insured Courier"
+    },
+    {
+      "type": "header",
+      "content": "Trust Badge 3: Security"
+    },
+    {
+      "type": "text",
+      "id": "trust_3_title",
+      "label": "Title",
+      "default": "Secure Payments"
+    },
+    {
+      "type": "text",
+      "id": "trust_3_subtitle",
+      "label": "Subtitle",
+      "default": "Encrypted 256-Bit SSL Checkout"
+    },
+    {
+      "type": "header",
+      "content": "Trust Badge 4: Support"
+    },
+    {
+      "type": "text",
+      "id": "trust_4_title",
+      "label": "Title",
+      "default": "Dedicated Support"
+    },
+    {
+      "type": "text",
+      "id": "trust_4_subtitle",
+      "label": "Subtitle",
+      "default": "24/7 Priority Customer Care"
+    },
+    {
+      "type": "header",
+      "content": "Optional Action Buttons"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_buttons",
+      "label": "Show Action Buttons",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "btn1_text",
+      "label": "Primary Button Label",
+      "default": "EXPLORE COLLECTIONS"
+    },
+    {
+      "type": "url",
+      "id": "btn1_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "color_background",
+      "id": "btn1_gradient",
+      "label": "Primary Button Gradient",
+      "default": "linear-gradient(90deg, #C69E58 0%, #F3DD99 25%, #AF874D 50%, #EDD696 75%, #C69E58 100%)"
+    },
+    {
+      "type": "color",
+      "id": "btn1_text_color",
+      "label": "Primary Button Text Color",
+      "default": "#0E0C09"
+    },
+    {
+      "type": "checkbox",
+      "id": "btn1_enable_glow",
+      "label": "Enable Primary Button Glow",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "btn1_glow_color",
+      "label": "Primary Glow Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "range",
+      "id": "btn1_glow_intensity",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Primary Glow Intensity",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "btn1_glow_size",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Primary Glow Size",
+      "default": 25
+    },
+    {
+      "type": "text",
+      "id": "btn2_text",
+      "label": "Secondary Button Label",
+      "default": "OUR STORY"
+    },
+    {
+      "type": "url",
+      "id": "btn2_link",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "color",
+      "id": "btn2_bg",
+      "label": "Secondary Glass Color",
+      "default": "#D9BA77"
+    },
+    {
+      "type": "range",
+      "id": "btn2_bg_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Secondary Glass Opacity",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "btn2_border",
+      "label": "Secondary Border Color",
+      "default": "#D9BA77"
+    },
+    {
+      "type": "color",
+      "id": "btn2_text_color",
+      "label": "Secondary Text Color",
+      "default": "#EAD297"
+    },
+    {
+      "type": "color",
+      "id": "btn2_bg_hover",
+      "label": "Hover Glass Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "range",
+      "id": "btn2_hover_bg_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "%",
+      "label": "Hover Glass Opacity",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "btn2_border_hover",
+      "label": "Hover Border Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "color",
+      "id": "btn2_text_hover",
+      "label": "Hover Text Color",
+      "default": "#F3DD99"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tribute Stadium Banner"
+    }
+  ]
+}
+{% endschema %}

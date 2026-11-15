@@ -1,0 +1,928 @@
+{% comment %}
+  Section: The Collections (Seven Worlds of Gratitude)
+  Layout: Balanced Emotional Bento (3 top + 4 bottom) on Desktop & Touch Carousel on Mobile with Navigation Arrows
+  Theme: GOAT CHRISTMAS - Luxury Black & Gold
+{% endcomment %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  .collections-grid-{{ section.id }} {
+    --bg-color: {{ section.settings.bg_color | default: '#0E0C09' }};
+    --eyebrow-color: {{ section.settings.eyebrow_color | default: '#DCB14F' }};
+    --heading-gradient: {{ section.settings.heading_gradient | default: 'linear-gradient(105deg, #C69E58 0%, #F3DD99 25%, #AF874D 50%, #EDD696 75%, #C69E58 100%)' }};
+    --text-color: {{ section.settings.text_color | default: '#B5A99D' }};
+    --card-bg: {{ section.settings.card_bg | default: '#1A1510' }};
+    --card-border: {{ section.settings.card_border | default: '#312519' }};
+    --card-hover-border: {{ section.settings.card_hover_border | default: '#DCB14F' }};
+    --card-hover-glow: {{ section.settings.card_hover_glow | default: '#C59B4E' }};
+    --accent-gold: {{ section.settings.accent_gold | default: '#DCB14F' }};
+    --title-color: {{ section.settings.card_title_color | default: '#F7EFE1' }};
+    --image-padding: {{ section.settings.image_padding | default: 8 }}px;
+
+    background-color: var(--bg-color);
+    background-image: radial-gradient(circle at 50% 25%, rgba(220, 177, 79, 0.07) 0%, rgba(14, 12, 9, 0) 65%);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    padding-left: 24px;
+    padding-right: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .collections-grid-{{ section.id }} .collections-grid__container {
+    max-width: {{ section.settings.max_width | default: 1540 }}px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* Header Section */
+  .collections-grid-{{ section.id }} .collections-grid__header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 65px auto;
+  }
+
+  .collections-grid-{{ section.id }} .collections-grid__eyebrow {
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    font-size: 11.5px;
+    letter-spacing: 4.5px;
+    text-transform: uppercase;
+    color: var(--eyebrow-color);
+    font-weight: 500;
+    margin-bottom: 20px;
+    display: inline-block;
+  }
+
+  /* Heading with Animated Shimmer */
+  .collections-grid-{{ section.id }} .collections-grid__heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 4.2vw, 56px);
+    line-height: 1.18;
+    font-weight: 600;
+    margin: 0 0 22px 0;
+    letter-spacing: -0.3px;
+    background: {%- if section.settings.heading_gradient != blank -%}{{ section.settings.heading_gradient }}{%- else -%}linear-gradient(105deg, #C69E58 0%, #F3DD99 25%, #AF874D 50%, #EDD696 75%, #C69E58 100%){%- endif -%};
+    background-size: 250% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.4));
+    {% if section.settings.enable_heading_shimmer != false %}
+      animation: collectionHeadingShimmer {{ section.settings.heading_shimmer_speed | default: 6 }}s ease-in-out infinite alternate;
+    {% endif %}
+  }
+
+  @keyframes collectionHeadingShimmer {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .collections-grid-{{ section.id }} .collections-grid__description {
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    font-size: 14.5px;
+    line-height: 1.8;
+    color: var(--text-color);
+    font-weight: 300;
+    margin: 0 auto;
+    max-width: 620px;
+  }
+
+  /* Wrapper for Carousel & Arrows */
+  .collections-grid-{{ section.id }} .collections-grid__wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  /* Desktop Layout: Balanced 12-Column Bento (3 top + 4 bottom) */
+  .collections-grid-{{ section.id }} .collections-grid__items {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 22px;
+  }
+
+  {% if section.settings.enable_bento_layout %}
+    .collections-grid-{{ section.id }} .collections-grid__items > .chapter-card,
+    .collections-grid-{{ section.id }} .collections-grid__items > .collection-card {
+      grid-column: span 4;
+    }
+    .collections-grid-{{ section.id }} .collections-grid__items > .chapter-card:nth-child(n+4),
+    .collections-grid-{{ section.id }} .collections-grid__items > .collection-card:nth-child(n+4) {
+      grid-column: span 3;
+    }
+  {% else %}
+    .collections-grid-{{ section.id }} .collections-grid__items {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .collections-grid-{{ section.id }} .collections-grid__items > .chapter-card,
+    .collections-grid-{{ section.id }} .collections-grid__items > .collection-card {
+      grid-column: auto;
+    }
+  {% endif %}
+
+  /* Single Emotional Card (Illuminated Surface) */
+  .collections-grid-{{ section.id }} .chapter-card,
+  .collections-grid-{{ section.id }} .collection-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 3px;
+    padding: 38px 32px;
+    min-height: 230px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-decoration: none;
+    box-sizing: border-box;
+    position: relative;
+    transition: all 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%), radial-gradient(ellipse at top left, rgba(220, 177, 79, 0.05), transparent 70%);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+  }
+
+  .collections-grid-{{ section.id }} .chapter-card:hover,
+  .collections-grid-{{ section.id }} .collection-card:hover {
+    border-color: var(--card-hover-border);
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.5), 0 0 28px rgba(220, 177, 79, 0.22);
+    transform: translateY(-4px);
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%), radial-gradient(ellipse at top left, rgba(220, 177, 79, 0.1), transparent 70%);
+  }
+
+  /* Image Container & Object Contain Handling */
+  .collections-grid-{{ section.id }} .chapter-card__image-wrapper {
+    width: 100%;
+    height: {{ section.settings.image_height | default: 200 }}px;
+    margin-bottom: 20px;
+    border-radius: 2px;
+    overflow: hidden;
+    padding: var(--image-padding);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  }
+
+  .collections-grid-{{ section.id }} .chapter-card__image {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.5s ease;
+  }
+
+  /* Card Top Content */
+  .collections-grid-{{ section.id }} .chapter-card__top {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .collections-grid-{{ section.id }} .chapter-card__num {
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--accent-gold);
+    margin-bottom: 22px;
+    font-weight: 500;
+    opacity: 0.95;
+    display: inline-block;
+  }
+
+  /* Title with Clean Background */
+  .collections-grid-{{ section.id }} .chapter-card__title,
+  .collections-grid-{{ section.id }} .collection-card__title {
+    background: none !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+    margin: 0 0 14px 0 !important;
+    display: block !important;
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 22px !important;
+    font-weight: 600 !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    color: var(--title-color) !important;
+    line-height: 1.25 !important;
+    box-decoration-break: unset !important;
+    -webkit-box-decoration-break: unset !important;
+    transition: color 0.3s ease;
+  }
+
+  .collections-grid-{{ section.id }} .chapter-card:hover .chapter-card__title,
+  .collections-grid-{{ section.id }} .collection-card:hover .collection-card__title {
+    color: #FFFFFF !important;
+  }
+
+  .collections-grid-{{ section.id }} .chapter-card__desc {
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text-color);
+    font-weight: 300;
+    margin: 0;
+  }
+
+  /* Bottom CTA */
+  .collections-grid-{{ section.id }} .chapter-card__cta {
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    font-weight: 600;
+    margin-top: 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+  }
+
+  .collections-grid-{{ section.id }} .chapter-card__cta-arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+
+  .collections-grid-{{ section.id }} .chapter-card:hover .chapter-card__cta {
+    opacity: 1;
+    color: #F3DD99;
+  }
+
+  .collections-grid-{{ section.id }} .chapter-card:hover .chapter-card__cta-arrow {
+    transform: translateX(5px);
+  }
+
+  /* Carousel Navigation Arrows */
+  .collections-grid-{{ section.id }} .collections-grid__arrow {
+    display: none;
+  }
+
+  .collections-grid-{{ section.id }} .collections-grid__dots {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .collections-grid-{{ section.id }} .collections-grid__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: rgba(220, 177, 79, 0.25);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .collections-grid-{{ section.id }} .collections-grid__dot.is-active {
+    width: 22px;
+    border-radius: 3px;
+    background-color: var(--accent-gold);
+    box-shadow: 0 0 8px rgba(220, 177, 79, 0.5);
+  }
+
+  .collections-grid-{{ section.id }} .collections-grid__mobile-hint {
+    display: none;
+    text-align: center;
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    opacity: 0.7;
+    margin-top: 15px;
+  }
+
+  /* Tablet Breakpoint */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .collections-grid-{{ section.id }} .collections-grid__items {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+    .collections-grid-{{ section.id }} .collections-grid__items > .chapter-card,
+    .collections-grid-{{ section.id }} .collections-grid__items > .collection-card {
+      grid-column: span 1 !important;
+    }
+  }
+
+  /* Mobile Device Breakpoint */
+  @media (max-width: 768px) {
+    .collections-grid-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top | divided_by: 1.5 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | divided_by: 1.5 | round }}px;
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+
+    .collections-grid-{{ section.id }} .collections-grid__header {
+      margin-bottom: 35px;
+    }
+
+    .collections-grid-{{ section.id }} .collections-grid__heading {
+      font-size: 32px;
+    }
+
+    {% if section.settings.enable_mobile_carousel %}
+      .collections-grid-{{ section.id }} .collections-grid__items {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        gap: 14px;
+        padding: 10px 18px 24px 18px;
+        margin-left: -18px;
+        margin-right: -18px;
+        scrollbar-width: none;
+      }
+
+      .collections-grid-{{ section.id }} .collections-grid__items::-webkit-scrollbar {
+        display: none;
+      }
+
+      .collections-grid-{{ section.id }} .collections-grid__items > .chapter-card,
+      .collections-grid-{{ section.id }} .collections-grid__items > .collection-card {
+        flex: 0 0 82%;
+        max-width: 320px;
+        min-width: 260px;
+        scroll-snap-align: center;
+        grid-column: auto !important;
+        padding: 30px 24px;
+        min-height: 220px;
+      }
+
+      {% if section.settings.show_mobile_arrows %}
+        .collections-grid-{{ section.id }} .collections-grid__arrow {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          top: 48%;
+          transform: translateY(-50%);
+          width: 38px;
+          height: 38px;
+          border-radius: 50%;
+          background: rgba(22, 17, 13, 0.88);
+          border: 1px solid rgba(220, 177, 79, 0.5);
+          color: var(--accent-gold, #DCB14F);
+          box-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          z-index: 10;
+          cursor: pointer;
+          transition: all 0.25s ease;
+          padding: 0;
+          outline: none;
+        }
+
+        .collections-grid-{{ section.id }} .collections-grid__arrow--prev {
+          left: -4px;
+        }
+
+        .collections-grid-{{ section.id }} .collections-grid__arrow--next {
+          right: -4px;
+        }
+      {% endif %}
+
+      .collections-grid-{{ section.id }} .collections-grid__dots {
+        display: flex;
+      }
+
+      .collections-grid-{{ section.id }} .collections-grid__mobile-hint {
+        display: block;
+      }
+    {% else %}
+      /* Mobile Grid View Columns Control when Carousel is disabled */
+      .collections-grid-{{ section.id }} .collections-grid__items {
+        display: grid;
+        grid-template-columns: repeat({{ section.settings.mobile_columns | default: 1 }}, 1fr);
+        gap: 14px;
+      }
+      .collections-grid-{{ section.id }} .collections-grid__items > .chapter-card,
+      .collections-grid-{{ section.id }} .collections-grid__items > .collection-card {
+        grid-column: auto !important;
+        padding: 24px 20px;
+      }
+    {% endif %}
+  }
+</style>
+
+<div class="collections-grid-{{ section.id }}">
+  <div class="collections-grid__container">
+    
+    <!-- Section Header -->
+    <div class="collections-grid__header">
+      {% if section.settings.eyebrow != blank %}
+        <span class="collections-grid__eyebrow">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="collections-grid__heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+
+      {% if section.settings.description != blank %}
+        <p class="collections-grid__description">{{ section.settings.description }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Cards Grid / Mobile Carousel Wrapper -->
+    <div class="collections-grid__wrapper">
+
+      {% if section.settings.enable_mobile_carousel and section.settings.show_mobile_arrows %}
+        <button type="button" class="collections-grid__arrow collections-grid__arrow--prev" aria-label="Previous Collection">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+      {% endif %}
+
+      <!-- Carousel / Grid Track -->
+      <div class="collections-grid__items">
+        {% for block in section.blocks %}
+          {% assign collection = block.settings.collection %}
+          
+          {% assign card_num = block.settings.custom_number %}
+          {% if card_num == blank %}
+            {% if forloop.index < 10 %}
+              {% assign card_num = '0 ' | append: forloop.index %}
+            {% else %}
+              {% assign card_num = forloop.index %}
+            {% endif %}
+          {% endif %}
+
+          {% assign card_title = block.settings.custom_title %}
+          {% if card_title == blank and collection != blank %}
+            {% assign card_title = collection.title %}
+          {% elsif card_title == blank %}
+            {% assign card_title = 'GOAT COLLECTION' %}
+          {% endif %}
+
+          {% assign card_desc = block.settings.custom_description %}
+          {% if card_desc == blank and collection != blank and collection.description != blank %}
+            {% assign card_desc = collection.description | strip_html | truncate: 120 %}
+          {% endif %}
+
+          {% assign card_link = block.settings.custom_link %}
+          {% if card_link == blank and collection != blank %}
+            {% assign card_link = collection.url %}
+          {% endif %}
+          {% if card_link == blank %}
+            {% assign card_link = '#' %}
+          {% endif %}
+
+          {% assign card_image = block.settings.card_image %}
+          {% if card_image == blank and collection != blank and collection.image != blank %}
+            {% assign card_image = collection.image %}
+          {% endif %}
+
+          <a href="{{ card_link }}" class="chapter-card" {{ block.shopify_attributes }}>
+            <div class="chapter-card__top">
+              {% if block.settings.show_number and card_num != blank %}
+                <span class="chapter-card__num">{{ card_num }}</span>
+              {% endif %}
+
+              {% if card_image != blank %}
+                <div class="chapter-card__image-wrapper">
+                  <img src="{{ card_image | image_url: width: 600 }}" alt="{{ card_title | escape }}" loading="lazy" class="chapter-card__image">
+                </div>
+              {% endif %}
+
+              {% if block.settings.show_title %}
+                <h3 class="chapter-card__title">{{ card_title }}</h3>
+              {% endif %}
+
+              {% if card_desc != blank %}
+                <p class="chapter-card__desc">{{ card_desc }}</p>
+              {% endif %}
+            </div>
+            
+            <div class="chapter-card__cta">
+              <span>{{ block.settings.cta_text | default: 'DISCOVER' }}</span>
+              <span class="chapter-card__cta-arrow">&rarr;</span>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+
+      {% if section.settings.enable_mobile_carousel and section.settings.show_mobile_arrows %}
+        <button type="button" class="collections-grid__arrow collections-grid__arrow--next" aria-label="Next Collection">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      {% endif %}
+
+    </div>
+
+    {% if section.settings.enable_mobile_carousel and section.blocks.size > 1 %}
+      <div class="collections-grid__dots">
+        {% for block in section.blocks %}
+          <span class="collections-grid__dot {% if forloop.first %}is-active{% endif %}" data-index="{{ forloop.index0 }}"></span>
+        {% endfor %}
+      </div>
+      <div class="collections-grid__mobile-hint">
+        &larr; Swipe to explore the chapters &rarr;
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% if section.settings.enable_mobile_carousel %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var section = document.querySelector('.collections-grid-{{ section.id }}');
+      if (!section) return;
+      var track = section.querySelector('.collections-grid__items');
+      var dots = section.querySelectorAll('.collections-grid__dot');
+      var prevBtn = section.querySelector('.collections-grid__arrow--prev');
+      var nextBtn = section.querySelector('.collections-grid__arrow--next');
+      if (!track) return;
+
+      function updateCarouselState() {
+        var scrollLeft = track.scrollLeft;
+        var firstCard = track.querySelector('.chapter-card') || track.querySelector('.collection-card');
+        if (!firstCard) return;
+        var cardWidth = firstCard.offsetWidth + 14;
+        var activeIndex = Math.round(scrollLeft / cardWidth);
+        activeIndex = Math.max(0, Math.min(activeIndex, dots.length - 1));
+
+        dots.forEach(function(dot, idx) {
+          if (idx === activeIndex) {
+            dot.classList.add('is-active');
+          } else {
+            dot.classList.remove('is-active');
+          }
+        });
+
+        if (prevBtn && nextBtn) {
+          var maxScroll = track.scrollWidth - track.clientWidth - 5;
+          prevBtn.style.opacity = scrollLeft <= 10 ? '0.3' : '1';
+          prevBtn.style.pointerEvents = scrollLeft <= 10 ? 'none' : 'auto';
+          nextBtn.style.opacity = scrollLeft >= maxScroll ? '0.3' : '1';
+          nextBtn.style.pointerEvents = scrollLeft >= maxScroll ? 'none' : 'auto';
+        }
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          var firstCard = track.querySelector('.chapter-card') || track.querySelector('.collection-card');
+          var scrollStep = firstCard ? (firstCard.offsetWidth + 14) : 280;
+          track.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          var firstCard = track.querySelector('.chapter-card') || track.querySelector('.collection-card');
+          var scrollStep = firstCard ? (firstCard.offsetWidth + 14) : 280;
+          track.scrollBy({ left: scrollStep, behavior: 'smooth' });
+        });
+      }
+
+      track.addEventListener('scroll', updateCarouselState, { passive: true });
+      updateCarouselState();
+
+      dots.forEach(function(dot) {
+        dot.addEventListener('click', function() {
+          var index = parseInt(dot.getAttribute('data-index'), 10);
+          var cards = track.querySelectorAll('.chapter-card');
+          if (!cards.length) cards = track.querySelectorAll('.collection-card');
+          if (cards[index]) {
+            cards[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          }
+        });
+      });
+    });
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Featured Collections Grid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_bento_layout",
+      "label": "Enable Balanced 3 + 4 Bento Grid (Desktop)",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mobile_carousel",
+      "label": "Enable Mobile Swipe Carousel",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "mobile_columns",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Mobile Cards Per Row (When Carousel Off)",
+      "default": 1,
+      "info": "Controls how many cards appear per row on mobile screens if the carousel is disabled."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_arrows",
+      "label": "Show Mobile Left & Right Arrows",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 1000,
+      "max": 1800,
+      "step": 20,
+      "unit": "px",
+      "label": "Maximum Width",
+      "default": 1540
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 40,
+      "max": 160,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 40,
+      "max": 160,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Image Styling Controls"
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "min": 100,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "label": "Image Container Height",
+      "default": 200
+    },
+    {
+      "type": "range",
+      "id": "image_padding",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Image Inner Padding",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Header Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Subtitle",
+      "default": "SEVEN WORLDS OF GRATITUDE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Collections"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_heading_shimmer",
+      "label": "Enable Heading Shimmer Animation",
+      "default": true
+    },
+    {
+      "type": "color_background",
+      "id": "heading_gradient",
+      "label": "Heading Gradient Color",
+      "default": "linear-gradient(105deg, #C69E58 0%, #F3DD99 25%, #AF874D 50%, #EDD696 75%, #C69E58 100%)"
+    },
+    {
+      "type": "range",
+      "id": "heading_shimmer_speed",
+      "label": "Shimmer Animation Speed",
+      "min": 2,
+      "max": 15,
+      "step": 1,
+      "unit": "s",
+      "default": 6
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Each collection is a different way of saying thank you — for the homes that watched, the parents who believed, and the love the game gave us."
+    },
+    {
+      "type": "header",
+      "content": "Color Settings"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background Color",
+      "default": "#0E0C09"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Description & Muted Text",
+      "default": "#B5A99D"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card Background Color",
+      "default": "#1A1510"
+    },
+    {
+      "type": "color",
+      "id": "card_border",
+      "label": "Card Border Color",
+      "default": "#312519"
+    },
+    {
+      "type": "color",
+      "id": "card_hover_border",
+      "label": "Card Hover Border Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "color",
+      "id": "card_hover_glow",
+      "label": "Card Hover Glow Color",
+      "default": "#C59B4E"
+    },
+    {
+      "type": "color",
+      "id": "accent_gold",
+      "label": "Accent Gold (Number & CTA)",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Card Title Color",
+      "default": "#F7EFE1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_card",
+      "name": "Collection Card",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "card_image",
+          "label": "Card Image (Optional)"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_title",
+          "label": "Show Card Title",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_number",
+          "label": "Show Number Badge",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "custom_number",
+          "label": "Number Badge Text (e.g., 0 1)"
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Card Title (Fallback/Override)"
+        },
+        {
+          "type": "textarea",
+          "id": "custom_description",
+          "label": "Card Description (Fallback/Override)"
+        },
+        {
+          "type": "url",
+          "id": "custom_link",
+          "label": "Card Link (Fallback)"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "Hover CTA Text",
+          "default": "DISCOVER"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collections Grid2",
+      "blocks": [
+        {
+          "type": "collection_card",
+          "settings": {
+            "custom_number": "0 1",
+            "custom_title": "GOAT GALLERY",
+            "custom_description": "Fine art works & posters honouring Number 7 & 10"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "custom_number": "0 2",
+            "custom_title": "GOAT STYLE",
+            "custom_description": "Apparel & phone cases inspired by the two greatest numbers"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "custom_number": "0 3",
+            "custom_title": "A FAREWELL TO AN ERA",
+            "custom_description": "Premium collectibles for the end of an unforgettable age"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "custom_number": "0 4",
+            "custom_title": "GOAT MOM",
+            "custom_description": "Art, journals & keepsakes for the mothers who watched with us"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "custom_number": "0 5",
+            "custom_title": "GOAT FATHER",
+            "custom_description": "Art, journals & mugs for the fathers who believed with us"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "custom_number": "0 6",
+            "custom_title": "GOAT LOVE",
+            "custom_description": "Premium gifts for the couples who felt every moment together"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "custom_number": "0 7",
+            "custom_title": "GOAT DUO",
+            "custom_description": "Paired premium pieces — because they were never one without the other"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

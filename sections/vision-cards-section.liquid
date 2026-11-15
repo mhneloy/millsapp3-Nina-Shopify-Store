@@ -1,0 +1,622 @@
+{% comment %}
+  Section: Vision Cards & Quote Section Component with Schema Controls
+{% endcomment %}
+
+<div class="vision-section-wrapper-{{ section.id }}">
+  <div class="vision-container">
+    
+    <!-- Top Subtitle / Badge -->
+    <div class="vision-badge">
+      <span class="badge-text">{{ section.settings.badge_text }}</span>
+    </div>
+
+    <!-- Main Section Title -->
+    <h2 class="vision-title">
+      {{ section.settings.main_title }}
+    </h2>
+    <div class="title-underline"></div>
+
+    <!-- Cards Grid (Dynamic Blocks) -->
+    <div class="vision-cards-grid">
+      {%- for block in section.blocks -%}
+        <div class="vision-card" {{ block.shopify_attributes }}>
+          <div class="card-glow"></div>
+          
+          {%- if block.settings.icon_svg != blank -%}
+            <div class="card-icon">
+              {{ block.settings.icon_svg }}
+            </div>
+          {%- endif -%}
+
+          <h3 class="card-title">{{ block.settings.card_title }}</h3>
+          <p class="card-desc">{{ block.settings.card_desc }}</p>
+
+          <div class="card-footer-info">
+            <span class="card-step">{{ block.settings.card_step }}</span>
+            <span class="card-category">{{ block.settings.card_category }}</span>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <!-- Bottom Quote & CTA Box -->
+    <div class="vision-quote-box">
+      <div class="quote-icon-top">
+        <svg fill="currentColor" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>quote</title> <path d="M9.563 8.469l-0.813-1.25c-5.625 3.781-8.75 8.375-8.75 12.156 0 3.656 2.688 5.375 4.969 5.375 2.875 0 4.906-2.438 4.906-5 0-2.156-1.375-4-3.219-4.688-0.531-0.188-1.031-0.344-1.031-1.25 0-1.156 0.844-2.875 3.938-5.344zM21.969 8.469l-0.813-1.25c-5.563 3.781-8.75 8.375-8.75 12.156 0 3.656 2.75 5.375 5.031 5.375 2.906 0 4.969-2.438 4.969-5 0-2.156-1.406-4-3.313-4.688-0.531-0.188-1-0.344-1-1.25 0-1.156 0.875-2.875 3.875-5.344z"></path> </g></svg>
+      </div>
+
+      <p class="quote-text">
+        "{{ section.settings.quote_main_text }} <span class="highlight-text">{{ section.settings.quote_highlight_text }}</span> {{ section.settings.quote_end_text }}"
+      </p>
+
+      {%- if section.settings.button_text != blank -%}
+        <div class="quote-btn-wrapper">
+          <a href="{{ section.settings.button_link }}" class="quote-btn">
+            {{ section.settings.button_text }}
+          </a>
+        </div>
+      {%- endif -%}
+
+      <!-- Bottom Feature Badges / Stars -->
+      <div class="quote-badges-list">
+        {%- if section.settings.badge_item_1 != blank -%}
+          <span class="q-badge">★ {{ section.settings.badge_item_1 }}</span>
+        {%- endif -%}
+        {%- if section.settings.badge_item_2 != blank -%}
+          <span class="q-badge">★ {{ section.settings.badge_item_2 }}</span>
+        {%- endif -%}
+        {%- if section.settings.badge_item_3 != blank -%}
+          <span class="q-badge">★ {{ section.settings.badge_item_3 }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .vision-section-wrapper-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    {%- if section.settings.bg_gradient != blank -%}
+      background: {{ section.settings.bg_gradient }};
+    {%- endif -%}
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+  }
+
+  .vision-container {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Badge Styles */
+  .vision-section-wrapper-{{ section.id }} .vision-badge {
+    margin-bottom: 12px;
+  }
+
+  .vision-section-wrapper-{{ section.id }} .badge-text {
+    color: {{ section.settings.top_badge_color }};
+    font-size: {{ section.settings.top_badge_font_size }}px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* Main Title */
+  .vision-section-wrapper-{{ section.id }} .vision-title {
+    color: {{ section.settings.main_title_color }};
+    font-size: {{ section.settings.main_title_font_size }}px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    letter-spacing: 1px;
+    line-height: 1.2;
+  }
+
+  .title-underline {
+    width: 60px;
+    height: 2px;
+    background-color: {{ section.settings.top_badge_color }};
+    margin-bottom: 50px;
+  }
+
+  /* Cards Grid */
+  .vision-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    width: 100%;
+    margin-bottom: 50px;
+  }
+
+  .vision-card {
+    background-color: {{ section.settings.card_bg_color }};
+    border: 1px solid {{ section.settings.card_border_color }};
+    border-radius: 16px;
+    padding: 35px 30px;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .card-glow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(216,178,87,0.1) 0%, rgba(0,0,0,0) 70%);
+    pointer-events: none;
+  }
+
+  .card-icon {
+    color: {{ section.settings.card_icon_color }};
+    margin-bottom: 20px;
+    width: 28px;
+    height: 28px;
+  }
+  .card-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .card-title {
+    color: {{ section.settings.card_title_color }};
+    font-size: {{ section.settings.card_title_font_size }}px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+  }
+
+  .card-desc {
+    color: {{ section.settings.card_desc_color }};
+    font-size: {{ section.settings.card_desc_font_size }}px;
+    line-height: 1.6;
+    margin: 0 0 25px 0;
+    font-weight: 300;
+  }
+
+  .card-footer-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: {{ section.settings.card_footer_color }};
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* Quote Box Styles */
+  .vision-quote-box {
+    background-color: {{ section.settings.quote_box_bg }};
+    border: 1px solid {{ section.settings.quote_box_border }};
+    border-radius: 20px;
+    padding: 50px 40px;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+  }
+
+  .quote-icon-top {
+    color: {{ section.settings.quote_icon_color }};
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .quote-text {
+    color: {{ section.settings.quote_text_color }};
+    font-size: {{ section.settings.quote_font_size }}px;
+    font-style: italic;
+    line-height: 1.6;
+    max-width: 850px;
+    margin: 0 auto 35px auto;
+    font-weight: 300;
+  }
+
+  .highlight-text {
+    color: {{ section.settings.quote_highlight_color }};
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  .quote-btn-wrapper {
+    margin-bottom: 35px;
+  }
+
+  .quote-btn {
+    display: inline-block;
+    background-color: transparent;
+    color: {{ section.settings.btn_text_color }};
+    border: 1px solid {{ section.settings.btn_border_color }};
+    padding: 14px 35px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .quote-btn:hover {
+    background-color: {{ section.settings.btn_border_color }};
+    color: #0b0b0b;
+  }
+
+  .quote-badges-list {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  .q-badge {
+    color: {{ section.settings.bottom_badge_color }};
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* Responsive Design for Mobile */
+  @media screen and (max-width: 768px) {
+    .vision-section-wrapper-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top | times: 0.6 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.6 }}px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    .vision-cards-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .vision-section-wrapper-{{ section.id }} .vision-title {
+      font-size: {{ section.settings.main_title_font_size | times: 0.55 }}px;
+    }
+
+    .vision-quote-box {
+      padding: 30px 20px;
+    }
+
+    .quote-text {
+      font-size: {{ section.settings.quote_font_size | times: 0.75 }}px;
+    }
+
+    .quote-badges-list {
+      gap: 15px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Vision Cards & Quote",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header Settings"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Top Badge Text",
+      "default": "OUR ETERNAL VISION"
+    },
+    {
+      "type": "range",
+      "id": "top_badge_font_size",
+      "label": "Badge Font Size (px)",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "top_badge_color",
+      "label": "Badge & Accent Color",
+      "default": "#d8b257"
+    },
+    {
+      "type": "text",
+      "id": "main_title",
+      "label": "Main Title Text",
+      "default": "A TRIBUTE TO GRATITUDE & JOY"
+    },
+    {
+      "type": "range",
+      "id": "main_title_font_size",
+      "label": "Main Title Font Size (Desktop px)",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "default": 38
+    },
+    {
+      "type": "color",
+      "id": "main_title_color",
+      "label": "Main Title Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Card Box Style"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card Background Color",
+      "default": "#141310"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card Border Color",
+      "default": "#26231d"
+    },
+    {
+      "type": "color",
+      "id": "card_icon_color",
+      "label": "Card Icon Color",
+      "default": "#d8b257"
+    },
+    {
+      "type": "range",
+      "id": "card_title_font_size",
+      "label": "Card Title Font Size (px)",
+      "min": 16,
+      "max": 28,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Card Title Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "card_desc_font_size",
+      "label": "Card Description Font Size (px)",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "card_desc_color",
+      "label": "Card Description Color",
+      "default": "#cccccc"
+    },
+    {
+      "type": "color",
+      "id": "card_footer_color",
+      "label": "Card Footer Text Color",
+      "default": "#888888"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Quote Box Settings"
+    },
+    {
+      "type": "color",
+      "id": "quote_box_bg",
+      "label": "Quote Box Background",
+      "default": "#12110e"
+    },
+    {
+      "type": "color",
+      "id": "quote_box_border",
+      "label": "Quote Box Border Color",
+      "default": "#332c1e"
+    },
+    {
+      "type": "color",
+      "id": "quote_icon_color",
+      "label": "Quote Icon Color",
+      "default": "#d8b257"
+    },
+    {
+      "type": "textarea",
+      "id": "quote_main_text",
+      "label": "Quote Main Text",
+      "default": "THIS THANKSGIVING AND CHRISTMAS,"
+    },
+    {
+      "type": "text",
+      "id": "quote_highlight_text",
+      "label": "Quote Highlight Text (Gold)",
+      "default": "GOAT CHRISTMAS"
+    },
+    {
+      "type": "textarea",
+      "id": "quote_end_text",
+      "label": "Quote Ending Text",
+      "default": "IS OUR WAY OF SAYING SOMETHING SIMPLE, SOMETHING MILLIONS OF HEARTS AROUND THE WORLD ALREADY FEEL:"
+    },
+    {
+      "type": "range",
+      "id": "quote_font_size",
+      "label": "Quote Font Size (px)",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "quote_text_color",
+      "label": "Quote Text Color",
+      "default": "#dedede"
+    },
+    {
+      "type": "color",
+      "id": "quote_highlight_color",
+      "label": "Quote Highlight Color",
+      "default": "#d8b257"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "THANK YOU FOR EVERYTHING"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Button Text Color",
+      "default": "#d8b257"
+    },
+    {
+      "type": "color",
+      "id": "btn_border_color",
+      "label": "Button Border Color",
+      "default": "#d8b257"
+    },
+    {
+      "type": "text",
+      "id": "badge_item_1",
+      "label": "Bottom Footer Tag 1",
+      "default": "FOR THE MOMENTS"
+    },
+    {
+      "type": "text",
+      "id": "badge_item_2",
+      "label": "Bottom Footer Tag 2",
+      "default": "FOR THE MAGIC"
+    },
+    {
+      "type": "text",
+      "id": "badge_item_3",
+      "label": "Bottom Footer Tag 3",
+      "default": "FOR THE MEMORIES"
+    },
+    {
+      "type": "color",
+      "id": "bottom_badge_color",
+      "label": "Bottom Tags Color",
+      "default": "#a89050"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing & Background"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Solid Color",
+      "default": "#0b0b0b"
+    },
+    {
+      "type": "color_background",
+      "id": "bg_gradient",
+      "label": "Background Gradient",
+      "default": "radial-gradient(circle at center, #171510 0%, #080808 80%)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding (px)",
+      "min": 20,
+      "max": 150,
+      "step": 5,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding (px)",
+      "min": 20,
+      "max": 150,
+      "step": 5,
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "vision_card",
+      "name": "Vision Card",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "icon_svg",
+          "label": "Card SVG Icon Code",
+          "default": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z\"/></svg>"
+        },
+        {
+          "type": "text",
+          "id": "card_title",
+          "label": "Card Title",
+          "default": "JOY SHARED WITH FAMILY"
+        },
+        {
+          "type": "textarea",
+          "id": "card_desc",
+          "label": "Card Description",
+          "default": "Joy we shared with our families. Magic we watched with our children. And stories we will tell for years to come. For so long, we have been an inseparable part of our lives and holiday seasons."
+        },
+        {
+          "type": "text",
+          "id": "card_step",
+          "label": "Card Tag/Step (e.g. 01)",
+          "default": "01"
+        },
+        {
+          "type": "text",
+          "id": "card_category",
+          "label": "Card Category Info (e.g. EMOTIONAL CONNECTION)",
+          "default": "// EMOTIONAL CONNECTION"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vision Cards & Quote",
+      "blocks": [
+        {
+          "type": "vision_card",
+          "settings": {
+            "card_title": "JOY SHARED WITH FAMILY",
+            "card_step": "01",
+            "card_category": "// EMOTIONAL CONNECTION"
+          }
+        },
+        {
+          "type": "vision_card",
+          "settings": {
+            "card_title": "WE GREW UP WITH THEM",
+            "card_step": "02",
+            "card_category": "// ETERNAL MEMORIES"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

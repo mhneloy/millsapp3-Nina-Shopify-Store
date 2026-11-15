@@ -1,0 +1,608 @@
+<div class="brand-story-section brand-story-section-{{ section.id }}">
+  <div class="bs-container">
+    <div class="bs-grid">
+      
+      <!-- Left Column: Image or Quote Card -->
+      <div class="bs-left-col">
+        {%- if section.settings.image != blank -%}
+          <div class="bs-image-wrapper">
+            <img src="{{ section.settings.image | image_url: width: 800 }}" 
+                 alt="{{ section.settings.image.alt | default: 'Brand Story' }}" 
+                 loading="lazy" 
+                 width="800" 
+                 height="800" 
+                 class="bs-img">
+          </div>
+        {%- else -%}
+          <!-- Default Stylized Quote Card if No Image Uploaded -->
+          <div class="bs-quote-card">
+            <div class="bs-arch-border">
+              <div class="bs-star-icon">✦</div>
+              <h3 class="bs-quote-text">“Thoughtfulness never goes out of style.”</h3>
+              <p class="bs-quote-subtitle">OUR ILLUSTRATIVE BRAND PHILOSOPHY</p>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Right Column: Story Content -->
+      <div class="bs-right-col">
+        
+        <!-- Header Counter & Subtitle -->
+        {%- if section.settings.counter_text != blank or section.settings.subtitle_text != blank -%}
+          <div class="bs-header-top">
+            {%- if section.settings.counter_text != blank -%}
+              <span class="bs-counter">{{ section.settings.counter_text }}</span>
+            {%- endif -%}
+            {%- if section.settings.subtitle_text != blank -%}
+              <span class="bs-subtitle">{{ section.settings.subtitle_text }}</span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        <!-- Main Heading -->
+        <h2 class="bs-main-title">
+          {{ section.settings.title_line_1 }} <span class="bs-highlight">{{ section.settings.title_highlight_1 }}</span> <br>
+          {{ section.settings.title_line_2 }} <span class="bs-highlight">{{ section.settings.title_highlight_2 }}</span>
+        </h2>
+
+        <!-- Description -->
+        {%- if section.settings.description != blank -%}
+          <p class="bs-description">{{ section.settings.description }}</p>
+        {%- endif -%}
+
+        <!-- Feature List Items (Blocks) -->
+        {%- if section.blocks.size > 0 -%}
+          <div class="bs-feature-list">
+            {%- for block in section.blocks -%}
+              <div class="bs-feature-item" {{ block.shopify_attributes }}>
+                <span class="bs-feature-num">{{ block.settings.number }}</span>
+                <div class="bs-feature-content">
+                  <h4 class="bs-feature-title">{{ block.settings.title }}</h4>
+                  <p class="bs-feature-desc">{{ block.settings.text }}</p>
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        <!-- Button -->
+        {%- if section.settings.button_label != blank -%}
+          <div class="bs-btn-wrapper">
+            <a href="{{ section.settings.button_link }}" class="bs-button bs-button-{{ section.settings.button_style }}">
+              {{ section.settings.button_label }} 
+              <span class="bs-arrow">↗</span>
+            </a>
+          </div>
+        {%- endif -%}
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Dynamic CSS Controlled by Section Settings */
+  .brand-story-section-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  .brand-story-section-{{ section.id }} .bs-counter,
+  .brand-story-section-{{ section.id }} .bs-subtitle {
+    color: {{ section.settings.accent_color }};
+  }
+
+  .brand-story-section-{{ section.id }} .bs-main-title {
+    color: {{ section.settings.main_text_color }};
+    font-size: {{ section.settings.main_title_size }}px;
+  }
+
+  .brand-story-section-{{ section.id }} .bs-highlight {
+    color: {{ section.settings.accent_color }};
+  }
+
+  .brand-story-section-{{ section.id }} .bs-description {
+    color: {{ section.settings.desc_color }};
+    font-size: {{ section.settings.desc_size }}px;
+  }
+
+  /* Quote Card Colors */
+  .brand-story-section-{{ section.id }} .bs-quote-card {
+    background-color: {{ section.settings.card_bg_color }};
+    border-color: {{ section.settings.card_border_color }};
+  }
+  .brand-story-section-{{ section.id }} .bs-arch-border {
+    border-color: {{ section.settings.card_border_color }};
+  }
+  .brand-story-section-{{ section.id }} .bs-star-icon,
+  .brand-story-section-{{ section.id }} .bs-quote-text,
+  .brand-story-section-{{ section.id }} .bs-quote-subtitle {
+    color: {{ section.settings.accent_color }};
+  }
+
+  /* List Items Colors */
+  .brand-story-section-{{ section.id }} .bs-feature-num {
+    color: {{ section.settings.accent_color }};
+  }
+  .brand-story-section-{{ section.id }} .bs-feature-title {
+    color: {{ section.settings.main_text_color }};
+  }
+  .brand-story-section-{{ section.id }} .bs-feature-desc {
+    color: {{ section.settings.desc_color }};
+  }
+  .brand-story-section-{{ section.id }} .bs-feature-item {
+    border-bottom-color: rgba(255, 255, 255, 0.12);
+  }
+
+  /* --- Button Styles & Colors --- */
+  /* 1. Solid Button Style */
+  .brand-story-section-{{ section.id }} .bs-button-solid {
+    background-color: {{ section.settings.btn_bg_color }};
+    color: {{ section.settings.btn_text_color }};
+    border: 1px solid {{ section.settings.btn_bg_color }};
+    padding: 12px 28px;
+    border-radius: 4px;
+  }
+  .brand-story-section-{{ section.id }} .bs-button-solid:hover {
+    background-color: {{ section.settings.btn_hover_bg_color }};
+    color: {{ section.settings.btn_hover_text_color }};
+    border-color: {{ section.settings.btn_hover_bg_color }};
+  }
+
+  /* 2. Outline Button Style */
+  .brand-story-section-{{ section.id }} .bs-button-outline {
+    background-color: transparent;
+    color: {{ section.settings.btn_text_color }};
+    border: 1px solid {{ section.settings.btn_text_color }};
+    padding: 12px 28px;
+    border-radius: 4px;
+  }
+  .brand-story-section-{{ section.id }} .bs-button-outline:hover {
+    background-color: {{ section.settings.btn_hover_bg_color }};
+    color: {{ section.settings.btn_hover_text_color }};
+    border-color: {{ section.settings.btn_hover_bg_color }};
+  }
+
+  /* 3. Line Button Style (Underline) */
+  .brand-story-section-{{ section.id }} .bs-button-line {
+    background-color: transparent;
+    color: {{ section.settings.btn_text_color }};
+    border-bottom: 1px solid {{ section.settings.btn_text_color }};
+    padding: 8px 0;
+    border-radius: 0;
+  }
+  .brand-story-section-{{ section.id }} .bs-button-line:hover {
+    color: {{ section.settings.btn_hover_text_color }};
+    border-bottom-color: {{ section.settings.btn_hover_text_color }};
+  }
+
+  /* Layout Structure */
+  .brand-story-section {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .bs-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .bs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  /* Left Column Styling */
+  .bs-image-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+  }
+
+  .bs-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .bs-quote-card {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    padding: 40px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bs-arch-border {
+    width: 100%;
+    height: 100%;
+    border: 1px solid;
+    border-top-left-radius: 180px;
+    border-top-right-radius: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .bs-star-icon {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .bs-quote-text {
+    font-size: 28px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.3;
+    margin: 0 0 25px 0;
+  }
+
+  .bs-quote-subtitle {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  /* Right Column Styling */
+  .bs-header-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+
+  .bs-main-title {
+    font-weight: 300;
+    line-height: 1.25;
+    margin: 0 0 25px 0;
+  }
+
+  .bs-highlight {
+    font-style: italic;
+  }
+
+  .bs-description {
+    line-height: 1.6;
+    margin-bottom: 35px;
+  }
+
+  /* Feature List Styling */
+  .bs-feature-list {
+    margin-bottom: 35px;
+  }
+
+  .bs-feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid;
+  }
+
+  .bs-feature-num {
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 500;
+    min-width: 25px;
+  }
+
+  .bs-feature-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+  }
+
+  .bs-feature-desc {
+    font-size: 13px;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* Button Styling */
+  .bs-btn-wrapper {
+    display: inline-block;
+  }
+
+  .bs-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    font-weight: 600;
+  }
+
+  .bs-arrow {
+    font-size: 14px;
+  }
+
+  /* Responsive Styling */
+  @media screen and (max-width: 990px) {
+    .bs-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .brand-story-section-{{ section.id }} .bs-main-title {
+      font-size: 34px !important;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Brand Story",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Background & Spacing"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 20,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Left Side Image / Quote Card"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Custom Image (Replaces Quote Card if added)"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Default Quote Card Background",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Quote Card Border Color",
+      "default": "#c5a880"
+    },
+    {
+      "type": "header",
+      "content": "Text & Colors"
+    },
+    {
+      "type": "text",
+      "id": "counter_text",
+      "label": "Counter Text",
+      "default": "03 / 11"
+    },
+    {
+      "type": "text",
+      "id": "subtitle_text",
+      "label": "Subtitle Text",
+      "default": "· BRAND STORY"
+    },
+    {
+      "type": "text",
+      "id": "title_line_1",
+      "label": "Title Line 1",
+      "default": "Every gift tells"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight_1",
+      "label": "Highlighted Text Line 1",
+      "default": "a"
+    },
+    {
+      "type": "text",
+      "id": "title_line_2",
+      "label": "Title Line 2",
+      "default": "story."
+    },
+    {
+      "type": "text",
+      "id": "title_highlight_2",
+      "label": "Highlighted Text Line 2",
+      "default": "-"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "This is where the client's real legacy, mission, and story should unfold. A brief, authentic narrative turns a collection of products into a recognizable brand experience."
+    },
+    {
+      "type": "color",
+      "id": "main_text_color",
+      "label": "Main Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent / Highlight Color",
+      "default": "#c5a880"
+    },
+    {
+      "type": "color",
+      "id": "desc_color",
+      "label": "Description Text Color",
+      "default": "#cccccc"
+    },
+    {
+      "type": "range",
+      "id": "main_title_size",
+      "min": 28,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "label": "Main Title Font Size",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "desc_size",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Font Size",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Button Settings"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "EXPLORE THE COLLECTION"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button Style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid Button"
+        },
+        {
+          "value": "outline",
+          "label": "Outline Button"
+        },
+        {
+          "value": "line",
+          "label": "Line Button"
+        }
+      ],
+      "default": "line"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Button Normal Text / Border Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_color",
+      "label": "Button Normal Background (Solid Style)",
+      "default": "#c5a880"
+    },
+    {
+      "type": "color",
+      "id": "btn_hover_text_color",
+      "label": "Button Hover Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "btn_hover_bg_color",
+      "label": "Button Hover Background Color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "01"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Legacy"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Description",
+          "default": "Why the brand exists, and what it stands for."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Story",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "number": "01",
+            "title": "Legacy",
+            "text": "Why the brand exists, and what it stands for."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "number": "02",
+            "title": "Emotion",
+            "text": "How the product connects to a real human feeling."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "number": "03",
+            "title": "Gratitude",
+            "text": "Why sharing and giving are part of the  experience."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

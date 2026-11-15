@@ -1,0 +1,1385 @@
+{% comment %}
+  Section: Featured Collection Slider & Grid
+  Author: Custom Shopify 2.0 Section
+  Theme: GOAT CHRISTMAS - Luxury Black & Gold
+{% endcomment %}
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Swiper CSS CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+{% assign glow_col = section.settings.card_hover_glow | default: '#DCB14F' %}
+{% assign glow_alpha = section.settings.card_glow_intensity | default: 25 | divided_by: 100.0 %}
+
+<div class="fcs-section fcs-section-{{ section.id }}">
+  <div class="fcs-container fcs-container-{{ section.id }}">
+    
+    {%- assign is_desktop_slider = false -%}
+    {%- if section.settings.desktop_layout == 'slider' -%}
+      {%- assign is_desktop_slider = true -%}
+    {%- endif -%}
+
+    {%- assign is_mobile_slider = false -%}
+    {%- if section.settings.mobile_layout == 'slider' -%}
+      {%- assign is_mobile_slider = true -%}
+    {%- endif -%}
+
+    <!-- Top Header -->
+    <div class="fcs-header">
+      <div class="fcs-header-left">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="fcs-eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+
+        <h2 class="fcs-title">
+          {{ section.settings.title_line_1 }} <span class="fcs-highlight">{{ section.settings.title_highlight }}</span>
+        </h2>
+      </div>
+
+      <!-- Header Navigation Arrows (Visible on Desktop & Mobile when Slider is active) -->
+      {%- assign show_slider_nav = false -%}
+      {%- if section.settings.show_navigation -%}
+        {%- if is_desktop_slider or is_mobile_slider -%}
+          {%- assign show_slider_nav = true -%}
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if show_slider_nav -%}
+        <div class="fcs-header-nav">
+          <button type="button" class="fcs-nav-btn fcs-btn-prev-{{ section.id }}" aria-label="Previous Slide">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button type="button" class="fcs-nav-btn fcs-btn-next-{{ section.id }}" aria-label="Next Slide">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Product Grid / Slider Wrapper -->
+    {%- assign selected_collection = section.settings.collection -%}
+    {%- assign products_limit = section.settings.products_to_show -%}
+
+    {%- if selected_collection != blank and selected_collection.products_count > 0 -%}
+      
+      {%- assign is_mobile_slider = false -%}
+      {%- if section.settings.mobile_layout == 'slider' -%}
+        {%- assign is_mobile_slider = true -%}
+      {%- endif -%}
+
+      <div class="fcs-main-wrapper fcs-desktop-{{ section.settings.desktop_layout }} fcs-mobile-{{ section.settings.mobile_layout }}">
+        
+        <!-- Conditional Swiper vs Pure Grid Wrapper -->
+        {%- if is_desktop_slider or is_mobile_slider -%}
+          <div class="swiper fcs-swiper-{{ section.id }}">
+            <div class="swiper-wrapper">
+              {%- for product in selected_collection.products limit: products_limit -%}
+                <div class="swiper-slide">
+                  <div class="fcs-card">
+                    
+                    <!-- Image & Badges Container -->
+                    <div class="fcs-image-wrapper">
+                      <a href="{{ product.url }}" class="fcs-image-link">
+                        {%- if product.featured_media -%}
+                          <img src="{{ product.featured_media | image_url: width: 800 }}" 
+                               alt="{{ product.featured_media.alt | escape }}" 
+                               loading="lazy" 
+                               width="800" 
+                               height="800" 
+                               class="fcs-product-img">
+                        {%- else -%}
+                          {{ 'product-1' | placeholder_svg_tag: 'fcs-product-img fcs-placeholder' }}
+                        {%- endif -%}
+                      </a>
+
+                      <!-- Badges Overlay -->
+                      <div class="fcs-badges-container">
+                        {%- if section.settings.show_default_badge and section.settings.default_badge_text != blank -%}
+                          <span class="fcs-badge fcs-badge-default">{{ section.settings.default_badge_text }}</span>
+                        {%- endif -%}
+
+                        {%- assign badge_key = section.settings.badge_metafield_key | strip -%}
+                        {%- if badge_key != blank -%}
+                          {%- assign raw_badge_val = product.metafields.custom[badge_key].value | default: product.metafields.custom[badge_key] -%}
+                          {%- if raw_badge_val != blank -%}
+                            {%- assign badge_array = raw_badge_val | split: ',' -%}
+                            {%- for badge_item in badge_array -%}
+                              {%- assign clean_badge = badge_item | strip -%}
+                              {%- if clean_badge != blank -%}
+                                <span class="fcs-badge fcs-badge-metafield">{{ clean_badge }}</span>
+                              {%- endif -%}
+                            {%- endfor -%}
+                          {%- endif -%}
+                        {%- endif -%}
+                      </div>
+                    </div>
+
+                    <!-- Product Info Bottom -->
+                    <div class="fcs-product-info">
+                      <div class="fcs-title-price-row">
+                        <h3 class="fcs-product-title">
+                          <a href="{{ product.url }}">{{ product.title }}</a>
+                        </h3>
+                        <div class="fcs-product-price">
+                          {{ product.price | money }}
+                        </div>
+                      </div>
+
+                      {%- assign desc_key = section.settings.desc_metafield_key | strip -%}
+                      {%- assign dynamic_short_desc = '' -%}
+                      {%- if desc_key != blank -%}
+                        {%- assign dynamic_short_desc = product.metafields.custom[desc_key].value | default: product.metafields.custom[desc_key] -%}
+                      {%- endif -%}
+
+                      {%- if dynamic_short_desc != blank -%}
+                        <p class="fcs-short-desc">{{ dynamic_short_desc }}</p>
+                      {%- elsif section.settings.show_fallback_desc and product.description != blank -%}
+                        <p class="fcs-short-desc">{{ product.description | strip_html | truncatewords: 10 }}</p>
+                      {%- endif -%}
+                    </div>
+
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+
+            <!-- Pagination Dots -->
+            {%- if section.settings.show_pagination -%}
+              <div class="swiper-pagination fcs-pagination-{{ section.id }}"></div>
+            {%- endif -%}
+          </div>
+        {%- else -%}
+          <!-- Pure Multi-Row Grid Mode -->
+          <div class="fcs-pure-grid">
+            {%- for product in selected_collection.products limit: products_limit -%}
+              <div class="fcs-pure-grid-item">
+                <div class="fcs-card">
+                  
+                  <!-- Image & Badges Container -->
+                  <div class="fcs-image-wrapper">
+                    <a href="{{ product.url }}" class="fcs-image-link">
+                      {%- if product.featured_media -%}
+                        <img src="{{ product.featured_media | image_url: width: 800 }}" 
+                             alt="{{ product.featured_media.alt | escape }}" 
+                             loading="lazy" 
+                             width="800" 
+                             height="800" 
+                             class="fcs-product-img">
+                      {%- else -%}
+                        {{ 'product-1' | placeholder_svg_tag: 'fcs-product-img fcs-placeholder' }}
+                      {%- endif -%}
+                    </a>
+
+                    <!-- Badges Overlay -->
+                    <div class="fcs-badges-container">
+                      {%- if section.settings.show_default_badge and section.settings.default_badge_text != blank -%}
+                        <span class="fcs-badge fcs-badge-default">{{ section.settings.default_badge_text }}</span>
+                      {%- endif -%}
+
+                      {%- assign badge_key = section.settings.badge_metafield_key | strip -%}
+                      {%- if badge_key != blank -%}
+                        {%- assign raw_badge_val = product.metafields.custom[badge_key].value | default: product.metafields.custom[badge_key] -%}
+                        {%- if raw_badge_val != blank -%}
+                          {%- assign badge_array = raw_badge_val | split: ',' -%}
+                          {%- for badge_item in badge_array -%}
+                            {%- assign clean_badge = badge_item | strip -%}
+                            {%- if clean_badge != blank -%}
+                              <span class="fcs-badge fcs-badge-metafield">{{ clean_badge }}</span>
+                            {%- endif -%}
+                          {%- endfor -%}
+                        {%- endif -%}
+                      {%- endif -%}
+                    </div>
+                  </div>
+
+                  <!-- Product Info Bottom -->
+                  <div class="fcs-product-info">
+                    <div class="fcs-title-price-row">
+                      <h3 class="fcs-product-title">
+                        <a href="{{ product.url }}">{{ product.title }}</a>
+                      </h3>
+                      <div class="fcs-product-price">
+                        {{ product.price | money }}
+                      </div>
+                    </div>
+
+                    {%- assign desc_key = section.settings.desc_metafield_key | strip -%}
+                    {%- assign dynamic_short_desc = '' -%}
+                    {%- if desc_key != blank -%}
+                      {%- assign dynamic_short_desc = product.metafields.custom[desc_key].value | default: product.metafields.custom[desc_key] -%}
+                    {%- endif -%}
+
+                    {%- if dynamic_short_desc != blank -%}
+                      <p class="fcs-short-desc">{{ dynamic_short_desc }}</p>
+                    {%- elsif section.settings.show_fallback_desc and product.description != blank -%}
+                      <p class="fcs-short-desc">{{ product.description | strip_html | truncatewords: 10 }}</p>
+                    {%- endif -%}
+                  </div>
+
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+      </div>
+
+      <!-- Centered Bottom Button -->
+      {%- if section.settings.link_text != blank -%}
+        <div class="fcs-bottom-btn-wrapper">
+          <a href="{{ section.settings.collection.url | default: '#' }}" class="fcs-bottom-btn fcs-button-{{ section.settings.button_style }}">
+            <span>{{ section.settings.link_text }}</span>
+            <span class="fcs-arrow">&rarr;</span>
+          </a>
+        </div>
+      {%- endif -%}
+
+    {%- else -%}
+      <!-- Empty State Placeholder -->
+      <div class="fcs-empty-state">
+        <p>Please select a collection in theme editor settings.</p>
+      </div>
+    {%- endif -%}
+
+  </div>
+</div>
+
+<!-- Swiper JS CDN with defer -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+
+<style>
+  /* Dynamic CSS Controlled by Section Settings */
+  .fcs-section-{{ section.id }} {
+    --bg-color: {{ section.settings.bg_color | default: '#0E0C09' }};
+    --eyebrow-color: {{ section.settings.eyebrow_color | default: '#DCB14F' }};
+    --title-color: {{ section.settings.title_color | default: '#F7EFE1' }};
+    --accent-color: {{ section.settings.accent_color | default: '#DCB14F' }};
+
+    --card-bg: {{ section.settings.card_bg | default: '#16120E' }};
+    --card-border: {{ section.settings.card_border | default: '#282017' }};
+    --card-hover-bg: {{ section.settings.card_hover_bg | default: '#1A1510' }};
+    --card-hover-border: {{ section.settings.card_hover_border | default: '#DCB14F' }};
+    --product-title-color: {{ section.settings.product_title_color | default: '#EEE7D9' }};
+    --product-title-hover: {{ section.settings.product_title_hover_color | default: '#FFFFFF' }};
+    --price-color: {{ section.settings.price_color | default: '#DCB14F' }};
+    --desc-color: {{ section.settings.desc_color | default: '#9D9083' }};
+
+    --nav-bg: {{ section.settings.nav_bg | default: 'rgba(22, 17, 13, 0.88)' }};
+    --nav-border: {{ section.settings.nav_border | default: 'rgba(220, 177, 79, 0.45)' }};
+    --nav-color: {{ section.settings.nav_color | default: '#DCB14F' }};
+    --nav-hover-bg: {{ section.settings.nav_hover_bg | default: 'rgba(220, 177, 79, 0.25)' }};
+    --nav-hover-border: {{ section.settings.nav_hover_border | default: '#DCB14F' }};
+    --nav-hover-color: {{ section.settings.nav_hover_color | default: '#FFFFFF' }};
+
+    --btn-text: {{ section.settings.btn_text_color | default: '#EAD297' }};
+    --btn-bg: {{ section.settings.btn_bg_color | default: '#DCB14F' }};
+    --btn-border: {{ section.settings.btn_border_color | default: '#D9BA77' }};
+    --btn-hover-bg: {{ section.settings.btn_hover_bg_color | default: '#DCB14F' }};
+    --btn-hover-text: {{ section.settings.btn_hover_text_color | default: '#0E0C09' }};
+    --btn-hover-border: {{ section.settings.btn_hover_border_color | default: '#DCB14F' }};
+
+    background-color: var(--bg-color);
+    {% if section.settings.show_ambient_light %}
+      background-image: radial-gradient(circle at 50% 20%, {{ section.settings.ambient_light_color | default: '#DCB14F' | color_modify: 'alpha', 0.06 }} 0%, rgba(14, 12, 9, 0) 65%);
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    {% endif %}
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Container Width Control */
+  .fcs-container-{{ section.id }} {
+    {%- if section.settings.container_width_type == 'full' -%}
+      max-width: 100% !important;
+      padding-left: 24px;
+      padding-right: 24px;
+    {%- else -%}
+      max-width: {{ section.settings.custom_container_width | default: 1540 }}px !important;
+      margin: 0 auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    {%- endif -%}
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Header Section */
+  .fcs-section-{{ section.id }} .fcs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 45px;
+  }
+
+  .fcs-section-{{ section.id }} .fcs-header-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .fcs-section-{{ section.id }} .fcs-eyebrow {
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    font-size: 11.5px;
+    letter-spacing: 4.5px;
+    text-transform: uppercase;
+    color: var(--eyebrow-color);
+    font-weight: 500;
+    margin-bottom: 12px;
+    display: inline-block;
+  }
+
+  .fcs-section-{{ section.id }} .fcs-title {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--title-color);
+    font-size: clamp(32px, 3.8vw, {{ section.settings.title_size }}px);
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.15;
+    letter-spacing: -0.3px;
+    {% if section.settings.enable_heading_shimmer != false %}
+      background: {%- if section.settings.heading_gradient != blank -%}{{ section.settings.heading_gradient }}{%- else -%}linear-gradient(105deg, #C69E58 0%, #F3DD99 25%, #AF874D 50%, #EDD696 75%, #C69E58 100%){%- endif -%};
+      background-size: 250% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+      animation: fcsHeadingShimmer {{ section.settings.heading_shimmer_speed | default: 6 }}s ease-in-out infinite alternate;
+      filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.35));
+    {% endif %}
+  }
+
+  @keyframes fcsHeadingShimmer {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .fcs-section-{{ section.id }} .fcs-highlight {
+    font-style: italic;
+    color: var(--accent-color);
+  }
+
+  /* Circular Frosted Glass Header Navigation Arrows */
+  .fcs-section-{{ section.id }} .fcs-header-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .fcs-section-{{ section.id }} .fcs-nav-btn {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--nav-border);
+    border-radius: 50%;
+    background: var(--nav-bg);
+    color: var(--nav-color);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    padding: 0;
+  }
+
+  .fcs-section-{{ section.id }} .fcs-nav-btn:hover:not(.swiper-button-disabled) {
+    border-color: var(--nav-hover-border);
+    color: var(--nav-hover-color);
+    background: var(--nav-hover-bg);
+    box-shadow: 0 0 18px rgba(220, 177, 79, 0.35);
+    transform: translateY(-2px);
+  }
+
+  .fcs-section-{{ section.id }} .fcs-nav-btn.swiper-button-disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+  }
+
+  /* Slider & Wrapper Headroom (Prevents Top Border Clipping on Hover) */
+  .fcs-section-{{ section.id }} .fcs-main-wrapper {
+    position: relative;
+    padding-top: 14px;
+    margin-top: -14px;
+    padding-bottom: 24px;
+    margin-bottom: -24px;
+  }
+
+  .fcs-section-{{ section.id }} .swiper {
+    padding-top: 14px !important;
+    padding-bottom: 24px !important;
+    margin-top: -14px !important;
+    margin-bottom: -24px !important;
+  }
+
+  .fcs-section-{{ section.id }} .swiper-slide {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    box-sizing: border-box;
+    height: auto;
+  }
+
+  /* Product Card Styling (Full Dynamic Borders & Glow) */
+  .fcs-section-{{ section.id }} .fcs-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 3px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+  }
+
+  .fcs-section-{{ section.id }} .fcs-card:hover {
+    background-color: var(--card-hover-bg);
+    border-color: var(--card-hover-border) !important;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7), 0 0 24px rgba({{ glow_col.red }}, {{ glow_col.green }}, {{ glow_col.blue }}, {{ glow_alpha }});
+    transform: translateY(-4px);
+  }
+
+  .fcs-section-{{ section.id }} .fcs-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background-color: #0E0C09;
+    border-radius: 2px;
+    margin-bottom: 4px;
+    padding:8px;
+  }
+
+  .fcs-section-{{ section.id }} .fcs-image-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .fcs-section-{{ section.id }} .fcs-product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .fcs-section-{{ section.id }} .fcs-card:hover .fcs-product-img {
+    transform: scale(1.05);
+  }
+
+  /* Badges: Frosted Glass Gold Pill */
+  .fcs-section-{{ section.id }} .fcs-badges-container {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .fcs-section-{{ section.id }} .fcs-badge {
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    font-size: 9.5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    font-weight: 600;
+    line-height: 1;
+    border-radius: 2px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: inline-block;
+    width: fit-content;
+  }
+
+  .fcs-section-{{ section.id }} .fcs-badge-default {
+    background-color: {{ section.settings.default_badge_bg | default: '#120E0A' }};
+    color: {{ section.settings.default_badge_text_color | default: '#EAD297' }};
+    border: 1px solid {{ section.settings.default_badge_border | default: '#DCB14F' }};
+  }
+
+  .fcs-section-{{ section.id }} .fcs-badge-metafield {
+    background-color: {{ section.settings.meta_badge_bg | default: 'rgba(220, 177, 79, 0.2)' }};
+    color: {{ section.settings.meta_badge_text_color | default: '#F3DD99' }};
+    border: 1px solid {{ section.settings.meta_badge_border | default: '#DCB14F' }};
+  }
+
+  /* Product Details */
+  .fcs-section-{{ section.id }} .fcs-product-info {
+    padding: 16px 6px 6px 6px;
+  }
+
+  .fcs-section-{{ section.id }} .fcs-title-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .fcs-section-{{ section.id }} .fcs-product-title {
+    margin: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    line-height: 1.25;
+  }
+
+  .fcs-section-{{ section.id }} .fcs-product-title a {
+    color: var(--product-title-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .fcs-section-{{ section.id }} .fcs-card:hover .fcs-product-title a {
+    color: var(--product-title-hover);
+  }
+
+  .fcs-section-{{ section.id }} .fcs-product-price {
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    color: var(--price-color);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  .fcs-section-{{ section.id }} .fcs-short-desc {
+    margin: 8px 0 0 0;
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--desc-color);
+    font-weight: 300;
+  }
+
+  /* Centered Bottom Button (Frosted Glass & Gold Shimmer Options) */
+  .fcs-section-{{ section.id }} .fcs-bottom-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 55px;
+  }
+
+  .fcs-section-{{ section.id }} .fcs-bottom-btn {
+    font-family: 'Jost', var(--g-font-2), sans-serif;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 34px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+
+  /* Glass Button (Matches Hero Secondary Button) */
+  .fcs-section-{{ section.id }} .fcs-button-glass {
+    background-color: rgba(217, 186, 119, 0);
+    color: var(--btn-text);
+    border: 1px solid var(--btn-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 4px 20px rgba(0, 0, 0, 0.35);
+  }
+
+  .fcs-section-{{ section.id }} .fcs-button-glass:hover {
+    background-color: rgba(220, 177, 79, 0.14);
+    color: var(--btn-hover-text);
+    border-color: var(--btn-hover-border);
+    box-shadow: 0 0 25px rgba(220, 177, 79, 0.45);
+    transform: translateY(-2px);
+  }
+
+  /* Gold Shimmer Button (Matches Hero Primary Button) */
+  .fcs-section-{{ section.id }} .fcs-button-gold {
+    background: linear-gradient(90deg, #C69E58 0%, #F3DD99 25%, #AF874D 50%, #EDD696 75%, #C69E58 100%);
+    color: var(--btn-text);
+    border: 1px solid var(--btn-border);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  }
+
+  .fcs-section-{{ section.id }} .fcs-button-gold:hover {
+    filter: brightness(1.05);
+    background: var(--btn-hover-bg);
+    color: var(--btn-hover-text);
+    border-color: var(--btn-hover-border);
+    box-shadow: 0 0 25px rgba(220, 177, 79, 0.45);
+    transform: translateY(-2px);
+  }
+
+  /* Classic Line & Outline Styles (Enhanced) */
+  .fcs-section-{{ section.id }} .fcs-button-outline {
+    background: transparent;
+    color: var(--btn-text);
+    border: 1px solid var(--btn-border);
+  }
+  .fcs-section-{{ section.id }} .fcs-button-outline:hover {
+    background: var(--btn-hover-bg);
+    color: var(--btn-hover-text);
+    border-color: var(--btn-hover-border);
+  }
+
+  .fcs-section-{{ section.id }} .fcs-button-line {
+    background: transparent;
+    color: var(--btn-text);
+    border-bottom: 1px solid var(--btn-border);
+    padding: 8px 4px;
+    border-radius: 0;
+  }
+  .fcs-section-{{ section.id }} .fcs-button-line:hover {
+    color: var(--btn-hover-text);
+    border-bottom-color: var(--btn-hover-border);
+  }
+
+  .fcs-section-{{ section.id }} .fcs-arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+  .fcs-section-{{ section.id }} .fcs-bottom-btn:hover .fcs-arrow {
+    transform: translateX(4px);
+  }
+
+  /* Pure Grid Mode Layout Engine */
+  .fcs-section-{{ section.id }} .fcs-pure-grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.desktop_columns }}, 1fr);
+    gap: 24px;
+    padding-top: 14px;
+    padding-bottom: 24px;
+    margin-top: -14px;
+    margin-bottom: -24px;
+  }
+
+  /* Swiper Pagination Styling */
+  .fcs-section-{{ section.id }} .swiper-pagination-bullet {
+    background: rgba(220, 177, 79, 0.3);
+    opacity: 1;
+    width: 6px;
+    height: 6px;
+    transition: all 0.3s ease;
+  }
+  .fcs-section-{{ section.id }} .swiper-pagination-bullet-active {
+    background: #DCB14F;
+    width: 22px;
+    border-radius: 3px;
+    box-shadow: 0 0 8px rgba(220, 177, 79, 0.5);
+  }
+
+  /* Responsive Design Optimized for 2-Card Mobile Layout & Touch/Arrow Navigation */
+  @media screen and (max-width: 768px) {
+    .fcs-header {
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: space-between !important;
+      align-items: flex-end !important;
+      gap: 12px !important;
+      margin-bottom: 24px !important;
+    }
+
+    .fcs-header-left {
+      flex: 1;
+    }
+
+    .fcs-section-{{ section.id }} .fcs-eyebrow {
+      font-size: 10px !important;
+      letter-spacing: 2px !important;
+      margin-bottom: 8px !important;
+    }
+
+    .fcs-section-{{ section.id }} .fcs-title {
+      font-size: 24px !important;
+      line-height: 1.2 !important;
+    }
+
+    .fcs-section-{{ section.id }} .fcs-header-nav {
+      display: flex !important;
+      gap: 8px !important;
+      flex-shrink: 0;
+    }
+
+    .fcs-section-{{ section.id }} .fcs-nav-btn {
+      width: 36px !important;
+      height: 36px !important;
+    }
+
+    .fcs-section-{{ section.id }} .fcs-pure-grid {
+      grid-template-columns: repeat({{ section.settings.mobile_columns }}, 1fr) !important;
+      gap: 12px !important;
+    }
+
+    .fcs-section-{{ section.id }} .fcs-card {
+      padding: 10px !important;
+    }
+
+    .fcs-section-{{ section.id }} .fcs-badges-container {
+      top: 8px !important;
+      left: 8px !important;
+      gap: 4px !important;
+    }
+
+    .fcs-section-{{ section.id }} .fcs-badge {
+      font-size: 7.5px !important;
+      letter-spacing: 1px !important;
+      padding: 3px 6px !important;
+    }
+
+    .fcs-section-{{ section.id }} .fcs-product-info {
+      padding: 12px 2px 4px 2px !important;
+    }
+
+    .fcs-section-{{ section.id }} .fcs-title-price-row {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 4px !important;
+    }
+
+    .fcs-section-{{ section.id }} .fcs-product-title {
+      font-size: 14.5px !important;
+      line-height: 1.25 !important;
+    }
+
+    .fcs-section-{{ section.id }} .fcs-product-price {
+      font-size: 13.5px !important;
+    }
+
+    .fcs-section-{{ section.id }} .fcs-short-desc {
+      font-size: 11.5px !important;
+      line-height: 1.4 !important;
+      margin-top: 4px !important;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .fcs-section-{{ section.id }} .fcs-title {
+      font-size: 21px !important;
+    }
+
+    .fcs-section-{{ section.id }} .fcs-nav-btn {
+      width: 34px !important;
+      height: 34px !important;
+    }
+
+    .fcs-section-{{ section.id }} .fcs-nav-btn svg {
+      width: 15px !important;
+      height: 15px !important;
+    }
+  }
+
+  {% comment %} custom code start {% endcomment %}
+   /* Keep product cards the same height */
+.fcs-section-{{ section.id }} .swiper-slide {
+  display: flex;
+}
+
+.fcs-section-{{ section.id }} .fcs-card {
+  flex: 1 1 auto;
+}
+
+.fcs-section-{{ section.id }} .fcs-product-info {
+  flex: 1 1 auto;
+}
+
+.fcs-section-{{ section.id }} .fcs-pure-grid-item {
+  display: flex;
+}
+
+/* Limit product names to two lines */
+.fcs-section-{{ section.id }} .fcs-title-price-row {
+  align-items: flex-start;
+}
+
+.fcs-section-{{ section.id }} .fcs-product-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 2.5em;
+  max-height: 2.5em;
+  line-height: 1.25 !important;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important;
+  overflow: hidden !important;
+}
+
+.fcs-section-{{ section.id }} .fcs-product-title a {
+  display: -webkit-box !important;
+  width: 100%;
+  max-height: 2.5em;
+  line-height: inherit !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important;
+  overflow: hidden !important;
+}
+
+/* Limit product descriptions to two lines */
+.fcs-section-{{ section.id }} .fcs-short-desc {
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important;
+  overflow: hidden !important;
+}
+  {% comment %} custom code end  {% endcomment %}
+</style>
+
+<!-- Swiper JS Initialization Logic -->
+<script>
+  window.addEventListener('DOMContentLoaded', function() {
+    if (typeof Swiper !== 'undefined') {
+      var isDesktopSlider = "{{ section.settings.desktop_layout }}" === "slider";
+      var isMobileSlider = "{{ section.settings.mobile_layout }}" === "slider";
+
+      if (isDesktopSlider || isMobileSlider) {
+        new Swiper('.fcs-swiper-{{ section.id }}', {
+          slidesPerView: {{ section.settings.mobile_columns }},
+          spaceBetween: 12,
+          loop: {{ section.settings.enable_loop }},
+          autoplay: {% if section.settings.enable_autoplay %}{ delay: {{ section.settings.autoplay_speed | times: 1000 }} }{% else %}false{% endif %},
+          navigation: {
+            nextEl: '.fcs-btn-next-{{ section.id }}',
+            prevEl: '.fcs-btn-prev-{{ section.id }}',
+          },
+          pagination: {
+            el: '.fcs-pagination-{{ section.id }}',
+            clickable: true,
+          },
+          breakpoints: {
+            769: {
+              slidesPerView: {{ section.settings.desktop_columns }},
+              spaceBetween: 24
+            }
+          }
+        });
+      }
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Featured Collection Grid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Container Width Settings"
+    },
+    {
+      "type": "select",
+      "id": "container_width_type",
+      "label": "Container Width Type",
+      "options": [
+        { "value": "custom", "label": "Custom Width (px)" },
+        { "value": "full", "label": "Full Width (100%)" }
+      ],
+      "default": "custom"
+    },
+    {
+      "type": "range",
+      "id": "custom_container_width",
+      "min": 1000,
+      "max": 1800,
+      "step": 20,
+      "unit": "px",
+      "label": "Custom Container Max Width",
+      "default": 1540
+    },
+    {
+      "type": "header",
+      "content": "Collection Settings"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Select Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 36,
+      "step": 1,
+      "label": "Maximum Products to Show",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Desktop Layout Configuration"
+    },
+    {
+      "type": "select",
+      "id": "desktop_layout",
+      "label": "Desktop Display Mode",
+      "options": [
+        { "value": "slider", "label": "Slider / Carousel" },
+        { "value": "grid", "label": "Multi-Row Grid System" }
+      ],
+      "default": "slider"
+    },
+    {
+      "type": "range",
+      "id": "desktop_columns",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "label": "Products Per Row / Slide View (Desktop)",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Mobile Layout Configuration"
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "Mobile Display Mode",
+      "options": [
+        { "value": "slider", "label": "Slider / Carousel" },
+        { "value": "grid", "label": "Multi-Row Grid System" }
+      ],
+      "default": "slider"
+    },
+    {
+      "type": "select",
+      "id": "mobile_columns",
+      "label": "Products Per Row / Slide View (Mobile)",
+      "options": [
+        { "value": "1", "label": "1 Column" },
+        { "value": "2", "label": "2 Columns" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "header",
+      "content": "Slider Controls (Swiper)"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_loop",
+      "label": "Enable Infinity Loop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "label": "Enable Autoplay",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Autoplay Delay Speed",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_navigation",
+      "label": "Show Header Arrows (Slider Mode)",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pagination",
+      "label": "Show Pagination Dots (Slider Mode)",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Product Metafield Keys Configuration"
+    },
+    {
+      "type": "text",
+      "id": "desc_metafield_key",
+      "label": "Short Description Metafield Key",
+      "default": "short_info",
+      "info": "Enter key under custom namespace (e.g. short_info for custom.short_info)"
+    },
+    {
+      "type": "text",
+      "id": "badge_metafield_key",
+      "label": "Badges Metafield Key",
+      "default": "badges_text",
+      "info": "Enter key under custom namespace (e.g. badges_text for custom.badges_text). Comma-separated values like 'NEW, HOT' render as separate badges."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_fallback_desc",
+      "label": "Fallback to standard product description if Metafield is empty",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Header Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Subtitle",
+      "default": "CURATED PIECES · LEGACY & GRATITUDE"
+    },
+    {
+      "type": "text",
+      "id": "title_line_1",
+      "label": "Title Text",
+      "default": "A Collection"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "label": "Title Italic Highlight",
+      "default": "to Remember."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_heading_shimmer",
+      "label": "Enable Heading Shimmer Animation",
+      "default": true
+    },
+    {
+      "type": "color_background",
+      "id": "heading_gradient",
+      "label": "Heading Gradient Color",
+      "default": "linear-gradient(105deg, #C69E58 0%, #F3DD99 25%, #AF874D 50%, #EDD696 75%, #C69E58 100%)"
+    },
+    {
+      "type": "range",
+      "id": "heading_shimmer_speed",
+      "label": "Shimmer Animation Speed",
+      "min": 2,
+      "max": 15,
+      "step": 1,
+      "unit": "s",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 28,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Section Title Size",
+      "default": 52
+    },
+    {
+      "type": "header",
+      "content": "Section Colors (Dynamic)"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background Color",
+      "default": "#0E0C09"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_ambient_light",
+      "label": "Show Soft Ambient Radial Glow",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "ambient_light_color",
+      "label": "Ambient Glow Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Heading Text Color",
+      "default": "#F7EFE1"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "header",
+      "content": "Product Card Colors (Dynamic)"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card Background Color",
+      "default": "#16120E"
+    },
+    {
+      "type": "color",
+      "id": "card_border",
+      "label": "Card Border Color",
+      "default": "#282017"
+    },
+    {
+      "type": "color",
+      "id": "card_hover_bg",
+      "label": "Card Hover Background Color",
+      "default": "#1A1510"
+    },
+    {
+      "type": "color",
+      "id": "card_hover_border",
+      "label": "Card Hover Border Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "color",
+      "id": "card_hover_glow",
+      "label": "Card Hover Glow Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "range",
+      "id": "card_glow_intensity",
+      "label": "Card Hover Glow Intensity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 25
+    },
+    {
+      "type": "color",
+      "id": "product_title_color",
+      "label": "Product Title Color",
+      "default": "#EEE7D9"
+    },
+    {
+      "type": "color",
+      "id": "product_title_hover_color",
+      "label": "Product Title Hover Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "color",
+      "id": "desc_color",
+      "label": "Short Description Color",
+      "default": "#9D9083"
+    },
+    {
+      "type": "header",
+      "content": "Product Badges (Dynamic)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_default_badge",
+      "label": "Show Static Badge on All Products",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "default_badge_text",
+      "label": "Static Badge Text",
+      "default": "LIMITED EDITION"
+    },
+    {
+      "type": "color",
+      "id": "default_badge_bg",
+      "label": "Static Badge Background",
+      "default": "#120E0A"
+    },
+    {
+      "type": "color",
+      "id": "default_badge_border",
+      "label": "Static Badge Border",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "color",
+      "id": "default_badge_text_color",
+      "label": "Static Badge Text Color",
+      "default": "#EAD297"
+    },
+    {
+      "type": "color",
+      "id": "meta_badge_bg",
+      "label": "Metafield Badge Background",
+      "default": "#241C14"
+    },
+    {
+      "type": "color",
+      "id": "meta_badge_border",
+      "label": "Metafield Badge Border",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "color",
+      "id": "meta_badge_text_color",
+      "label": "Metafield Badge Text Color",
+      "default": "#F3DD99"
+    },
+    {
+      "type": "header",
+      "content": "Header Navigation Arrows (Dynamic)"
+    },
+    {
+      "type": "color",
+      "id": "nav_bg",
+      "label": "Navigation Arrows Background",
+      "default": "#16110D"
+    },
+    {
+      "type": "color",
+      "id": "nav_border",
+      "label": "Navigation Arrows Border",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "color",
+      "id": "nav_color",
+      "label": "Navigation Arrows Icon Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "color",
+      "id": "nav_hover_bg",
+      "label": "Navigation Arrows Hover Background",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "color",
+      "id": "nav_hover_border",
+      "label": "Navigation Arrows Hover Border",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "color",
+      "id": "nav_hover_color",
+      "label": "Navigation Arrows Hover Icon Color",
+      "default": "#0E0C09"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Button Settings (Dynamic)"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Bottom Button Label",
+      "default": "EXPLORE ALL PIECES"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Bottom Button Style",
+      "options": [
+        { "value": "glass", "label": "Frosted Glass Button (Hero Secondary Style)" },
+        { "value": "gold", "label": "Gold Shimmer Button (Hero Primary Style)" },
+        { "value": "outline", "label": "Outline Button" },
+        { "value": "line", "label": "Line Button" }
+      ],
+      "default": "glass"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Button Text Color",
+      "default": "#EAD297"
+    },
+    {
+      "type": "color",
+      "id": "btn_border_color",
+      "label": "Button Border Color",
+      "default": "#D9BA77"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_color",
+      "label": "Button Background Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "color",
+      "id": "btn_hover_text_color",
+      "label": "Button Hover Text Color",
+      "default": "#0E0C09"
+    },
+    {
+      "type": "color",
+      "id": "btn_hover_border_color",
+      "label": "Button Hover Border Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "color",
+      "id": "btn_hover_bg_color",
+      "label": "Button Hover Background Color",
+      "default": "#DCB14F"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 20,
+      "max": 140,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 140,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 90
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection Grid"
+    }
+  ]
+}
+{% endschema %}

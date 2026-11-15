@@ -1,0 +1,379 @@
+{% comment %}
+  Section: Tribute Banner Component with Schema Controls
+{% endcomment %}
+
+<div class="tribute-section-wrapper-{{ section.id }}">
+  <div class="tribute-container">
+    
+    {%- if section.settings.show_badge -%}
+      <!-- Badge / Subtitle Tag -->
+      <div class="tribute-badge">
+        <span class="badge-dot"></span>
+        <span class="badge-text">{{ section.settings.badge_text }}</span>
+      </div>
+    {%- endif -%}
+
+    <!-- Main Title -->
+    <h2 class="tribute-title">
+      <span class="title-main">{{ section.settings.title_line1 }}</span>
+      <span class="title-highlight">{{ section.settings.title_line2 }}</span>
+    </h2>
+
+    <!-- Subtitle / Quote -->
+    <p class="tribute-quote">
+      "{{ section.settings.quote_text }}"
+    </p>
+
+    {%- if section.settings.show_crown -%}
+      <!-- Bottom Decorative Crown Divider -->
+      <div class="tribute-divider">
+        <span class="divider-line"></span>
+        <span class="crown-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
+          </svg>
+        </span>
+        <span class="divider-line"></span>
+      </div>
+    {%- endif -%}
+
+  </div>
+</div>
+
+<style>
+  .tribute-section-wrapper-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    {%- if section.settings.bg_gradient != blank -%}
+      background: {{ section.settings.bg_gradient }};
+    {%- endif -%}
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  .tribute-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Badge Styles */
+  .tribute-section-wrapper-{{ section.id }} .tribute-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid {{ section.settings.badge_border_color }};
+    border-radius: 50px;
+    padding: 6px 20px;
+    margin-bottom: 30px;
+    background-color: {{ section.settings.badge_bg_color }};
+  }
+
+  .tribute-section-wrapper-{{ section.id }} .badge-dot {
+    width: 6px;
+    height: 6px;
+    background-color: {{ section.settings.badge_text_color }};
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .tribute-section-wrapper-{{ section.id }} .badge-text {
+    color: {{ section.settings.badge_text_color }};
+    font-size: {{ section.settings.badge_font_size }}px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* Main Title Styles */
+  .tribute-section-wrapper-{{ section.id }} .tribute-title {
+    margin: 0 0 25px 0;
+    line-height: 1.15;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tribute-section-wrapper-{{ section.id }} .title-main {
+    color: {{ section.settings.title_color }};
+    font-size: {{ section.settings.title_font_size }}px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .tribute-section-wrapper-{{ section.id }} .title-highlight {
+    color: {{ section.settings.highlight_color }};
+    font-size: {{ section.settings.highlight_font_size }}px;
+    font-weight: 400;
+    font-style: italic;
+    margin-top: 5px;
+  }
+
+  /* Quote Styles */
+  .tribute-section-wrapper-{{ section.id }} .tribute-quote {
+    color: {{ section.settings.quote_color }};
+    font-size: {{ section.settings.quote_font_size }}px;
+    font-style: italic;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 0 45px 0;
+    font-weight: 300;
+  }
+
+  /* Crown Divider Styles */
+  .tribute-section-wrapper-{{ section.id }} .tribute-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 250px;
+    gap: 15px;
+  }
+
+  .tribute-section-wrapper-{{ section.id }} .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(216,178,87,0) 0%, {{ section.settings.divider_color }} 50%, rgba(216,178,87,0) 100%);
+  }
+
+  .tribute-section-wrapper-{{ section.id }} .crown-icon {
+    width: 18px;
+    height: 18px;
+    color: {{ section.settings.divider_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tribute-section-wrapper-{{ section.id }} .crown-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Responsive Design for Mobile Devices */
+  @media screen and (max-width: 768px) {
+    .tribute-section-wrapper-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top | times: 0.6 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.6 }}px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .tribute-section-wrapper-{{ section.id }} .tribute-badge {
+      padding: 5px 14px;
+      margin-bottom: 20px;
+    }
+
+    .tribute-section-wrapper-{{ section.id }} .badge-text {
+      font-size: {{ section.settings.badge_font_size | times: 0.85 }}px;
+      letter-spacing: 1.5px;
+    }
+
+    .tribute-section-wrapper-{{ section.id }} .title-main {
+      font-size: {{ section.settings.title_font_size | times: 0.55 }}px;
+      letter-spacing: 1px;
+    }
+
+    .tribute-section-wrapper-{{ section.id }} .title-highlight {
+      font-size: {{ section.settings.highlight_font_size | times: 0.55 }}px;
+    }
+
+    .tribute-section-wrapper-{{ section.id }} .tribute-quote {
+      font-size: {{ section.settings.quote_font_size | times: 0.8 }}px;
+      line-height: 1.5;
+      margin-bottom: 30px;
+      padding: 0 10px;
+    }
+
+    .tribute-section-wrapper-{{ section.id }} .tribute-divider {
+      max-width: 180px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Tribute Banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Badge Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show Badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "A TRIBUTE TO GREATNESS"
+    },
+    {
+      "type": "range",
+      "id": "badge_font_size",
+      "label": "Badge Font Size (px)",
+      "min": 9,
+      "max": 16,
+      "step": 1,
+      "default": 11
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge Text & Dot Color",
+      "default": "#d8b257"
+    },
+    {
+      "type": "color",
+      "id": "badge_border_color",
+      "label": "Badge Border Color",
+      "default": "#cfa850"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg_color",
+      "label": "Badge Background Color",
+      "default": "rgba(0, 0, 0, 0.4)"
+    },
+    {
+      "type": "header",
+      "content": "Main Title Settings"
+    },
+    {
+      "type": "text",
+      "id": "title_line1",
+      "label": "Title Line 1",
+      "default": "SOME PEOPLE GAVE US"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Title Line 1 Font Size (Desktop px)",
+      "min": 24,
+      "max": 80,
+      "step": 2,
+      "default": 54
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Line 1 Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "title_line2",
+      "label": "Title Line 2 (Highlighted)",
+      "default": "More Than Moments."
+    },
+    {
+      "type": "range",
+      "id": "highlight_font_size",
+      "label": "Title Line 2 Font Size (Desktop px)",
+      "min": 28,
+      "max": 90,
+      "step": 2,
+      "default": 64
+    },
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "Title Line 2 Color",
+      "default": "#d8b257"
+    },
+    {
+      "type": "header",
+      "content": "Quote Settings"
+    },
+    {
+      "type": "textarea",
+      "id": "quote_text",
+      "label": "Quote Text",
+      "default": "They gave us memories we carried home. Joy we shared with our families. Magic we watched with our children."
+    },
+    {
+      "type": "range",
+      "id": "quote_font_size",
+      "label": "Quote Font Size (px)",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "quote_color",
+      "label": "Quote Text Color",
+      "default": "#dedede"
+    },
+    {
+      "type": "header",
+      "content": "Divider Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_crown",
+      "label": "Show Crown Divider",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Crown & Line Color",
+      "default": "#d8b257"
+    },
+    {
+      "type": "header",
+      "content": "Section Background & Spacing"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Solid Color",
+      "default": "#0b0b0b"
+    },
+    {
+      "type": "color_background",
+      "id": "bg_gradient",
+      "label": "Background Gradient",
+      "default": "radial-gradient(circle at center, #1b1913 0%, #080808 70%)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding (px)",
+      "min": 20,
+      "max": 150,
+      "step": 5,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding (px)",
+      "min": 20,
+      "max": 150,
+      "step": 5,
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tribute Banner"
+    }
+  ]
+}
+{% endschema %}

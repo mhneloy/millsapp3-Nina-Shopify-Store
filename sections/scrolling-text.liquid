@@ -42,9 +42,9 @@
         {%- for i in (1..10) -%}
           <span class="textscroll-item {% if scroll_type == 'from-left' %} anim-loop-left {% else %} anim-loop-right {% endif %}">
           {%- for block in section.blocks -%}
-           <span class=" px-5 {{ size }} type-{{ text_style }} mb-0 d-flex align-items-center">
+           <span class=" px-0 {{ size }} type-{{ text_style }} mb-0 d-flex align-items-center">
             {% if block.settings.image != blank %}
-              <img class="image-content__image mr-2"
+              <img class="image-content__image mr-0"
                 src="{{ block.settings.image | image_url: width: 240 }}"
                 alt="{{ block.settings.image.alt | escape }}"
                 loading="lazy"
@@ -244,10 +244,10 @@
       "id": "size_icon",
       "label": "Icon Size",
       "unit": "px",
-      "min": 4,
-      "max": 120,
-      "step": 4,
-      "default": 24
+      "min": 5,
+      "max": 500,
+      "step": 5,
+      "default": 25
     },
     {
       "type": "header",
@@ -259,10 +259,10 @@
       "id": "speed",
       "label": "Scrolling Speed",
       "unit": "s",
-      "min": 10,
+      "min": 0,
       "max": 30,
       "step": 1,
-      "default": 10,
+      "default": 0,
       "info": "Auto - Scrolling"
     },
     {

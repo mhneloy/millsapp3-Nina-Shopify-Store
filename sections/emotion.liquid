@@ -1,0 +1,435 @@
+<div class="emotional-message-section emotional-message-section-{{ section.id }}">
+  <div class="em-container">
+    
+    <!-- Counter & Category -->
+    {%- if section.settings.counter_text != blank or section.settings.subtitle_text != blank -%}
+      <div class="em-header-top">
+        {%- if section.settings.counter_text != blank -%}
+          <span class="em-counter">{{ section.settings.counter_text }}</span>
+        {%- endif -%}
+        {%- if section.settings.subtitle_text != blank -%}
+          <span class="em-subtitle">{{ section.settings.subtitle_text }}</span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Main Title with Highlighted Text -->
+    <div class="em-title-wrapper">
+      <h2 class="em-main-title">
+        {{ section.settings.title_line_1 }} <br>
+        {{ section.settings.title_line_2 }} <span class="em-highlight">{{ section.settings.title_highlight }}</span>
+      </h2>
+    </div>
+
+    <!-- Divider Line -->
+    <div class="em-divider"></div>
+
+    <!-- Description -->
+    {%- if section.settings.description != blank -%}
+      <p class="em-description">{{ section.settings.description }}</p>
+    {%- endif -%}
+
+    <!-- Action Button / Link -->
+    {%- if section.settings.button_label != blank -%}
+      <div class="em-btn-wrapper">
+        <a href="{{ section.settings.button_link }}" class="em-button em-button-{{ section.settings.button_style }}">
+          {{ section.settings.button_label }} 
+          <span class="em-arrow">↗</span>
+        </a>
+      </div>
+    {%- endif -%}
+
+  </div>
+</div>
+
+<style>
+  /* Dynamic CSS Controlled by Section Settings */
+  .emotional-message-section-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  .emotional-message-section-{{ section.id }} .em-counter {
+    color: {{ section.settings.counter_color }};
+    font-size: {{ section.settings.counter_size }}px;
+  }
+
+  .emotional-message-section-{{ section.id }} .em-subtitle {
+    color: {{ section.settings.subtitle_color }};
+    font-size: {{ section.settings.subtitle_size }}px;
+  }
+
+  .emotional-message-section-{{ section.id }} .em-main-title {
+    color: {{ section.settings.main_text_color }};
+    font-size: {{ section.settings.main_title_size }}px;
+  }
+
+  .emotional-message-section-{{ section.id }} .em-highlight {
+    color: {{ section.settings.highlight_color }};
+  }
+
+  .emotional-message-section-{{ section.id }} .em-description {
+    color: {{ section.settings.desc_color }};
+    font-size: {{ section.settings.desc_size }}px;
+  }
+
+  /* --- Button Styles & Colors --- */
+
+  /* 1. Solid Button Style */
+  .emotional-message-section-{{ section.id }} .em-button-solid {
+    background-color: {{ section.settings.btn_bg_color }};
+    color: {{ section.settings.btn_text_color }};
+    border: 1px solid {{ section.settings.btn_bg_color }};
+    padding: 12px 28px;
+    border-radius: 4px;
+  }
+
+  .emotional-message-section-{{ section.id }} .em-button-solid:hover {
+    background-color: {{ section.settings.btn_hover_bg_color }};
+    color: {{ section.settings.btn_hover_text_color }};
+    border-color: {{ section.settings.btn_hover_bg_color }};
+  }
+
+  /* 2. Outline Button Style */
+  .emotional-message-section-{{ section.id }} .em-button-outline {
+    background-color: transparent;
+    color: {{ section.settings.btn_text_color }};
+    border: 1px solid {{ section.settings.btn_text_color }};
+    padding: 12px 28px;
+    border-radius: 4px;
+  }
+
+  .emotional-message-section-{{ section.id }} .em-button-outline:hover {
+    background-color: {{ section.settings.btn_hover_bg_color }};
+    color: {{ section.settings.btn_hover_text_color }};
+    border-color: {{ section.settings.btn_hover_bg_color }};
+  }
+
+  /* 3. Line Button Style (Underline Only) */
+  .emotional-message-section-{{ section.id }} .em-button-line {
+    background-color: transparent;
+    color: {{ section.settings.btn_text_color }};
+    border-bottom: 1px solid {{ section.settings.btn_text_color }};
+    padding: 8px 0;
+    border-radius: 0;
+  }
+
+  .emotional-message-section-{{ section.id }} .em-button-line:hover {
+    color: {{ section.settings.btn_hover_text_color }};
+    border-bottom-color: {{ section.settings.btn_hover_text_color }};
+  }
+
+  /* General Component Structure */
+  .emotional-message-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .em-container {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .em-header-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .em-counter {
+    letter-spacing: 3px;
+  }
+
+  .em-subtitle {
+    letter-spacing: 2px;
+  }
+
+  .em-title-wrapper {
+    margin: 25px 0;
+  }
+
+  .em-main-title {
+    font-weight: 300;
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  .em-highlight {
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .em-divider {
+    width: 60px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 30px auto;
+  }
+
+  .em-description {
+    max-width: 600px;
+    margin: 0 auto 35px auto;
+    line-height: 1.6;
+  }
+
+  .em-btn-wrapper {
+    display: inline-block;
+  }
+
+  .em-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    font-weight: 600;
+  }
+
+  .em-arrow {
+    font-size: 14px;
+  }
+
+  /* Responsive Adjustments */
+  @media screen and (max-width: 768px) {
+    .emotional-message-section-{{ section.id }} .em-main-title {
+      font-size: 32px !important;
+    }
+    .emotional-message-section-{{ section.id }} .em-description {
+      font-size: 14px !important;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Emotional Message",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Background & Spacing"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 20,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Top Header Settings"
+    },
+    {
+      "type": "text",
+      "id": "counter_text",
+      "label": "Counter Text",
+      "default": "02 / 11"
+    },
+    {
+      "type": "color",
+      "id": "counter_color",
+      "label": "Counter Color",
+      "default": "#c5a880"
+    },
+    {
+      "type": "range",
+      "id": "counter_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Counter Font Size",
+      "default": 13
+    },
+    {
+      "type": "text",
+      "id": "subtitle_text",
+      "label": "Subtitle Text",
+      "default": "· EMOTIONAL MESSAGE"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#c5a880"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle Font Size",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Main Heading Content"
+    },
+    {
+      "type": "text",
+      "id": "title_line_1",
+      "label": "Title Line 1",
+      "default": "The most meaningful things"
+    },
+    {
+      "type": "text",
+      "id": "title_line_2",
+      "label": "Title Line 2",
+      "default": "are the ones we"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "label": "Highlighted Italic Text",
+      "default": "feel."
+    },
+    {
+      "type": "color",
+      "id": "main_text_color",
+      "label": "Main Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "Highlight Italic Text Color",
+      "default": "#c5a880"
+    },
+    {
+      "type": "range",
+      "id": "main_title_size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Main Title Font Size",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Description Settings"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description Text",
+      "default": "A thoughtful gesture can express gratitude, honor a memory, and bring people a little closer. Every detail should make that feeling unforgettable."
+    },
+    {
+      "type": "color",
+      "id": "desc_color",
+      "label": "Description Text Color",
+      "default": "#cccccc"
+    },
+    {
+      "type": "range",
+      "id": "desc_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Font Size",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Button Settings"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "READ THE STORY"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button Style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid Button"
+        },
+        {
+          "value": "outline",
+          "label": "Outline Button"
+        },
+        {
+          "value": "line",
+          "label": "Line Button"
+        }
+      ],
+      "default": "line"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Button Normal Text / Border Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_color",
+      "label": "Button Normal Background (Solid Style)",
+      "default": "#c5a880"
+    },
+    {
+      "type": "color",
+      "id": "btn_hover_text_color",
+      "label": "Button Hover Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "btn_hover_bg_color",
+      "label": "Button Hover Background Color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Emotional Message"
+    }
+  ]
+}
+{% endschema %}

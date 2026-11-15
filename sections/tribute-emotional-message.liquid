@@ -1,0 +1,347 @@
+{% comment %}
+  Section: Tribute Emotional Quote Message
+  Author: Custom Shopify 2.0 Section
+{% endcomment %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Jost:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  .tribute-quote-{{ section.id }} {
+    --bg-color: {{ section.settings.bg_color }};
+    --quote-color: {{ section.settings.quote_color }};
+    --subtext-color: {{ section.settings.sub_text_color }};
+    --divider-color: {{ section.settings.divider_color }};
+    --heading-gradient: {{ section.settings.heading_gradient }};
+
+    background-color: var(--bg-color);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tribute-quote-{{ section.id }} .tribute-quote__container {
+    max-width: {{ section.settings.max_width }}px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Elegant Diamond Line Divider */
+  .tribute-quote-{{ section.id }} .tribute-quote__ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: 100%;
+    max-width: 170px;
+  }
+
+  .tribute-quote-{{ section.id }} .tribute-quote__ornament-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--divider-color));
+  }
+
+  .tribute-quote-{{ section.id }} .tribute-quote__ornament-line--right {
+    background: linear-gradient(90deg, var(--divider-color), transparent);
+  }
+
+  .tribute-quote-{{ section.id }} .tribute-quote__ornament-diamond {
+    width: 6px;
+    height: 6px;
+    background-color: var(--divider-color);
+    transform: rotate(45deg);
+    display: inline-block;
+    box-shadow: 0 0 6px rgba(213, 171, 94, 0.4);
+  }
+
+  /* Main Italic Quote - Ultra-Crisp, High-Clarity Cormorant Garamond */
+  .tribute-quote-{{ section.id }} .tribute-quote__text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(21px, 2.5vw, 32px);
+    line-height: 1.65;
+    color: var(--quote-color);
+    margin: 35px 0 35px 0;
+    max-width: 880px;
+    letter-spacing: 0.3px;
+    text-shadow: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Subtitle Context Line - Enhanced Contrast & Typography */
+  .tribute-quote-{{ section.id }} .tribute-quote__subtext {
+    font-family: 'Jost', 'Montserrat', sans-serif;
+    font-size: clamp(11px, 1.1vw, 12px);
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--subtext-color);
+    margin-bottom: 22px;
+    font-weight: 500;
+    line-height: 1.5;
+    opacity: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Gradient Heading with Shimmer Animation */
+  .tribute-quote-{{ section.id }} .tribute-quote__heading {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(26px, 3.8vw, 46px);
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin: 0 0 45px 0;
+    line-height: 1.25;
+    background: {%- if section.settings.heading_gradient != blank -%}{{ section.settings.heading_gradient }}{%- else -%}linear-gradient(105deg, #C69E58 0%, #F3DD99 25%, #AF874D 50%, #EDD696 75%, #C69E58 100%){%- endif -%};
+    background-size: 250% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    filter: drop-shadow(0 2px 10px rgba(197, 155, 78, 0.35));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    {% if section.settings.enable_heading_shimmer != false %}
+      animation: tributeShimmerBackAndForth {{ section.settings.heading_shimmer_speed | default: 6 }}s ease-in-out infinite alternate;
+    {% endif %}
+  }
+
+  @keyframes tributeShimmerBackAndForth {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+
+  /* Mobile Responsive - Razor Sharp & Crystal Clear */
+  @media (max-width: 768px) {
+    .tribute-quote-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top | divided_by: 1.6 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | divided_by: 1.6 | round }}px;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .tribute-quote-{{ section.id }} .tribute-quote__text {
+      margin: 24px 0 28px 0;
+      font-size: 21px;
+      font-weight: 500;
+      line-height: 1.65;
+      letter-spacing: 0.3px;
+      text-shadow: none !important;
+    }
+
+    .tribute-quote-{{ section.id }} .tribute-quote__subtext {
+      letter-spacing: 2.5px;
+      font-size: 11px;
+      line-height: 1.5;
+      margin-bottom: 18px;
+      opacity: 1;
+    }
+
+    .tribute-quote-{{ section.id }} .tribute-quote__heading {
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      line-height: 1.25;
+      margin-bottom: 28px;
+    }
+  }
+</style>
+
+<div class="tribute-quote-{{ section.id }}">
+  <div class="tribute-quote__container">
+    
+    <!-- Top Divider -->
+    {% if section.settings.show_dividers %}
+      <div class="tribute-quote__ornament">
+        <span class="tribute-quote__ornament-line"></span>
+        <span class="tribute-quote__ornament-diamond"></span>
+        <span class="tribute-quote__ornament-line tribute-quote__ornament-line--right"></span>
+      </div>
+    {% endif %}
+
+    <!-- Quote Message -->
+    {% if section.settings.quote_text != blank %}
+      <div class="tribute-quote__text">
+        {{ section.settings.quote_text }}
+      </div>
+    {% endif %}
+
+    <!-- Subtitle -->
+    {% if section.settings.sub_text != blank %}
+      <div class="tribute-quote__subtext">
+        {{ section.settings.sub_text }}
+      </div>
+    {% endif %}
+
+    <!-- Gradient Heading -->
+    {% if section.settings.heading != blank %}
+      <h2 class="tribute-quote__heading">
+        {{ section.settings.heading }}
+      </h2>
+    {% endif %}
+
+    <!-- Bottom Divider -->
+    {% if section.settings.show_dividers %}
+      <div class="tribute-quote__ornament">
+        <span class="tribute-quote__ornament-line"></span>
+        <span class="tribute-quote__ornament-diamond"></span>
+        <span class="tribute-quote__ornament-line tribute-quote__ornament-line--right"></span>
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Tribute Emotional Message",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 600,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "label": "Content Maximum Width",
+      "default": 960
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 40,
+      "max": 160,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 40,
+      "max": 160,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Ornament Dividers"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dividers",
+      "label": "Show Top & Bottom Dividers",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "textarea",
+      "id": "quote_text",
+      "label": "Quote Text",
+      "default": "“Some people gave us more than moments. They gave us memories we carried home. Joy we shared with our families. Magic we watched with our children.”"
+    },
+    {
+      "type": "textarea",
+      "id": "sub_text",
+      "label": "Subtitle Context Line",
+      "default": "THIS SEASON, MILLIONS OF HEARTS FEEL THE SAME SIMPLE WORDS —"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading Text",
+      "default": "THANK YOU FOR EVERYTHING"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_heading_shimmer",
+      "label": "Enable Heading Shimmer Animation",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "heading_shimmer_speed",
+      "label": "Shimmer Animation Speed",
+      "min": 2,
+      "max": 15,
+      "step": 1,
+      "unit": "s",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Color Settings"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#060504"
+    },
+    {
+      "type": "color",
+      "id": "quote_color",
+      "label": "Quote Text Color",
+      "default": "#f0e6d9"
+    },
+    {
+      "type": "color",
+      "id": "sub_text_color",
+      "label": "Subtitle Color",
+      "default": "#93806f"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider Ornament Color",
+      "default": "#c59a4e"
+    },
+    {
+      "type": "color_background",
+      "id": "heading_gradient",
+      "label": "Heading Gradient Color",
+      "default": "linear-gradient(105deg, #C69E58 0%, #F3DD99 25%, #AF874D 50%, #EDD696 75%, #C69E58 100%)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tribute Emotional Message"
+    }
+  ]
+}
+{% endschema %}
