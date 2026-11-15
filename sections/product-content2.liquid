@@ -305,7 +305,9 @@
               {%- when 'review' -%}
                 <div class="tab-pane {{ pane_class }} premium-pane-content" id="tab-pane-{{ block.id }}-{{ section.id }}">
                   {%- if block.settings.review_type == 'judgeme' -%}
-                    {%- render 'judgeme_widgets', widget_type: 'judgeme_review_widget', product: product -%}
+                    <div id="judgeme_product_reviews" class="jdgm-widget jdgm-review-widget" data-id="{{ product.id }}" data-product-title="{{ product.title | escape }}" data-auto-install="false">
+                      {{ product.metafields.judgeme.widget }}
+                    </div>
                   {%- elsif block.settings.review_type == 'loox' -%}
                     <div id="looxReviews" data-product-id="{{ product.id }}">{{ product.metafields.loox.reviews }}</div>
                   {%- elsif block.settings.review_type == 'Ali' -%}

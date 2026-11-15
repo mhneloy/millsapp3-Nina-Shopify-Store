@@ -71,10 +71,10 @@ data-section-type="newletter-footer"  >
                   <p class="form-success">{{ 'general.newsletter_form.confirmation' | t }}</p>
                 {%- else -%}
                   <input type="hidden" name="contact[tags]" value="newsletter">
-                  <label for="NewsletterEmail-{{ block.id }}" class="label--hidden">{{ 'general.newsletter_form.newsletter_label' | t }}</label>
+                  <label for="NewsletterEmail-{{ section.id }}" class="label--hidden">{{ 'general.newsletter_form.newsletter_label' | t }}</label>
                   <div class=" form-group text-center input-group mb-0 align-items-center pl-4 pr-2 py-1">
                     {%- render 'icon-email' -%}
-                    <input class="form-control" type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_placeholder' | t }}" name="contact[email]" id="NewsletterEmail-{{ block.id }}" autocorrect="off" autocapitalize="off">
+                    <input class="form-control" type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_placeholder' | t }}" name="contact[email]" id="NewsletterEmail-{{ section.id }}" autocorrect="off" autocapitalize="off">
                     <button type="submit" class="btn" name="commit">
                       <span class="icon__fallback-text" >{{ 'general.newsletter_form.submit' | t }}</span>
                         <svg class="svg-submit" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

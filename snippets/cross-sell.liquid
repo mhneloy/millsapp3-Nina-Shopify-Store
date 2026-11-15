@@ -27,7 +27,7 @@
             {%- if settings.safe_checkout_pcart != blank -%}
             <div class="mini-cart-safe-checkout">
               <img class="lazyload" loading="lazy" 
-                src={{ settings.safe_checkout_pcart | image_url: width: 1, height: 1 }}"
+                src="{{ settings.safe_checkout_pcart | image_url: width: 1, height: 1 }}"
                 data-src="{{ settings.safe_checkout_pcart | image_url: width: 500 }}" 
                 width ="{{ settings.safe_checkout_pcart.width }}"
                 height = "{{ settings.safe_checkout_pcart.height }}" />

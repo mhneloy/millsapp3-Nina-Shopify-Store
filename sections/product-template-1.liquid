@@ -1573,7 +1573,6 @@
                     stab_content4 : block.settings.stab_content4,
                     gtab_review_enable : block.settings.gtab_review_enable,
                     gtab_review : block.settings.gtab_review -%}
-                  </div>
                 {%- else -%}
                   {%- render 'product-information', 
                     product : product, 
@@ -1588,8 +1587,8 @@
                     stab_content4 : block.settings.stab_content4,
                     gtab_review_enable : block.settings.gtab_review_enable,
                     gtab_review : block.settings.gtab_review -%}
-                  </div>
                 {%- endif -%}
+              </div>
               
             {%- endcase -%}
           {%- endfor -%}

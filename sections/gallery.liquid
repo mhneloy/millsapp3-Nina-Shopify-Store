@@ -172,7 +172,7 @@
                   preload="metadata"
                 ></video>
               {% else %}
-                <img src="{{ item | image_url: width: 1200 }}" alt="{{ item.alt | escape }}" loading="lazy">
+                <img src="{{ item | image_url: width: 1200 }}" width="{{ item.width }}" height="{{ item.height }}" alt="{{ item.alt | escape }}" loading="lazy">
               {% endif %}
             </div>
           </div>
@@ -197,7 +197,7 @@
                 {% endif %}
               {% else %}
                 {% if block.settings.image != blank %}
-                  <img src="{{ block.settings.image | image_url: width: 1200 }}" alt="{{ block.settings.image.alt | escape }}" loading="lazy">
+                  <img src="{{ block.settings.image | image_url: width: 1200 }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" alt="{{ block.settings.image.alt | escape }}" loading="lazy">
                 {% else %}
                   {{ 'image' | placeholder_svg_tag }}
                 {% endif %}
@@ -228,7 +228,7 @@
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {

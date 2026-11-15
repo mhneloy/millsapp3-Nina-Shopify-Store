@@ -11,7 +11,7 @@
 {%- endif -%}
 <fieldset class="single-option-radio {% if isColor %} single-color {{ size_color }} {% if color_circle %}roud-color{% endif %} {% endif %} "
           name="{{ option.name | handleize }}"
-          id="ProductSelect-option-{{ forloop.index0 }}">
+          id="ProductSelect-option-{{ section.id }}-{{ firstloop }}">
   
   {%- for value in option.values -%}
     {%- liquid
@@ -59,7 +59,7 @@
 </fieldset>
 {%- else -%}
 <select class="single-option-selector single-option-selector-{{ section.id }} product-form__input"
-        id="SingleOptionSelector-{{ firstloop }}"
+        id="SingleOptionSelector-{{ section.id }}-{{ firstloop }}"
         data-name="{{ option.name }}"
         data-index="option{{ loop }}">
   {%- for value in option.values -%}

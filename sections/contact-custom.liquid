@@ -297,7 +297,7 @@
               <div class="info-block" {{ block.shopify_attributes }}>
                 {% if block.settings.custom_icon != blank %}
                   <img 
-                    src="{{ block.settings.custom_icon | image_url: width: 100 }}" 
+                    src="{{ block.settings.custom_icon | image_url: width: 100 }}" width="{{ block.settings.custom_icon.width }}" height="{{ block.settings.custom_icon.height }}"
                     alt="{{ block.settings.label | escape }}" 
                     class="custom-icon-img"
                     loading="lazy"
@@ -330,7 +330,7 @@
                 {% if block.settings.show_icon %}
                   {% if block.settings.custom_icon != blank %}
                     <img 
-                      src="{{ block.settings.custom_icon | image_url: width: 100 }}" 
+                      src="{{ block.settings.custom_icon | image_url: width: 100 }}" width="{{ block.settings.custom_icon.width }}" height="{{ block.settings.custom_icon.height }}"
                       alt="{{ block.settings.map_title | escape }}" 
                       class="custom-icon-img"
                       loading="lazy"
