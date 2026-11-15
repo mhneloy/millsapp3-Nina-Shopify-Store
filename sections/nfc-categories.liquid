@@ -1,3 +1,4 @@
+{% render 'nfc-section-style', section: section %}
 <section class="category-section page-width" id="collection"><div class="section-heading"><p class="eyebrow">{{ section.settings.eyebrow | escape }}</p><h2>{{ section.settings.heading | escape | newline_to_br }}</h2></div><div class="category-grid">{% for block in section.blocks %}{% assign tile_collection = block.settings.collection %}{% assign tile_image = block.settings.image | default: tile_collection.image %}{% assign tile_link = block.settings.link | default: tile_collection.url | default: routes.all_products_collection_url %}
 <a class="category-tile" href="{{ tile_link }}" {{ block.shopify_attributes }}>{% assign fallback = 'nfc-editorial-tee.jpg' %}{% if forloop.index == 2 %}{% assign fallback = 'nfc-editorial-hoodie.jpg' %}{% endif %}{% render 'nfc-image', image: tile_image, fallback: fallback, alt: block.settings.heading, loading: 'lazy', sizes: '(max-width: 700px) 100vw, 50vw' %}<span class="category-tile__number">{{ block.settings.eyebrow | escape }}</span><span class="category-tile__bottom"><span>{{ block.settings.heading | default: tile_collection.title | escape }}</span>{% render 'nfc-icon', name: 'arrow' %}</span></a>{% endfor %}</div>{% if section.settings.note != blank %}<p class="image-note">{{ section.settings.note | escape }}</p>{% endif %}</section>
 {% schema %}
@@ -21,6 +22,228 @@
       "id": "note",
       "label": "Image note",
       "default": "Campaign imagery is editorial concept photography; official garment artwork appears on catalog products."
+    },
+    {
+      "type": "header",
+      "content": "Section colors"
+    },
+    {
+      "type": "paragraph",
+      "content": "Leave a color empty to keep the original design. These controls affect only this section."
+    },
+    {
+      "type": "color",
+      "id": "nfc_background_color",
+      "label": "Background"
+    },
+    {
+      "type": "color",
+      "id": "nfc_heading_color",
+      "label": "Headings"
+    },
+    {
+      "type": "color",
+      "id": "nfc_text_color",
+      "label": "Paragraphs and body text"
+    },
+    {
+      "type": "color",
+      "id": "nfc_eyebrow_color",
+      "label": "Eyebrow text"
+    },
+    {
+      "type": "color",
+      "id": "nfc_link_color",
+      "label": "Links"
+    },
+    {
+      "type": "color",
+      "id": "nfc_accent_color",
+      "label": "Accents"
+    },
+    {
+      "type": "color",
+      "id": "nfc_border_color",
+      "label": "Borders and dividers"
+    },
+    {
+      "type": "header",
+      "content": "Section buttons"
+    },
+    {
+      "type": "color",
+      "id": "nfc_button_text",
+      "label": "Button text and icons"
+    },
+    {
+      "type": "color",
+      "id": "nfc_button_background",
+      "label": "Filled button background"
+    },
+    {
+      "type": "color",
+      "id": "nfc_button_border",
+      "label": "Button border"
+    },
+    {
+      "type": "color",
+      "id": "nfc_button_hover_text",
+      "label": "Button hover text"
+    },
+    {
+      "type": "color",
+      "id": "nfc_button_hover_background",
+      "label": "Filled button hover background"
+    },
+    {
+      "type": "header",
+      "content": "Section layout"
+    },
+    {
+      "type": "select",
+      "id": "nfc_content_position",
+      "label": "Content column position",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "Original design"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "nfc_text_alignment",
+      "label": "Heading alignment",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "Original design"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "nfc_custom_width",
+      "label": "Customize content width",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "nfc_content_width",
+      "label": "Content width",
+      "min": 480,
+      "max": 1600,
+      "step": 20,
+      "default": 1440,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Section typography"
+    },
+    {
+      "type": "checkbox",
+      "id": "nfc_custom_typography",
+      "label": "Customize text sizes",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "nfc_heading_size",
+      "label": "Heading size on desktop",
+      "min": 20,
+      "max": 140,
+      "step": 2,
+      "default": 56,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "nfc_heading_size_mobile",
+      "label": "Heading size on mobile",
+      "min": 20,
+      "max": 100,
+      "step": 2,
+      "default": 36,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "nfc_paragraph_size",
+      "label": "Paragraph size on desktop",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "nfc_paragraph_size_mobile",
+      "label": "Paragraph size on mobile",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "text",
+      "id": "nfc_padding_desktop",
+      "label": "Padding on desktop",
+      "info": "Top right bottom left. Example: 60px 20px 60px 20px. Leave blank to keep the design defaults."
+    },
+    {
+      "type": "text",
+      "id": "nfc_padding_mobile",
+      "label": "Padding on mobile",
+      "info": "Top right bottom left. Example: 60px 20px 60px 20px. Leave blank to keep the design defaults."
+    },
+    {
+      "type": "header",
+      "content": "Section margin"
+    },
+    {
+      "type": "text",
+      "id": "nfc_margin_desktop",
+      "label": "Margin on desktop",
+      "info": "Top right bottom left. Example: 60px 20px 60px 20px. Leave blank to keep the design defaults."
+    },
+    {
+      "type": "text",
+      "id": "nfc_margin_mobile",
+      "label": "Margin on mobile",
+      "info": "Top right bottom left. Example: 60px 20px 60px 20px. Leave blank to keep the design defaults."
     }
   ],
   "max_blocks": 6,

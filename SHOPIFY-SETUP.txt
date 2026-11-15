@@ -84,4 +84,20 @@ quick view, add to cart, quantity changes, removal, mobile navigation, keyboard
 dismissal, FAQ expansion, and overflow at 390, 768, and 1440 pixels. These checks
 do not replace rendering and transaction checks in a real Shopify draft theme.
 
+SECTION DESIGN CONTROLS
+
+Select any NFC section in the theme editor to find Section colors, Section
+buttons, Section layout, Section typography, Section padding, and Section margin.
+Colors and spacing apply only to that section instance. Leave optional colors
+blank to retain the existing design. Enable Customize content width or Customize
+text sizes to use the width and font-size sliders. Content column position moves
+narrow page content; Heading alignment also aligns campaign/banner headings.
+
+Padding and margin fields follow the existing theme's top/right/bottom/left
+format, such as 60px 20px 60px 20px. Desktop and mobile have separate fields;
+mobile overrides apply at 700px and below. A blank mobile field inherits a custom
+desktop override, or uses the original design when neither override is set.
+Contact and FAQ use centered content columns and headings by default. Form
+fields, questions, and answers retain their readable alignment within the column.
+
 Source reference: https://pdf-to-shopfront.lovable.app/

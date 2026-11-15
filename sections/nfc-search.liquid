@@ -1,3 +1,4 @@
+{% render 'nfc-section-style', section: section %}
 <section class="shop-page page-width"><header class="shop-heading"><p class="eyebrow">{{ section.settings.eyebrow | escape }}</p><h1>{{ section.settings.heading | escape }}</h1></header><form class="search-page-form" action="{{ routes.search_url }}" method="get"><label class="sr-only" for="Search-{{ section.id }}">Search products</label><input id="Search-{{ section.id }}" name="q" type="search" placeholder="Search catalog" value="{{ search.terms | escape }}"><input type="hidden" name="type" value="product"><input type="hidden" name="options[prefix]" value="last"><button class="nfc-button nfc-button--dark">Search {% render 'nfc-icon', name: 'search' %}</button></form>
 {% if search.performed %}{% paginate search.results by 16 %}<p class="form-note">{{ search.results_count }} results for “{{ search.terms | escape }}”</p><div class="product-grid">{% for item in search.results %}{% if item.object_type == 'product' %}{% render 'nfc-product-card', product: item %}{% else %}<a href="{{ item.url }}">{{ item.title | escape }}</a>{% endif %}{% else %}{% render 'nfc-empty', heading: 'No results found', copy: 'Try another search term.' %}{% endfor %}</div>{% render 'nfc-pagination', paginate: paginate %}{% endpaginate %}{% endif %}</section>
 {% schema %}
@@ -15,6 +16,228 @@
       "id": "heading",
       "label": "Heading",
       "default": "SEARCH"
+    },
+    {
+      "type": "header",
+      "content": "Section colors"
+    },
+    {
+      "type": "paragraph",
+      "content": "Leave a color empty to keep the original design. These controls affect only this section."
+    },
+    {
+      "type": "color",
+      "id": "nfc_background_color",
+      "label": "Background"
+    },
+    {
+      "type": "color",
+      "id": "nfc_heading_color",
+      "label": "Headings"
+    },
+    {
+      "type": "color",
+      "id": "nfc_text_color",
+      "label": "Paragraphs and body text"
+    },
+    {
+      "type": "color",
+      "id": "nfc_eyebrow_color",
+      "label": "Eyebrow text"
+    },
+    {
+      "type": "color",
+      "id": "nfc_link_color",
+      "label": "Links"
+    },
+    {
+      "type": "color",
+      "id": "nfc_accent_color",
+      "label": "Accents"
+    },
+    {
+      "type": "color",
+      "id": "nfc_border_color",
+      "label": "Borders and dividers"
+    },
+    {
+      "type": "header",
+      "content": "Section buttons"
+    },
+    {
+      "type": "color",
+      "id": "nfc_button_text",
+      "label": "Button text and icons"
+    },
+    {
+      "type": "color",
+      "id": "nfc_button_background",
+      "label": "Filled button background"
+    },
+    {
+      "type": "color",
+      "id": "nfc_button_border",
+      "label": "Button border"
+    },
+    {
+      "type": "color",
+      "id": "nfc_button_hover_text",
+      "label": "Button hover text"
+    },
+    {
+      "type": "color",
+      "id": "nfc_button_hover_background",
+      "label": "Filled button hover background"
+    },
+    {
+      "type": "header",
+      "content": "Section layout"
+    },
+    {
+      "type": "select",
+      "id": "nfc_content_position",
+      "label": "Content column position",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "Original design"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "nfc_text_alignment",
+      "label": "Heading alignment",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "Original design"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "nfc_custom_width",
+      "label": "Customize content width",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "nfc_content_width",
+      "label": "Content width",
+      "min": 480,
+      "max": 1600,
+      "step": 20,
+      "default": 1440,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Section typography"
+    },
+    {
+      "type": "checkbox",
+      "id": "nfc_custom_typography",
+      "label": "Customize text sizes",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "nfc_heading_size",
+      "label": "Heading size on desktop",
+      "min": 20,
+      "max": 140,
+      "step": 2,
+      "default": 56,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "nfc_heading_size_mobile",
+      "label": "Heading size on mobile",
+      "min": 20,
+      "max": 100,
+      "step": 2,
+      "default": 36,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "nfc_paragraph_size",
+      "label": "Paragraph size on desktop",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "nfc_paragraph_size_mobile",
+      "label": "Paragraph size on mobile",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "text",
+      "id": "nfc_padding_desktop",
+      "label": "Padding on desktop",
+      "info": "Top right bottom left. Example: 60px 20px 60px 20px. Leave blank to keep the design defaults."
+    },
+    {
+      "type": "text",
+      "id": "nfc_padding_mobile",
+      "label": "Padding on mobile",
+      "info": "Top right bottom left. Example: 60px 20px 60px 20px. Leave blank to keep the design defaults."
+    },
+    {
+      "type": "header",
+      "content": "Section margin"
+    },
+    {
+      "type": "text",
+      "id": "nfc_margin_desktop",
+      "label": "Margin on desktop",
+      "info": "Top right bottom left. Example: 60px 20px 60px 20px. Leave blank to keep the design defaults."
+    },
+    {
+      "type": "text",
+      "id": "nfc_margin_mobile",
+      "label": "Margin on mobile",
+      "info": "Top right bottom left. Example: 60px 20px 60px 20px. Leave blank to keep the design defaults."
     }
   ]
 }

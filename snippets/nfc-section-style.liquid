@@ -1,0 +1,84 @@
+{%- comment -%}Shared editor controls, scoped to this section instance.{%- endcomment -%}
+{%- assign surface = ' > :is(section, footer, header, [data-catalog-response])' -%}
+{% style %}
+  #shopify-section-{{ section.id }} {
+    {% if section.settings.nfc_accent_color != blank %}--gold: {{ section.settings.nfc_accent_color }};{% endif %}
+    {% if section.settings.nfc_custom_width %}--page-width: {{ section.settings.nfc_content_width }}px;{% endif %}
+    {% if section.settings.nfc_margin_desktop != blank %}margin: {{ section.settings.nfc_margin_desktop | escape }};{% endif %}
+  }
+  {% if section.settings.nfc_background_color != blank %}
+    #shopify-section-{{ section.id }}{{ surface }} { background: {{ section.settings.nfc_background_color }}; }
+  {% endif %}
+  {% if section.settings.nfc_padding_desktop != blank %}
+    #shopify-section-{{ section.id }}{{ surface }} { padding: {{ section.settings.nfc_padding_desktop | escape }}; }
+  {% endif %}
+  {% if section.settings.nfc_heading_color != blank %}
+    #shopify-section-{{ section.id }} :is(h1, h2, h3, h4, h5, h6, .product-card__title, .category-tile__bottom, .wordmark, .faq-group summary, .product-accordions summary) { color: {{ section.settings.nfc_heading_color }}; }
+  {% endif %}
+  {% if section.settings.nfc_text_color != blank %}
+    #shopify-section-{{ section.id }} :is(p:not(.eyebrow), .rte, .rte p:not(.eyebrow), .statement-copy, .footer-description, .form-note, .product-detail__description, .shop-toolbar__count, label, input, textarea, select, .product-price, .site-footer__bottom) { color: {{ section.settings.nfc_text_color }}; }
+  {% endif %}
+  {% if section.settings.nfc_eyebrow_color != blank %}
+    #shopify-section-{{ section.id }} .eyebrow { color: {{ section.settings.nfc_eyebrow_color }}; }
+  {% endif %}
+  {% if section.settings.nfc_link_color != blank %}
+    #shopify-section-{{ section.id }} :is(a:not(.nfc-button):not(.wordmark):not(.category-tile):not(.product-card__title), .rte a) { color: {{ section.settings.nfc_link_color }}; }
+  {% endif %}
+  {% if section.settings.nfc_button_text != blank %}
+    #shopify-section-{{ section.id }} .nfc-button { color: {{ section.settings.nfc_button_text }}; }
+  {% endif %}
+  {% if section.settings.nfc_button_background != blank %}
+    #shopify-section-{{ section.id }} :is(.nfc-button--dark, .nfc-button--hero, .nfc-button--quick) { background: {{ section.settings.nfc_button_background }}; }
+  {% endif %}
+  {% if section.settings.nfc_button_border != blank %}
+    #shopify-section-{{ section.id }} .nfc-button { border-color: {{ section.settings.nfc_button_border }}; }
+  {% endif %}
+  {% if section.settings.nfc_button_hover_text != blank %}
+    #shopify-section-{{ section.id }} .nfc-button:is(:hover, :focus-visible) { color: {{ section.settings.nfc_button_hover_text }}; }
+  {% endif %}
+  {% if section.settings.nfc_button_hover_background != blank %}
+    #shopify-section-{{ section.id }} :is(.nfc-button--dark, .nfc-button--hero, .nfc-button--quick):is(:hover, :focus-visible) { background: {{ section.settings.nfc_button_hover_background }}; }
+  {% endif %}
+  {% if section.settings.nfc_border_color != blank %}
+    #shopify-section-{{ section.id }} { --line: {{ section.settings.nfc_border_color }}; }
+  {% endif %}
+  {% if section.settings.nfc_custom_width %}
+    #shopify-section-{{ section.id }} :is(.content-page__heading, .content-page__body) { max-width: {{ section.settings.nfc_content_width }}px; }
+    #shopify-section-{{ section.id }} .content-page__body > .contact-form { max-width: 100%; }
+  {% endif %}
+  {% case section.settings.nfc_content_position %}
+    {% when 'center' %}
+      #shopify-section-{{ section.id }} :is(.content-page__heading, .content-page__body) { margin-inline: auto; }
+    {% when 'right' %}
+      #shopify-section-{{ section.id }} :is(.content-page__heading, .content-page__body) { margin-left: auto; margin-right: 0; }
+    {% when 'left' %}
+      #shopify-section-{{ section.id }} :is(.content-page__heading, .content-page__body) { margin-left: 0; margin-right: auto; }
+  {% endcase %}
+  {% if section.settings.nfc_text_alignment != 'default' and section.settings.nfc_text_alignment != blank %}
+    #shopify-section-{{ section.id }} :is(.section-heading, .content-page__heading, .shop-heading, .campaign-hero__content, .brand-statement__inner, .editorial-banner__content, .newsletter-band > div) { text-align: {{ section.settings.nfc_text_alignment }}; }
+    {% if section.settings.nfc_text_alignment == 'center' %}
+      #shopify-section-{{ section.id }} :is(.campaign-hero__content, .editorial-banner__content) { align-items: center; }
+      #shopify-section-{{ section.id }} :is(.campaign-hero__actions, .collection-heading) { justify-content: center; }
+      #shopify-section-{{ section.id }} :is(.section-heading__description, .content-page__heading > p, .brand-statement h2, .statement-copy) { margin-inline: auto; }
+    {% elsif section.settings.nfc_text_alignment == 'right' %}
+      #shopify-section-{{ section.id }} :is(.campaign-hero__content, .editorial-banner__content) { align-items: flex-end; }
+      #shopify-section-{{ section.id }} :is(.brand-statement h2, .statement-copy) { margin-left: auto; margin-right: 0; }
+    {% endif %}
+  {% endif %}
+  {% if section.settings.nfc_custom_typography %}
+    #shopify-section-{{ section.id }} :is(.section-heading h2, .content-page__heading h1, .shop-heading h1, .campaign-hero h1, .brand-statement h2, .editorial-banner h2, .newsletter-band h2, .product-detail__info h1) { font-size: {{ section.settings.nfc_heading_size }}px; }
+    #shopify-section-{{ section.id }} :is(p:not(.eyebrow), .rte, .rte p:not(.eyebrow), .statement-copy, .footer-description, .product-detail__description) { font-size: {{ section.settings.nfc_paragraph_size }}px; }
+  {% endif %}
+  @media (max-width: 700px) {
+    {% if section.settings.nfc_margin_mobile != blank %}
+      #shopify-section-{{ section.id }} { margin: {{ section.settings.nfc_margin_mobile | escape }}; }
+    {% endif %}
+    {% if section.settings.nfc_padding_mobile != blank %}
+      #shopify-section-{{ section.id }}{{ surface }} { padding: {{ section.settings.nfc_padding_mobile | escape }}; }
+    {% endif %}
+    {% if section.settings.nfc_custom_typography %}
+      #shopify-section-{{ section.id }} :is(.section-heading h2, .content-page__heading h1, .shop-heading h1, .campaign-hero h1, .brand-statement h2, .editorial-banner h2, .newsletter-band h2, .product-detail__info h1) { font-size: {{ section.settings.nfc_heading_size_mobile }}px; }
+      #shopify-section-{{ section.id }} :is(p:not(.eyebrow), .rte, .rte p:not(.eyebrow), .statement-copy, .footer-description, .product-detail__description) { font-size: {{ section.settings.nfc_paragraph_size_mobile }}px; }
+    {% endif %}
+  }
+{% endstyle %}
