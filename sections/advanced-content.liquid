@@ -323,6 +323,7 @@
                           </div>
                         </div>
                       {%- endfor -%}
+                    </div>
                   {%- else -%}
                     <h4 class="mb-2">
                       Collection title
@@ -348,7 +349,6 @@
                       </div>
                     {%- endfor -%}
                   {%- endif -%}
-                  </div>
                 {%- when 'bgvideo' -%}
                   {% if block.settings.link_video != blank %}
                     <div class="video-section video-section--{{ block.settings.cover_bg_video }} " >
@@ -356,7 +356,7 @@
                         <video id="Mp4{{ block.id }}" src="{{ block.settings.link_video }}" loop="" muted="" playsinline="" autoplay=""></video>
                       </div>
                     </div>
-                  {% else %}
+                  {% else if %}
                     <div class="hero-video">
                       {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
                     </div>

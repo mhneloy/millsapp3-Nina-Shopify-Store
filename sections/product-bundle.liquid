@@ -174,7 +174,7 @@ data-section-type="bundleproduct" >
                         {% endunless %} 
                     </div>
                     {%- if product.has_only_default_variant -%}
-                    <input id="remove_the_dis_cart_btn" name="id" value="{{ product.selected_or_first_available_variant.id }}" type="hidden">
+                    <input id="remove_the_dis_cart_btn" name="id" value="{{ variant.id }}" type="hidden">
                     {%- else -%}
                     <select name="id" class="fbtproduct-form__variants" data-item="{{ product.variants.first.id }}">
                       {% for variant in product.variants %}

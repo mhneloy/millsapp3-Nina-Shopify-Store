@@ -111,7 +111,7 @@
     <div class="template-search__search">
         {% comment %}
       {%- if settings.predictive_search_enabled -%}
-        <predictive-search data-loading-text="{{ 'general.accessibility.loading' | t }}">
+        <predictive-search data-loading-text="{{ 'accessibility.loading' | t }}">
       {%- endif -%}
     {% endcomment %}
         <form action="{{ routes.search_url }}" method="get" role="search" class="search">

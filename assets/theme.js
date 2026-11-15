@@ -1728,7 +1728,7 @@ theme.Product = (function() {
       // eslint-disable-next-line no-new
       this.variants = new slate.Variants(options);
       var variant = this.variants
-      if (variant.currentVariant && variant.currentVariant.compare_at_price > variant.currentVariant.price) {
+      if( variant.currentVariant.compare_at_price > variant.currentVariant.price){
         var load_sale_minus = variant.currentVariant.compare_at_price - variant.currentVariant.price;
         var load_sale_per = load_sale_minus*100 / variant.currentVariant.compare_at_price;
         var load_roundNumber = parseInt(load_sale_per);

@@ -32,7 +32,7 @@ data-bgset="{% render 'bgset', image: section.settings.image_bg %}" loading="laz
            data-infinite="{{ section.settings.infinite }}" 
            data-section-id="{{ section.id }}" 
            data-section-type="slickCarousels">
-           <div class="quote__slide-wrapper carousel__slide-wrapper--{{ section.id }} quote__slide-wrapper-first"
+           <div class="quote__slide-wrapper carousel__slide-wrapper--{{ block.id }} quote__slide-wrapper-first" {{ block.shopify_attributes }}  
             style="
             --f-bg:{{ section.settings.f_bg }};
             --g-color-heading:{{ section.settings.f_color }};

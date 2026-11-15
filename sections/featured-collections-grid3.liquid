@@ -496,7 +496,7 @@
 
               {% if card_image != blank %}
                 <div class="chapter-card__image-wrapper">
-                  <img src="{{ card_image | image_url: width: 600 }}" width="{{ card_image.width }}" height="{{ card_image.height }}" alt="{{ card_title | escape }}" loading="lazy" class="chapter-card__image">
+                  <img src="{{ card_image | image_url: width: 600 }}" alt="{{ card_title | escape }}" loading="lazy" class="chapter-card__image">
                 </div>
               {% endif %}
 

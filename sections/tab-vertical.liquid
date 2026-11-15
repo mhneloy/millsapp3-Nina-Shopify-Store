@@ -147,8 +147,11 @@
               
                 {%- for block in section.blocks -%}
                     <div class="tab-pane tab-v-pane {% if forloop.index == 1 %} active {% endif %}" id="v-pills-{{ block.id }}" role="tabpanel" aria-labelledby="v-pills-{{block.id}}-tab">
-                        {%- if section.settings.style_tab == "style_row" or section.settings.style_tab == "style_text" -%}
-                            <div class="{% if section.settings.style_tab == "style_row" %}d-flex align-items-center style_row__right{% else %}d-lg-flex align-items-center style_text__right{% endif %}">
+                        {%- if section.settings.style_tab == "style_row" -%}
+                            <div class="d-flex align-items-center style_row__right">
+                        {%- endif -%}
+                        {%- if section.settings.style_tab == "style_text" -%}
+                        <div class="d-lg-flex align-items-center style_text__right">
                         {%- endif -%}
                         {%- if block.settings.id_video != blank -%}
                             <div class="tab-image__big">

@@ -33,7 +33,7 @@
           <img src="{{ block.settings.image | image_url: width: 1, height: 1 }}" class="lazyload transition" data-src="{{ block.settings.image | image_url: width: 1920 }}"
             loading="lazy"
                 width="{{ block.settings.image.width }}"
-                height="{{ block.settings.image.height }}">
+                height="{{ block.settings.image.height }}" ">
           {%- if block.settings.button_link != blank -%}</a> {%- endif -%}
           {%- else -%}
           {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}

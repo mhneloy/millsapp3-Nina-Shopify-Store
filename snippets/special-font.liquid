@@ -1,4 +1,9 @@
-{% comment %}
-  The original local Marcellus font asset is absent. Preserve the existing font
-  fallback without loading a replacement font or requesting a missing asset.
-{% endcomment %}
+<style>
+    @font-face {
+        font-family: 'Marcellus';
+        src: url('{{ 'Marcellus-Regular.ttf ' | asset_url }}') format('ttf'),
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+    }
+</style>

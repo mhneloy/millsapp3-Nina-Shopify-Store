@@ -115,6 +115,322 @@
   .selector-wrapper {
     margin: 0 0 1.2rem;
   }
+{% comment %} update code start {% endcomment %}
+ #shopify-section-{{ section.id }} .product-form .selector-wrapper {
+  margin-bottom: 24px;
+}
+
+#shopify-section-{{ section.id }} .product-form .single-option-radio {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 8px;
+  width: 100%;
+}
+
+#shopify-section-{{ section.id }} .product-form .single-option-radio label {
+  box-sizing: border-box;
+  height: auto;
+  min-height: 48px;
+  margin: 0;
+  line-height: 1.25;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+#shopify-section-{{ section.id }} .product-form .single-option-radio:not(.single-color) label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  max-width: calc(50% - 4px);
+  padding: 10px 12px;
+  text-align: center;
+}
+
+#shopify-section-{{ section.id }} .product-form .single-option-radio.single-color label:not([title]) {
+  display: inline-flex;
+  flex: 1 1 calc(25% - 8px);
+  align-items: center;
+  justify-content: center;
+  min-width: 75px;
+  max-width: calc(25% - 6px);
+  padding: 8px 6px;
+  border: 1px solid rgba(var(--g-color-heading-rgb), 0.1);
+  text-align: center;
+}
+{% comment %} update code end  {% endcomment %}
+
+{% comment %} price part update code start  {% endcomment %}
+
+/* Dynamic Saving Badge */
+.product-saving-badge-item {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.product-saving-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 8px;
+  background-color: var(--g-main);
+  color: #111;
+  {% comment %} border-radius: 4px; {% endcomment %}
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 767px) {
+  .product-saving-badge {
+    font-size: 11px;
+    padding: 5px 9px;
+  }
+}
+
+{% comment %} price part update code end   {% endcomment %}
+
+{% comment %} tap code start =========== {% endcomment %}
+
+/* ==========================================
+   PREMIUM DARK PRODUCT TABS - BUTTON STYLE
+========================================== */
+
+.custom-product-tabs {
+  width: 100%;
+  margin: 20px 0;
+}
+
+/* Tab Navigation */
+.custom-tabs-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 0 0 18px;
+  border: none;
+}
+
+/* Tab Buttons */
+.custom-product-tabs .custom-tab-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+
+  background: #242428;
+  color: #e5e5e5;
+  border: 1px solid #404044;
+  {% comment %} border-radius: 6px; {% endcomment %}
+
+  padding: 9px 16px;
+  margin: 0;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.1px;
+  text-align: center;
+  text-transform: none;
+  text-decoration: none;
+  white-space: nowrap;
+
+  cursor: pointer;
+  box-shadow: none;
+  outline: none;
+
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Remove Old Underline */
+.custom-product-tabs .custom-tab-btn::after,
+.custom-product-tabs .custom-tab-btn::before {
+  display: none;
+  content: none;
+}
+
+/* Hover State */
+@media (hover: hover) {
+  .custom-product-tabs .custom-tab-btn:not(.active):hover {
+    background: #303035;
+    color: #ffffff;
+    border-color: var(--g-main);
+    transform: translateY(-1px);
+  }
+}
+
+/* Active Button */
+.custom-product-tabs .custom-tab-btn.active,
+.custom-product-tabs .custom-tab-btn[aria-selected="true"] {
+  background: var(--g-main);
+  border-color: var(--g-main);
+  color: #111111;
+  font-weight: 600;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Focus Accessibility */
+.custom-product-tabs .custom-tab-btn:focus-visible {
+  outline: 2px solid var(--g-main);
+  outline-offset: 3px;
+}
+
+/* Content Wrapper */
+.custom-tabs-content {
+  position: relative;
+  width: 100%;
+  padding: 18px 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Tab Panels */
+.custom-tab-panel {
+  width: 100%;
+}
+
+.custom-tab-panel[hidden] {
+  display: none !important;
+}
+
+.custom-tab-panel.active {
+  animation: premiumTabFade 0.35s ease both;
+}
+
+/* Content Typography */
+.custom-tab-inner {
+  color: #b8b8b8;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.custom-tab-inner p {
+  margin: 0 0 12px;
+}
+
+.custom-tab-inner p:last-child {
+  margin-bottom: 0;
+}
+
+.custom-tab-inner h2,
+.custom-tab-inner h3,
+.custom-tab-inner h4,
+.custom-tab-inner h5 {
+  color: #ffffff;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0 0 12px;
+}
+
+.custom-tab-inner ul,
+.custom-tab-inner ol {
+  margin: 0 0 14px;
+  padding-left: 22px;
+}
+
+.custom-tab-inner li {
+  margin-bottom: 6px;
+}
+
+.custom-tab-inner a {
+  color: var(--g-main);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.custom-tab-inner a:hover {
+  opacity: 0.8;
+}
+
+.custom-tab-inner img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+/* Smooth Content Animation */
+@keyframes premiumTabFade {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tablet */
+@media screen and (max-width: 991px) {
+  .custom-tabs-nav {
+    gap: 5px;
+  }
+
+  .custom-product-tabs .custom-tab-btn {
+    font-size: 12px;
+    padding: 8px 13px;
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 767px) {
+  {% comment %} .custom-product-tabs {
+    margin: 16px 0;
+  } {% endcomment %}
+
+  .custom-tabs-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 15px;
+  }
+
+  .custom-product-tabs .custom-tab-btn {
+    font-size: 11px;
+    padding: 8px 11px;
+    {% comment %} border-radius: 5px; {% endcomment %}
+    white-space: normal;
+  }
+
+  .custom-tabs-content {
+    padding-top: 15px;
+  }
+
+  .custom-tab-inner {
+    font-size: 13px;
+    line-height: 1.75;
+  }
+}
+
+/* Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .custom-tab-panel.active {
+    animation: none;
+  }
+
+  .custom-product-tabs .custom-tab-btn {
+    transition: none;
+  }
+}
+
+
+{% comment %} tap code end =========== {% endcomment %}
+
   #shopify-section-{{ section.id }} .product-single__info-wrapper{
       padding:0rem 0rem 0rem 2rem;
   }
@@ -341,6 +657,90 @@
     white-space: nowrap;
     text-align: center;
   }
+
+  {% comment %} product badge start {% endcomment %}
+  .product-badges-block {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.product-badges-wrapper {
+  border: 1px solid var(--box-border-color, #e5e5e5);
+  background-color: var(--box-bg-color, #faf9f6);
+  padding: 0px;
+  border-radius: 4px;
+}
+
+.product-badges-title {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin: 0 0 6px 0;
+  color: var(--box-text-color, #111111);
+}
+
+.product-badges-description {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--box-text-color, #111111);
+  margin-bottom: 12px;
+  opacity: 0.9;
+}
+
+.product-badges-description p {
+  margin: 0;
+}
+
+.product-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.product-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 5px 5px;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+/* Dynamic Colors From Settings */
+.product-badge--dark {
+  background-color: var(--dark-badge-bg, #222222);
+  color: var(--dark-badge-text, #ffffff);
+  border: 1px solid var(--dark-badge-border, #222222);
+}
+
+.product-badge--light {
+  background-color: var(--light-badge-bg, #ffffff);
+  color: var(--light-badge-text, #111111);
+  border: 1px solid var(--light-badge-border, #dcdcdc);
+}
+
+.product-badge__icon {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.product-badge__icon svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+}
+
+.product-badge__text {
+  line-height: 1.2;
+}
+  {% comment %} product badge end  {% endcomment %}
   @media (min-width:991px) {
     .photos-sticky{
       position: sticky;
@@ -373,6 +773,62 @@
       padding-top: 20px;
     }
   }
+
+  {% comment %} test start  {% endcomment %}
+   
+/* =========================================
+   SMART DYNAMIC PRODUCT BADGES
+========================================= */
+
+.product-badges {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: flex-start;
+  align-content: flex-start;
+  justify-content: flex-start;
+  gap: 8px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.product-badges .product-badge {
+  display: inline-flex !important;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0 !important;
+  box-sizing: border-box;
+  border-radius: 0 !important;
+}
+
+.product-badges .product-badge__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-badges .product-badge__text {
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .product-badges {
+    gap: 6px;
+  }
+}
+
+@media (max-width: 375px) {
+  .product-badges .product-badge__text {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
+
+  {% comment %} test end  {% endcomment %}
 </style>
 <div class="{{ section.settings.setwidth }} js-recently-view" itemscope itemtype="http://schema.org/Product" id="ProductSection-{{ section.id }}" 
   data-id="{{ section.settings.media_style }}" 
@@ -428,12 +884,85 @@
             {%- when '@app' -%}
               {% render block %}
             {%- when 'text' -%}
-                <p
+                <div
                   class="product-block product__text{% if block.settings.text_style == 'uppercase' %} text-uppercase {% elsif block.settings.text_style == 'subtitle' %} subtop{% endif %}"
                   {{ block.shopify_attributes }}
                 >
                   {{- block.settings.text -}}
-                </p>
+                </div>
+
+            {%- when 'custom_liquid' -%}
+              {%- if block.settings.custom_liquid != blank -%}
+              <div class="product-block product__custom-liquid" {{ block.shopify_attributes }}>
+              {{ block.settings.custom_liquid }}
+              </div>
+              {%- endif -%}
+            {% comment %} badge customization start{% endcomment %}
+       {% when 'product_badges' %}
+  {%- liquid
+    assign metafield_input = block.settings.metafield_key | default: 'custom.product_badges'
+    assign key_parts = metafield_input | split: '.'
+    assign ns = key_parts[0]
+    assign key = key_parts[1]
+    
+    assign badges_value = product.metafields[ns][key].value
+  -%}
+
+  {% if badges_value != blank %}
+    <div 
+      class="product-badges-block" 
+      style="
+        --box-bg-color: {{ block.settings.box_bg_color }};
+        --box-border-color: {{ block.settings.box_border_color }};
+        --box-text-color: {{ block.settings.box_text_color }};
+        --dark-badge-bg: {{ block.settings.dark_bg_color }};
+        --dark-badge-text: {{ block.settings.dark_text_color }};
+        --dark-badge-border: {{ block.settings.dark_border_color }};
+        --light-badge-bg: {{ block.settings.light_bg_color }};
+        --light-badge-text: {{ block.settings.light_text_color }};
+        --light-badge-border: {{ block.settings.light_border_color }};
+      "
+      {{ block.shopify_attributes }}
+    >
+      <div class="product-badges-wrapper">
+        {% if block.settings.block_title != blank %}
+          <h3 class="product-badges-title">{{ block.settings.block_title }}</h3>
+        {% endif %}
+
+        {% if block.settings.block_description != blank %}
+          <div class="product-badges-description">
+            {{ block.settings.block_description }}
+          </div>
+        {% endif %}
+
+        <div class="product-badges" aria-label="Product highlights">
+          {% for badge in badges_value %}
+            {% if badge.active %}
+              {%- liquid
+                assign is_dark = false
+                if forloop.first or badge.badge_name == "TRIBUTE COLLECTION"
+                  assign is_dark = true
+                endif
+              -%}
+
+              <span class="product-badge {% if is_dark %}product-badge--dark{% else %}product-badge--light{% endif %}">
+                {% if badge.icon != blank %}
+                  <span class="product-badge__icon">
+                    {{ badge.icon }}
+                  </span>
+                {% endif %}
+
+                <span class="product-badge__text">
+                  {{ badge.badge_name }}
+                </span>
+              </span>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+            {% comment %} badge customization end{% endcomment %}
             {%- when 'title' -%}
               <div class="product-block product-title">
                 {%- if block.settings.e_label -%}
@@ -472,6 +1001,7 @@
               </div>
             {%- when 'separator' -%}
               <hr/>
+{% comment %}               
             {%- when 'price' -%}
               <ul class="product-block product-single__meta-list product-single__meta-price list--inline{% if shop.taxes_included or shop.shipping_policy.body != blank %} product-single__price-container{% endif %}">
                 <li>
@@ -540,7 +1070,224 @@
                   {% when 'truck' %} <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-truck" viewBox="0 0 64 64"><defs><style>.a{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:2px}</style></defs><path class="a" d="M16.5 43.22H6.88V16.5h33.14v26.72H23.94M45.42 43.22h-5.4V30.4h17.1v12.82h-4.23M57.12 30.4l-6.41-8.56H40.02"/><circle class="a" cx="20.24" cy="43.76" r="3.74"/><path class="a" d="M45.42 43.23a3.82 3.82 0 1 1 0 .37v-.37"/></svg>
                 {% endcase %}
                 {{ block.settings.free_word }}
+              </div> {% endcomment %}
+
+{% comment %} price  update code start ======================= {% endcomment %}
+
+{%- when 'price' -%}
+
+  {%- liquid
+    assign regular_price = current_variant.price
+    assign compare_price = current_variant.compare_at_price
+    assign show_saving = false
+    assign saving_percentage = 0
+
+    if compare_price != blank and compare_price > regular_price
+      assign show_saving = true
+      assign saving_amount = compare_price | minus: regular_price
+      assign saving_percentage = saving_amount | times: 100.0 | divided_by: compare_price | round
+    endif
+  -%}
+
+  <ul class="product-block product-single__meta-list product-single__meta-price list--inline{% if shop.taxes_included or shop.shipping_policy.body != blank %} product-single__price-container{% endif %}">
+
+    <li>
+      {%- unless show_saving -%}
+        <span class="visually-hidden">
+          {{ 'products.product.regular_price' | t }}
+        </span>
+      {%- endunless -%}
+
+      <span
+        id="ProductPrice-{{ section.id }}"
+        class="product-single__price"
+        itemprop="price"
+        content="{{ current_variant.price | divided_by: 100.00 }}"
+      >
+        {{ current_variant.price | money }}
+      </span>
+    </li>
+
+    {%- if show_saving -%}
+      <li>
+        <span class="visually-hidden">
+          {{ 'products.product.regular_price' | t }}
+        </span>
+
+        <s
+          id="ComparePrice-{{ section.id }}"
+          class="product-single__price product-single__price--compare"
+        >
+          {{ current_variant.compare_at_price | money }}
+        </s>
+      </li>
+
+      <li class="product-saving-badge-item">
+        <span
+          id="SavingBadge-{{ section.id }}"
+          class="product-saving-badge"
+        >
+          SAVE {{ saving_percentage }}%
+        </span>
+      </li>
+    {%- endif -%}
+
+    {%- if settings.sale_label_enable -%}
+      <li>
+        {% capture txtupper %}
+          {% if settings.txtuppercase %}
+            text-uppercase
+          {% endif %}
+        {% endcapture %}
+
+        <div
+          class="d-inline-block{% unless show_saving %} hide{% endunless %} product-tag product-tag-sale product-tag--absolute {{ txtupper }} {{ settings.tagsale }}"
+          aria-hidden="true"
+          style="background-color: {{ settings.sale_label_bg_product }}; color: {{ settings.sale_label_cl_product }};"
+        >
+          {%- if show_saving -%}
+            {%- if settings.tagsale == 'percent' -%}
+              -{{ saving_percentage }}%
+
+            {%- elsif settings.tagsale == 'txt' -%}
+              {{ settings.sale_label_text | default: 'on sale' }}
+
+            {%- else -%}
+              {{ settings.sale_label_text | default: 'on sale' }}
+              <span class="product-tag-sale-number">
+                {{ saving_percentage }}%
+              </span>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+      </li>
+    {%- endif -%}
+
+    {%- if section.settings.stock_enable -%}
+      <li>
+        {%- render 'productStock', current_variant: current_variant -%}
+      </li>
+    {%- endif -%}
+
+  </ul>
+
+{%- when 'salepoint' -%}
+
+{%- when 'product_tab' -%}
+
+  {%- assign previous_tab = false -%}
+
+  {%- for check_block in section.blocks -%}
+    {%- if check_block.id == block.id -%}
+      {%- break -%}
+    {%- endif -%}
+
+    {%- if check_block.type == 'product_tab' -%}
+      {%- assign previous_tab = true -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- unless previous_tab -%}
+
+    <div
+      class="custom-product-tabs product-block"
+      id="ProductTabs-{{ section.id }}"
+    >
+
+      <!-- Tab Navigation -->
+      <div
+        class="custom-tabs-nav"
+        role="tablist"
+        aria-label="Product information"
+      >
+
+        {%- assign tab_index = 0 -%}
+
+        {%- for item in section.blocks -%}
+          {%- if item.type == 'product_tab' -%}
+
+            <button
+              type="button"
+              class="custom-tab-btn{% if tab_index == 0 %} active{% endif %}"
+              id="tab-{{ section.id }}-{{ item.id }}"
+              role="tab"
+              aria-controls="panel-{{ section.id }}-{{ item.id }}"
+              aria-selected="{% if tab_index == 0 %}true{% else %}false{% endif %}"
+              tabindex="{% if tab_index == 0 %}0{% else %}-1{% endif %}"
+              {{ item.shopify_attributes }}
+            >
+              {{ item.settings.tab_title | escape }}
+            </button>
+
+            {%- assign tab_index = tab_index | plus: 1 -%}
+
+          {%- endif -%}
+        {%- endfor -%}
+
+      </div>
+
+      <!-- Tab Content -->
+      <div class="custom-tabs-content">
+
+        {%- assign tab_index = 0 -%}
+
+        {%- for item in section.blocks -%}
+          {%- if item.type == 'product_tab' -%}
+
+            <div
+              class="custom-tab-panel{% if tab_index == 0 %} active{% endif %}"
+              id="panel-{{ section.id }}-{{ item.id }}"
+              role="tabpanel"
+              aria-labelledby="tab-{{ section.id }}-{{ item.id }}"
+              tabindex="0"
+              {% unless tab_index == 0 %}hidden{% endunless %}
+            >
+
+              <div class="custom-tab-inner rte">
+
+                {%- case item.settings.content_type -%}
+
+                  {%- when 'page' -%}
+
+                    {%- assign selected_page = item.settings.tab_page -%}
+
+                    {%- if selected_page != blank -%}
+                      {{ selected_page.content }}
+                    {%- endif -%}
+
+                  {%- when 'liquid' -%}
+
+                    {{ item.settings.custom_liquid }}
+
+                  {%- when 'description' -%}
+
+                    {{ product.description }}
+
+                  {%- when 'richtext' -%}
+
+                    {{ item.settings.tab_content }}
+
+                {%- endcase -%}
+
               </div>
+
+            </div>
+
+            {%- assign tab_index = tab_index | plus: 1 -%}
+
+          {%- endif -%}
+        {%- endfor -%}
+
+      </div>
+
+    </div>
+
+  {%- endunless -%}
+
+ {% comment %} tap update code end ==========================={% endcomment %}
+
+
+            
             {%- when 'buttons' -%} 
             <div class="product-button-variant product-block">
               {% if product.metafields.info.affiliate_link != blank %}{% comment %}AFFILIATE PRODUCT{% endcomment %}
@@ -1979,7 +2726,171 @@ initPhotoSwipeFromDOM('.my-gallery');
           "info": "Add app snippets or other Liquid code to create advanced customizations."
         }
       ]
+    },
+
+{
+  "type": "product_tab",
+  "name": "Product Tab",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Tab Settings"
+    },
+    {
+      "type": "text",
+      "id": "tab_title",
+      "label": "Tab Heading",
+      "default": "Product Information"
+    },
+    {
+      "type": "select",
+      "id": "content_type",
+      "label": "Content Source",
+      "options": [
+        {
+          "value": "richtext",
+          "label": "Rich Text Content"
+        },
+        {
+          "value": "liquid",
+          "label": "Custom Liquid"
+        },
+        {
+          "value": "page",
+          "label": "Shopify Page"
+        },
+        {
+          "value": "description",
+          "label": "Product Description"
+        }
+      ],
+      "default": "richtext"
+    },
+    {
+      "type": "header",
+      "content": "Rich Text Content"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_content",
+      "label": "Tab Content",
+      "default": "<p>Add your tab content here.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Custom Liquid"
+    },
+    {
+      "type": "liquid",
+      "id": "custom_liquid",
+      "label": "Custom Liquid Code",
+      "info": "Add HTML, Liquid code, or dynamic product metafields."
+    },
+    {
+      "type": "header",
+      "content": "Shopify Page"
+    },
+    {
+      "type": "page",
+      "id": "tab_page",
+      "label": "Select Page",
+      "info": "Select a Shopify page to display its content inside this tab."
     }
+  ]
+},
+  {
+  "type": "product_badges",
+  "name": "Product Badges",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "text",
+      "id": "block_title",
+      "label": "Box Title",
+      "default": "Product Features",
+      "info": "Box-er upore jodi kono title rakhte chan"
+    },
+    {
+      "type": "richtext",
+      "id": "block_description",
+      "label": "Box Description",
+      "info": "Title-er niche description dekhathe chaithey"
+    },
+    {
+      "type": "text",
+      "id": "metafield_key",
+      "label": "Metafield Namespace & Key",
+      "default": "custom.product_badges",
+      "info": "E.g., custom.product_badges"
+    },
+    {
+      "type": "header",
+      "content": "Outer Box Settings"
+    },
+    {
+      "type": "color",
+      "id": "box_bg_color",
+      "label": "Outer Box Background",
+      "default": "#faf9f6"
+    },
+    {
+      "type": "color",
+      "id": "box_border_color",
+      "label": "Outer Box Border Color",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "box_text_color",
+      "label": "Box Title & Description Color",
+      "default": "#111111"
+    },
+    {
+      "type": "header",
+      "content": "First/Dark Badge Colors"
+    },
+    {
+      "type": "color",
+      "id": "dark_bg_color",
+      "label": "Dark Badge Background",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "dark_text_color",
+      "label": "Dark Badge Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "dark_border_color",
+      "label": "Dark Badge Border Color",
+      "default": "#222222"
+    },
+    {
+      "type": "header",
+      "content": "Normal/Light Badge Colors"
+    },
+    {
+      "type": "color",
+      "id": "light_bg_color",
+      "label": "Light Badge Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "light_text_color",
+      "label": "Light Badge Text Color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "light_border_color",
+      "label": "Light Badge Border Color",
+      "default": "#dcdcdc"
+    }
+  ]
+}
   ]
 }
 {% endschema %}
@@ -2031,8 +2942,8 @@ This file has been rewritten to preserve the original behavior.
 Changes:
 - from: '{% capture "form_class" %}'
   to: "{% capture form_class %}"
-  position: 23128..23152
+  position: 23443..23467
 - from: '{% capture "form_id" %}'
   to: "{% capture form_id %}"
-  position: 23368..23389
+  position: 23683..23704
 {%- endcomment -%}

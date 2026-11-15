@@ -1,10 +1,5 @@
 {
   "general": {
-    "404": {
-      "title": "Seite nicht gefunden",
-      "subtext_html": "Die von Ihnen angeforderte Seite existiert nicht.",
-      "404_link": "Einkauf fortzusetzen"
-    },
     "accessibility": {
       "loading": "Loading...",
       "skip_to_content": "Direkt zum Inhalt",
@@ -14,12 +9,16 @@
       "vendor": "Vendor",
       "star_reviews_info": "{{ rating_value }} out of {{ rating_max }} stars",
       "total_reviews": "total reviews",
-      "unit_price_separator": "per",
-      "close": "Schließen"
+      "unit_price_separator": "per"
     },
     "meta": {
       "tags": "Getaggt \"{{ tags }}\"",
       "page": "Seite {{ page }}"
+    },
+    "404": {
+      "title": "Seite nicht gefunden",
+      "subtext_html": "Die von Ihnen angeforderte Seite existiert nicht.",
+      "404_link": "Einkauf fortzusetzen"
     },
     "password_page": {
       "login_form_heading": "Shop mit Passwort betreten",
@@ -28,7 +27,7 @@
       "login_form_submit": "Betreten",
       "signup_form_email_label": "E-Mail",
       "signup_form_success": "Wir senden Ihnen eine E-Mail, kurz bevor wir eröffnen!",
-      "admin_link_html": "Sind Sie der Geschäftsinhaber? <a href=\"/admin\" class=\"text-link\">Melden Sie sich hier an</a>",
+      "admin_link_html": "Sind Sie der Geschäftsinhaber? <a href=\"\/admin\" class=\"text-link\">Melden Sie sich hier an<\/a>",
       "password_link": "Mit Passwort betreten",
       "powered_by_shopify_html": "Dieser Shop wird mit Hilfe von {{ shopify }} betrieben werden"
     },
@@ -54,20 +53,19 @@
       "view_all": "View all",
       "no_result": "No results.",
       "results_count_html": {
-        "one": "{{ count }} ergebnis für <strong>{{ terms }}</strong>",
-        "other": "{{ count }} ergebnisse für <strong>{{ terms }}</strong>"
+        "one": "{{ count }} ergebnis für <strong>{{ terms }}<\/strong>",
+        "other": "{{ count }} ergebnisse für <strong>{{ terms }}<\/strong>"
       },
       "products": "Produkte",
       "pages_and_articles": "Seiten und Artikel",
-      "titleplace": "WONACH SUCHST DU?",
-      "search": "Suchen"
+      "titleplace": "TODO"
     },
     "quickview": {
       "view_full": "View Full Product Details.",
-      "addtocart": "In den Warenkorb",
-      "sku": "Artikelnummer",
-      "type": "Typ",
-      "vendor": "Anbieter"
+      "addtocart": "TODO",
+      "sku": "TODO",
+      "type": "TODO",
+      "vendor": "TODO"
     },
     "drawers": {
       "menu": "Menü",
@@ -77,19 +75,13 @@
       "method": "Zahlungsarten"
     },
     "breadcrumb": {
-      "home": "Startseite"
+      "home": "TODO"
     },
     "pagination": {
-      "label": "Seitennavigation",
-      "page": "Seite {{ number }}",
-      "next": "Nächste Seite",
-      "previous": "Vorherige Seite",
-      "load_more": "Mehr laden",
-      "viewed": "Du hast {{ perpage }} von {{ numberitem }} Produkten angesehen"
-    },
-    "product_bundle": {
-      "total": "Gesamtpreis:",
-      "save": "Du sparst:"
+      "label": "TODO",
+      "page": "TODO",
+      "next": "TODO",
+      "previous": "TODO"
     }
   },
   "blogs": {
@@ -99,8 +91,8 @@
       "all_tags": "Alle",
       "read_more": "Weiterlesen",
       "back_to_blog": "Zurück zu {{ title }}",
-      "next_post": "Nächster Beitrag",
-      "pre_post": "Vorheriger Beitrag"
+      "next_post": "TODO",
+      "pre_post": "TODO"
     },
     "comments": {
       "title": "Hinterlassen Sie einen Kommentar",
@@ -115,7 +107,7 @@
         "one": "{{ count }} Kommentar",
         "other": "{{ count }} Kommentare"
       },
-      "description": "Hinterlasse einen Kommentar"
+      "description": "TODO"
     }
   },
   "cart": {
@@ -125,9 +117,9 @@
       "remove": "Entfernen",
       "note": "Besondere Hinweise an den Verkäufer",
       "taxes_and_shipping_at_checkout": "Steuern und Versandkosten werden beim Checkout berechnet",
-      "taxes_and_shipping_policy_at_checkout_html": "zzgl. MwSt. und <a href=\"{{ link }}\">Versandkosten</a>",
+      "taxes_and_shipping_policy_at_checkout_html": "zzgl. MwSt. und <a href=\"{{ link }}\">Versandkosten<\/a>",
       "taxes_included_but_shipping_at_checkout": "inkl. MwSt.",
-      "taxes_included_and_shipping_policy_html": "inkl. MwSt. zzgl. <a href=\"{{ link }}\">Versandkosten</a>",
+      "taxes_included_and_shipping_policy_html": "inkl. MwSt. zzgl. <a href=\"{{ link }}\">Versandkosten<\/a>",
       "update": "Einkaufswagen aktualisieren",
       "view": "View Cart",
       "and_more": "And more",
@@ -137,15 +129,11 @@
       "continue_browsing": "Mit der Suche hier fortfahren.",
       "close_notification": "Schließen",
       "savings_html": "Sie sparen {{ price }}",
-      "note_title": "Bestellnotiz",
-      "note_label": "Bestellnotiz hinzufügen",
-      "save": "Speichern",
-      "close": "Schließen",
-      "empty_button": "Unsere Produkte ansehen",
-      "accept": "Wir akzeptieren",
-      "total": "Gesamt",
-      "coupon_title": "Gutschein",
-      "calc_title": "Versand"
+      "note_title": "TODO",
+      "note_label": "TODO",
+      "save": "TODO",
+      "close": "TODO",
+      "empty_button": "TODO"
     },
     "label": {
       "product": "Artikel",
@@ -153,12 +141,6 @@
       "decrease_quantity": "Artikelmenge um eins reduzieren",
       "increase_quantity": "Artikelmenge um eins erhöhen",
       "total": "Gesamt"
-    },
-    "gift": {
-      "title": "Geschenk",
-      "description": "Möchtest du eine Geschenkverpackung? Nur ",
-      "save": "Geschenkverpackung hinzufügen",
-      "close": "Schließen"
     }
   },
   "collections": {
@@ -170,8 +152,8 @@
       "list_view": "List view",
       "filter": "Filter",
       "link_title": "Durchsuchen Sie unsere {{ title }}-Zusammenstellung",
-      "item": "Artikel",
-      "items": "Artikel"
+      "item": "TODO",
+      "items": "TODO"
     },
     "sorting": {
       "title": "Sortieren nach",
@@ -201,8 +183,7 @@
       "send_question": "Send question",
       "receive_info": "Receive email",
       "post_success": "Danke, dass Sie uns kontaktiert haben. Wir werden uns so schnell wie möglich bei Ihnen melden.",
-      "question_success": "Thanks for your question. We'll get back to you as soon as possible.",
-      "post_error": "Bitte korrigiere Folgendes"
+      "question_success": "Thanks for your question. We'll get back to you as soon as possible."
     }
   },
   "customer": {
@@ -304,9 +285,9 @@
       "email": "E-Mail",
       "password": "Passwort",
       "submit": "Erstellen",
-      "sub_title": "Bitte fülle die folgenden Felder aus",
-      "already": "Bereits registriert?",
-      "login": "Anmelden"
+      "sub_title": "TODO",
+      "already": "TODO",
+      "login": "TODO"
     }
   },
   "homepage": {
@@ -315,7 +296,7 @@
       "previous_slide": "Vorheriger Schieber",
       "pause_slideshow": "Diashow pausieren",
       "play_slideshow": "Diashow abspielen",
-      "navigation_instructions": "Nutzen Sie die linken/rechten Pfeile, um durch die Slideshow zu navigieren, oder wischen Sie nach links bzw. rechts, wenn Sie ein mobiles Gerät verwenden",
+      "navigation_instructions": "Nutzen Sie die linken\/rechten Pfeile, um durch die Slideshow zu navigieren, oder wischen Sie nach links bzw. rechts, wenn Sie ein mobiles Gerät verwenden",
       "slide_number": "Folie {{ slide_number }}, aktuell"
     },
     "onboarding": {
@@ -333,8 +314,8 @@
       "account": "Account",
       "log_out": "Ausloggen",
       "create_account": "Account erstellen",
-      "question_account": "Neuer Kunde?",
-      "sub_login": "Bitte gib deine E-Mail-Adresse und dein Passwort ein:"
+      "question_account": "TODO",
+      "sub_login": "TODO"
     },
     "sidebar": {
       "featured_products": "Ausgewählte Artikel"
@@ -345,7 +326,7 @@
   },
   "products": {
     "product": {
-      "hurrify": "Nur noch {{ number }} Artikel auf Lager!",
+      "hurrify": "Hurrify, only a few left:",
       "sold_out": "Ausverkauft",
       "waitlist": "Join Waitlist",
       "available": "Available",
@@ -360,7 +341,7 @@
       "on_sale_from_html": "Im Angebot ab {{ price }}",
       "from_text_html": "Von {{ price }}",
       "include_taxes": "inkl. MwSt.",
-      "shipping_policy_html": "zzgl. <a href=\"{{ link }}\">Versandkosten</a>",
+      "shipping_policy_html": "zzgl. <a href=\"{{ link }}\">Versandkosten<\/a>",
       "quantity": "Menge",
       "add_to_cart": "In den Einkaufswagen legen",
       "full_details": "Alle Einzelheiten",
@@ -388,55 +369,31 @@
         "other": "{{ count }} übrig"
       },
       "collection_return": "Zurück zur {{ collection }}",
-      "product_added_to_cart_html": "Artikel wurde in den Einkaufswagen gelegt. <span>Sehen Sie sich Ihren Einkaufswagen an und gehen Sie zur Kasse</span>.",
+      "product_added_to_cart_html": "Artikel wurde in den Einkaufswagen gelegt. <span>Sehen Sie sich Ihren Einkaufswagen an und gehen Sie zur Kasse<\/span>.",
       "stock_unavailable": "Der Artikel konnte nicht in Ihren Warenkorb gelegt werden, da nicht genug Einheiten auf Lager sind.",
-      "xr_button": "In deinem Raum ansehen",
-      "xr_button_label": "In deinem Raum ansehen, öffnet den Artikel in einem Augmented-Reality-Fenster",
-      "pickup_availability": {
-        "view_store_info": "Shop-Informationen anzeigen",
-        "check_other_stores": "Verfügbarkeit in anderen Shops prüfen",
-        "pick_up_available": "Abholung verfügbar",
-        "pick_up_available_at_html": "Abholung bei <span class=\"color-foreground\">{{ location_name }}</span> verfügbar",
-        "pick_up_unavailable_at_html": "Abholung bei <span class=\"color-foreground\">{{ location_name }}</span> derzeit nicht verfügbar",
-        "unavailable": "Verfügbarkeit zur Abholung konnte nicht geladen werden",
-        "refresh": "Aktualisieren"
-      },
-      "price": {
-        "from_price_html": "Ab {{ price }}",
-        "regular_price": "Regulärer Preis",
-        "sale_price": "Angebotspreis",
-        "unit_price": "Grundpreis"
-      }
+      "xr_button": "TODO",
+      "xr_button_label": "TODO"
     },
     "facets": {
-      "apply": "Anwenden",
-      "clear": "Löschen",
-      "clear_all": "Alle löschen",
-      "from": "Von",
-      "filter_and_sort": "Filtern und sortieren",
-      "filter_by_label": "Filter:",
-      "filter_button": "Filtern",
-      "filters_selected": {
-        "one": "{{ count }} ausgewählt",
-        "other": "{{ count }} ausgewählt"
-      },
-      "t_price": "Preis: ",
-      "max_price": "Der höchste Preis ist ",
-      "product_count": {
-        "one": "{{ product_count }} von {{ count }} Produkt",
-        "other": "{{ product_count }} von {{ count }} Produkten"
-      },
-      "product_count_simple": {
-        "one": "{{ count }} Produkt",
-        "other": "{{ count }} Produkte"
-      },
-      "reset": "Zurücksetzen",
-      "sort_button": "Sortieren",
-      "sort_by_label": "Sortieren nach:",
-      "to": "Bis",
-      "clear_filter": "Filter löschen",
-      "show_more": "Mehr anzeigen",
-      "show_less": "Weniger anzeigen"
+      "apply": "TODO",
+      "clear": "TODO",
+      "clear_all": "TODO",
+      "from": "TODO",
+      "filter_and_sort": "TODO",
+      "filter_by_label": "TODO",
+      "filter_button": "TODO",
+      "filters_selected": "TODO",
+      "t_price": "TODO",
+      "max_price": "TODO",
+      "product_count": "TODO",
+      "product_count_simple": "TODO",
+      "reset": "TODO",
+      "sort_button": "TODO",
+      "sort_by_label": "TODO",
+      "to": "TODO",
+      "clear_filter": "TODO",
+      "show_more": "TODO",
+      "show_less": "TODO"
     }
   },
   "gift_cards": {
@@ -455,16 +412,16 @@
   },
   "date_formats": {
     "month_day_year": "%B %d, %Y",
-    "motth": "%b",
-    "day": "%d",
-    "year": "%Y"
+    "motth": "TODO",
+    "day": "TODO",
+    "year": "TODO"
   },
   "sections": {
     "map": {
       "get_directions": "Richtungen",
       "address_error": "Kann die Adresse nicht finden",
       "address_no_results": "Keine Ergebnisse für diese Adresse",
-      "address_query_limit_html": "Sie haben die Google- API-Nutzungsgrenze überschritten. Betrachten wir zu einem <a href=\"https://developers.google.com/maps/premium/usage-limits\">Premium-Paket</a> zu aktualisieren.",
+      "address_query_limit_html": "Sie haben die Google- API-Nutzungsgrenze überschritten. Betrachten wir zu einem <a href=\"https:\/\/developers.google.com\/maps\/premium\/usage-limits\">Premium-Paket<\/a> zu aktualisieren.",
       "auth_error_html": "Es gab ein Problem bei Google Maps API Konto zu authentifizieren."
     },
     "slideshow": {
@@ -473,12 +430,12 @@
       "pause_slideshow": "Pause slideshow",
       "rotate_slideshow": "Play slideshow",
       "load_slide": "Load slide {{ slide_number }}",
-      "navigation_instructions": "Use left/right arrows to navigate the slideshow or swipe left/right if using a mobile device"
+      "navigation_instructions": "Use left\/right arrows to navigate the slideshow or swipe left\/right if using a mobile device"
     },
     "collection_template": {
-      "empty": "Keine Produkte gefunden",
-      "title": "Kollektion",
-      "use_fewer_filters_html": "Verwende weniger Filter oder <a class=\"{{ class }}\" href=\"{{ link }}\">lösche alle</a>"
+      "empty": "TODO",
+      "title": "TODO",
+      "use_fewer_filters_html": "TODO"
     }
   },
   "video": {
@@ -486,34 +443,19 @@
     "close": "Beenden Sie das Video"
   },
   "templates": {
-    "search": {
-      "no_results": "Keine Ergebnisse für „{{ terms }}“ gefunden. Prüfe die Schreibweise oder verwende einen anderen Suchbegriff.",
-      "page": "Seite",
-      "products": "Produkte",
-      "results_with_count": {
-        "one": "{{ count }} Ergebnis",
-        "other": "{{ count }} Ergebnisse"
-      },
-      "results_with_count_and_term": {
-        "one": "{{ count }} Ergebnis für „{{ terms }}“ gefunden",
-        "other": "{{ count }} Ergebnisse für „{{ terms }}“ gefunden"
-      },
-      "title": "Suchergebnisse",
-      "search_for": "Nach „{{ terms }}“ suchen"
-    }
+    "search": "TODO"
+  },
+  "accessibility": {
+    "vendor": "TODO",
+    "star_reviews_info": "TODO",
+    "total_reviews": "TODO"
   },
   "onboarding": {
-    "product_title": "Beispielhafter Produkttitel"
+    "product_title": "TODO"
   },
   "localization": {
-    "language_label": "Sprache",
-    "update_language": "Sprache aktualisieren",
-    "update_country": "Land/Region aktualisieren",
-    "country_label": "Land/Region"
-  },
-  "improved": {
-    "product": {
-      "description_details": "Vollständige Produktdetails lesen"
-    }
+    "language_label": "TODO",
+    "update_language": "TODO",
+    "update_country": "TODO"
   }
 }
