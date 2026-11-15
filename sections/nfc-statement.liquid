@@ -1,5 +1,66 @@
+{% style %}
+  .brand-statement[data-brand-statement="{{ section.id }}"] {
+    background: {{ section.settings.nfc_background_color | default: '#171717' }};
+    color: {{ section.settings.nfc_heading_color | default: '#fafafa' }};
+    min-height: 550px;
+    display: flex;
+    align-items: center;
+    padding-block: 86px;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .brand-statement[data-brand-statement="{{ section.id }}"] .brand-statement__inner {
+    z-index: 1;
+    position: relative;
+    padding-block: 0;
+  }
+  .brand-statement[data-brand-statement="{{ section.id }}"] h2 {
+    max-width: 770px;
+    margin: 22px 0 0;
+    color: {{ section.settings.nfc_heading_color | default: '#fafafa' }};
+    font-family: var(--font-display, 'Space Grotesk', sans-serif);
+    font-size: clamp(48px, 7vw, 92px);
+    font-weight: 700;
+    line-height: .9;
+  }
+  .brand-statement[data-brand-statement="{{ section.id }}"] :is(.eyebrow, h2 span) {
+    color: {{ section.settings.nfc_accent_color | default: '#bca476' }};
+  }
+  .brand-statement[data-brand-statement="{{ section.id }}"] .statement-copy {
+    max-width: 430px;
+    margin: 20px 0 27px;
+    color: {{ section.settings.nfc_text_color | default: '#fafafa' }};
+    font-size: 13px;
+    line-height: 1.8;
+  }
+  .brand-statement[data-brand-statement="{{ section.id }}"] .statement-copy p { margin: 0; }
+  .brand-statement[data-brand-statement="{{ section.id }}"] .hero-text-link {
+    color: {{ section.settings.nfc_link_color | default: '#fafafa' }};
+  }
+  .brand-statement[data-brand-statement="{{ section.id }}"] .brand-statement__mark {
+    position: absolute;
+    z-index: 0;
+    right: -26px;
+    bottom: -132px;
+    color: {{ section.settings.watermark_color | default: '#fafafa' }};
+    opacity: {{ section.settings.watermark_opacity | default: 5 | divided_by: 100.0 }};
+    font-family: var(--font-display, 'Space Grotesk', sans-serif);
+    font-size: clamp(230px, 40vw, 620px);
+    font-weight: 700;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  @media (max-width: 700px) {
+    .brand-statement[data-brand-statement="{{ section.id }}"] { min-height: 465px; padding-block: 64px; }
+    .brand-statement[data-brand-statement="{{ section.id }}"] .brand-statement__inner { padding-block: 0; }
+    .brand-statement[data-brand-statement="{{ section.id }}"] h2 { font-size: clamp(44px, 12vw, 65px); }
+    .brand-statement[data-brand-statement="{{ section.id }}"] .brand-statement__mark { font-size: 220px; right: -44px; bottom: -56px; }
+  }
+{% endstyle %}
 {% render 'nfc-section-style', section: section %}
-<section class="brand-statement"><div class="brand-statement__inner page-width"><p class="eyebrow">{{ section.settings.eyebrow | escape }}</p><h2>{{ section.settings.heading | escape | newline_to_br }}<br><span>{{ section.settings.accent_heading | escape }}</span></h2><div class="statement-copy">{{ section.settings.copy }}</div><a class="hero-text-link" href="{{ section.settings.link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }} {% render 'nfc-icon', name: 'arrow' %}</a></div><span class="brand-statement__mark" aria-hidden="true">{{ section.settings.watermark | escape }}</span></section>
+<section class="brand-statement" data-brand-statement="{{ section.id }}" aria-labelledby="StatementHeading-{{ section.id }}"><div class="brand-statement__inner page-width"><p class="eyebrow">{{ section.settings.eyebrow | escape }}</p><h2 id="StatementHeading-{{ section.id }}">{{ section.settings.heading | escape | newline_to_br }}<br><span>{{ section.settings.accent_heading | escape }}</span></h2><div class="statement-copy">{{ section.settings.copy }}</div><a class="hero-text-link nfc-button nfc-button--text nfc-statement-link" href="{{ section.settings.link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }} {% render 'nfc-icon', name: 'arrow' %}</a></div><span class="brand-statement__mark" aria-hidden="true">{{ section.settings.watermark | escape }}</span></section>
 {% schema %}
 {
   "name": "NFC brand statement",
@@ -46,6 +107,22 @@
       "default": "NFC"
     },
     {
+      "type": "color",
+      "id": "watermark_color",
+      "label": "Watermark color",
+      "default": "#fafafa"
+    },
+    {
+      "type": "range",
+      "id": "watermark_opacity",
+      "label": "Watermark opacity",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "%",
+      "default": 5
+    },
+    {
       "type": "header",
       "content": "Section colors"
     },
@@ -56,32 +133,38 @@
     {
       "type": "color",
       "id": "nfc_background_color",
-      "label": "Background"
+      "label": "Background",
+      "default": "#171717"
     },
     {
       "type": "color",
       "id": "nfc_heading_color",
-      "label": "Headings"
+      "label": "Headings",
+      "default": "#fafafa"
     },
     {
       "type": "color",
       "id": "nfc_text_color",
-      "label": "Paragraphs and body text"
+      "label": "Paragraphs and body text",
+      "default": "#fafafa"
     },
     {
       "type": "color",
       "id": "nfc_eyebrow_color",
-      "label": "Eyebrow text"
+      "label": "Eyebrow text",
+      "default": "#bca476"
     },
     {
       "type": "color",
       "id": "nfc_link_color",
-      "label": "Links"
+      "label": "Links",
+      "default": "#fafafa"
     },
     {
       "type": "color",
       "id": "nfc_accent_color",
-      "label": "Accents"
+      "label": "Accents",
+      "default": "#bca476"
     },
     {
       "type": "color",
