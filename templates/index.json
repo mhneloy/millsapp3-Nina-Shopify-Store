@@ -58,7 +58,7 @@
           "settings": {
             "eyebrow": "01 — EVERYDAY STATEMENTS",
             "heading": "Graphic tees",
-            "collection": "",
+            "collection": "frontpage",
             "link": ""
           }
         },
@@ -67,7 +67,7 @@
           "settings": {
             "eyebrow": "02 — LAYER WITH PURPOSE",
             "heading": "Statement hoodies",
-            "collection": "",
+            "collection": "hoodies",
             "link": ""
           }
         }
