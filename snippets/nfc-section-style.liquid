@@ -1,6 +1,7 @@
 {%- comment -%}Shared editor controls, scoped to this section instance.{%- endcomment -%}
 {%- assign surface = ' > :is(section, footer, header, [data-catalog-response])' -%}
 {% style %}
+  #shopify-section-{{ section.id }} :is(p:not(.eyebrow), .rte, .rte p:not(.eyebrow), .statement-copy, .footer-description, .product-detail__description) { font-size: 14px; }
   #shopify-section-{{ section.id }} {
     {% if section.settings.nfc_accent_color != blank %}--gold: {{ section.settings.nfc_accent_color }};{% endif %}
     {% if section.settings.nfc_custom_width %}--page-width: {{ section.settings.nfc_content_width }}px;{% endif %}
