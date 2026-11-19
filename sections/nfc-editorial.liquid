@@ -1,5 +1,85 @@
 {% render 'nfc-section-style', section: section %}
-<section class="editorial-banner">{% render 'nfc-image', image: section.settings.image, fallback: 'nfc-campaign-hero.jpg', alt: section.settings.image_alt, loading: 'lazy', sizes: '100vw' %}<div class="editorial-banner__overlay"></div><div class="editorial-banner__content page-width"><p class="eyebrow">{{ section.settings.eyebrow | escape }}</p><h2>{{ section.settings.heading | escape | newline_to_br }}</h2><a class="nfc-button nfc-button--hero" href="{{ section.settings.link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }} {% render 'nfc-icon', name: 'arrow' %}</a></div></section>
+{%- if section.settings.mobile_image != blank -%}
+  {%- liquid
+    assign mobile_image = section.settings.mobile_image
+    assign mobile_max_width = mobile_image.width | at_most: 1500
+    assign mobile_widths = '360,540,750,1100' | split: ','
+    capture mobile_srcset
+      for width in mobile_widths
+        assign candidate_width = width | plus: 0
+        if candidate_width < mobile_max_width
+          echo mobile_image | image_url: width: candidate_width
+          echo ' '
+          echo candidate_width
+          echo 'w, '
+        endif
+      endfor
+      echo mobile_image | image_url: width: mobile_max_width
+      echo ' '
+      echo mobile_max_width
+      echo 'w'
+    endcapture
+  -%}
+{%- endif -%}
+{% style %}
+  #shopify-section-{{ section.id }} .editorial-banner__image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    object-position: center 58%;
+  }
+  @media (max-width: 700px) {
+    #shopify-section-{{ section.id }} .editorial-banner__image {
+      object-position: 57% center;
+    }
+    {% if section.settings.mobile_image != blank %}
+      #shopify-section-{{ section.id }} .editorial-banner__image {
+        object-position: {{ mobile_image.presentation.focal_point | default: 'center center' }};
+      }
+      {% if section.settings.mobile_image_fit == 'cover' %}
+        #shopify-section-{{ section.id }} .editorial-banner {
+          min-height: {{ section.settings.mobile_height }}px;
+        }
+      {% else %}
+        #shopify-section-{{ section.id }} .editorial-banner {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr);
+          min-height: 0;
+        }
+        #shopify-section-{{ section.id }} .editorial-banner__media,
+        #shopify-section-{{ section.id }} .editorial-banner__content {
+          grid-area: 1 / 1;
+          min-width: 0;
+          min-height: 0;
+        }
+        #shopify-section-{{ section.id }} .editorial-banner__media {
+          display: block;
+          align-self: start;
+        }
+        #shopify-section-{{ section.id }} .editorial-banner__image {
+          display: block;
+          position: static;
+          height: auto;
+          aspect-ratio: {{ mobile_image.width }} / {{ mobile_image.height }};
+        }
+        #shopify-section-{{ section.id }} .editorial-banner__content {
+          padding-block: 24px;
+        }
+      {% endif %}
+    {% endif %}
+  }
+{% endstyle %}
+<section class="editorial-banner">
+  <picture class="editorial-banner__media">
+    {%- if section.settings.mobile_image != blank -%}
+      <source media="(max-width: 700px)" srcset="{{ mobile_srcset | strip | escape }}" sizes="100vw" width="{{ mobile_image.width }}" height="{{ mobile_image.height }}">
+    {%- endif -%}
+    {% render 'nfc-image', image: section.settings.image, fallback: 'nfc-campaign-hero.jpg', class: 'editorial-banner__image', alt: section.settings.image_alt, loading: 'lazy', sizes: '100vw' %}
+  </picture>
+  <div class="editorial-banner__overlay"></div><div class="editorial-banner__content page-width"><p class="eyebrow">{{ section.settings.eyebrow | escape }}</p><h2>{{ section.settings.heading | escape | newline_to_br }}</h2><a class="nfc-button nfc-button--hero" href="{{ section.settings.link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }} {% render 'nfc-icon', name: 'arrow' %}</a></div>
+</section>
 {% schema %}
 {
   "name": "NFC editorial banner",
@@ -20,6 +100,34 @@
       "type": "image_picker",
       "id": "image",
       "label": "Campaign image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile campaign image",
+      "info": "Shown on screens up to 700px wide. Leave empty to use the main campaign image. A portrait image works best with the text overlay."
+    },
+    {
+      "type": "select",
+      "id": "mobile_image_fit",
+      "label": "Mobile image display",
+      "default": "adapt",
+      "options": [
+        { "value": "adapt", "label": "Show full image" },
+        { "value": "cover", "label": "Fill banner" }
+      ],
+      "info": "Show full image keeps the complete image visible. Fill banner crops the image to fill the mobile banner height, using its focal point. Applies when a mobile image is selected."
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Mobile banner height",
+      "min": 400,
+      "max": 900,
+      "step": 20,
+      "unit": "px",
+      "default": 520,
+      "info": "Used with Fill banner. The banner grows if the text needs more room."
     },
     {
       "type": "text",
