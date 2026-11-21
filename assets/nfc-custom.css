@@ -133,7 +133,7 @@ details[open]>summary svg{transform:rotate(45deg)}
 .contact-form .checkbox-label{display:flex;align-items:center;gap:10px}
 .contact-form .checkbox-label input{width:16px;min-height:16px}
 .shopify-policy__container{max-width:900px!important;padding:70px 32px 100px!important}
-.shopify-policy__title{text-align:left!important;font-family:var(--font-display);font-size:clamp(24px,4vw,42px);line-height:1}
+.shopify-policy__title{text-align:left!important;font-family:var(--font-display);font-size:clamp(24px,4vw,42px);line-height:1;text-transform:capitalize}
 .shopify-policy__body{border-top:1px solid var(--line);padding-top:25px;margin-top:35px;font-size:13px;line-height:1.8}
 .mobile-nav-links .nav-dropdown>summary{min-height:58px;justify-content:space-between;border-bottom:1px solid var(--line);font-family:var(--font-display)}
 .mobile-nav-links .nav-dropdown__links{padding-inline-start:15px;overflow-wrap:anywhere}
