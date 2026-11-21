@@ -59,7 +59,7 @@
     #shopify-section-{{ section.id }} :is(.section-heading, .content-page__heading, .shop-heading, .campaign-hero__content, .brand-statement__inner, .editorial-banner__content, .newsletter-band > div) { text-align: {{ section.settings.nfc_text_alignment }}; }
     {% if section.settings.nfc_text_alignment == 'center' %}
       #shopify-section-{{ section.id }} :is(.campaign-hero__content, .editorial-banner__content) { align-items: center; }
-      #shopify-section-{{ section.id }} :is(.campaign-hero__actions, .collection-heading) { justify-content: space-around; }
+      #shopify-section-{{ section.id }} :is(.campaign-hero__actions, .collection-heading) { justify-content: center; }
       #shopify-section-{{ section.id }} :is(.section-heading__description, .content-page__heading > p, .brand-statement h2, .statement-copy) { margin-inline: auto; }
     {% elsif section.settings.nfc_text_alignment == 'right' %}
       #shopify-section-{{ section.id }} :is(.campaign-hero__content, .editorial-banner__content) { align-items: flex-end; }
