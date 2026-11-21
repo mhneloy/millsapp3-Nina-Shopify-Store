@@ -12,7 +12,8 @@
     "hero": {
       "type": "nfc-hero",
       "custom_css": [
-        ".campaign-hero__actions a{display: none;}"
+        ".campaign-hero__actions a {display: none;}",
+        ".campaign-hero__content{justify-content: space-around;}"
       ],
       "settings": {
         "eyebrow": "NUTS FOR CHRIST · STREETWEAR",
@@ -74,9 +75,9 @@
       "settings": {
         "animation": "",
         "setwidth": "container",
-        "bgsection": "#FAF9F6",
+        "bgsection": "#faf9f6",
         "gradient_bg": "",
-        "title_color": "transparent",
+        "title_color": "rgba(0,0,0,0)",
         "title_top": "",
         "title": "",
         "text": "",
