@@ -35,7 +35,7 @@
         "nfc_background_color": "",
         "nfc_heading_color": "",
         "nfc_text_color": "",
-        "nfc_eyebrow_color": "",
+        "nfc_eyebrow_color": "#DAB672",
         "nfc_link_color": "",
         "nfc_accent_color": "",
         "nfc_border_color": "",
@@ -117,7 +117,7 @@
       ],
       "custom_css": [
         ".category-tile {aspect-ratio: 1;}",
-        ".category-tile img{object-fit: fill;}"
+        ".category-tile img {object-fit: fill;}"
       ],
       "settings": {
         "eyebrow": "THE COLLECTION",
