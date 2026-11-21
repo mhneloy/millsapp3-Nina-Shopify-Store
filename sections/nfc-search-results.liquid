@@ -3,7 +3,7 @@
 <div data-catalog-response data-result-count="{{ search.results_count }}">
   {% paginate search.results by 24 %}
     {% if search.results_count > 0 %}
-      <div class="product-grid">{% for product in search.results %}{% if product.object_type == 'product' %}{% render 'nfc-product-card', product: product %}{% endif %}{% endfor %}</div>
+      <div class="product-grid">{% for product in search.results %}{% if product.object_type == 'product' %}{% render 'nfc-product-card', product: product, show_collection_handles: true %}{% endif %}{% endfor %}</div>
     {% else %}
       {% render 'nfc-empty', heading: 'No matching products', copy: 'Try a different product name, or clear the search to see all pieces.' %}
     {% endif %}

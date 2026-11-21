@@ -138,6 +138,21 @@
       if (!response) throw new Error('Search results were not returned. Please try again.');
       if (controller !== state.controller) return;
       results.innerHTML = response.innerHTML;
+      const collectionHandle = section.dataset.collectionHandle;
+      if (term && collectionHandle && collectionHandle !== 'all') {
+        const collectionPath = new URL(section.dataset.collectionUrl, location.origin).pathname.replace(/\/$/, '');
+        // Search covers the whole catalog, so only use collection URLs for members.
+        results.querySelectorAll('[data-product-collections]').forEach(card => {
+          if (!card.dataset.productCollections.split(' ').includes(collectionHandle)) return;
+          card.querySelectorAll('a[href]').forEach(link => {
+            const productUrl = new URL(link.href);
+            const productPath = productUrl.pathname.match(/\/products\/[^/]+\/?$/)?.[0];
+            if (!productPath || productUrl.origin !== location.origin) return;
+            productUrl.pathname = collectionPath + productPath;
+            link.href = productUrl.href;
+          });
+        });
+      }
       const count = section.querySelector('[data-catalog-count]');
       count.textContent = term ? `${response.dataset.resultCount} matching pieces` : html.querySelector('[data-catalog-count]').textContent;
       status.textContent = term ? `Results for “${term}”.` : '';
