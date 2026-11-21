@@ -13,8 +13,8 @@
       "type": "nfc-hero",
       "settings": {
         "eyebrow": "NUTS FOR CHRIST · STREETWEAR",
-        "heading": "WEAR\nYOUR FAITH.",
-        "copy": "Bold streetwear. Powerful messages. Faith expressed through every fit.",
+        "heading": "",
+        "copy": "",
         "image": "shopify://shop_images/Vibrant_Faith_Graffiti_Group_Portrait.webp",
         "mobile_image": "shopify://shop_images/Nuts_for_Christ_Sunset_Street_Poster.webp",
         "mobile_image_fit": "adapt",
@@ -52,6 +52,36 @@
         "nfc_padding_mobile": "",
         "nfc_margin_desktop": "",
         "nfc_margin_mobile": ""
+      }
+    },
+    "rich_text_d6irp8": {
+      "type": "rich-text",
+      "blocks": {
+        "paragraph_PRHgtj": {
+          "type": "paragraph",
+          "settings": {
+            "subtext": "<div style=\"text-align: center; width: 100%; padding: 20px 0;\">\n  <h1 style=\"margin: 0 0 12px; font-size: 42px\">\n    WEAR YOUR FAITH.\n  </h1>\n  <p style=\"margin: 0;\">\n    Bold Streetwear. Powerful Messages.\n    Faith Expressed through every fit.\n  </p>\n</div>"
+          }
+        }
+      },
+      "block_order": [
+        "paragraph_PRHgtj"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "animation": "",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "gradient_bg": "",
+        "title_color": "transparent",
+        "title_top": "",
+        "title": "",
+        "text": "",
+        "align-heading": "center",
+        "paddingsection": "0px 0px 0px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
       }
     },
     "categories": {
@@ -192,6 +222,8 @@
         "eyebrow": "BOLD BY BELIEF",
         "heading": "FAITH NEVER\nGOES OUT OF STYLE.",
         "image": "shopify://shop_images/275453A5-D514-478F-81C1-770D8E5341F6_31359a84-539f-4381-8217-6ce300b53dce.png",
+        "mobile_image_fit": "adapt",
+        "mobile_height": 520,
         "image_alt": "Nuts for Christ streetwear campaign",
         "button_label": "Shop now",
         "link": "",
@@ -259,6 +291,7 @@
   },
   "order": [
     "hero",
+    "rich_text_d6irp8",
     "categories",
     "featured",
     "statement",
