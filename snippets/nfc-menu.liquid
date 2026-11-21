@@ -1,10 +1,11 @@
 {%- if menu.links != blank -%}
   {%- for link in menu.links -%}
     {%- if link.links != blank -%}
+      {%- assign parent_title = link.title | strip | downcase -%}
       <details class="nav-dropdown" name="{{ disclosure_group }}">
         <summary>{{ link.title | escape }}</summary>
         <div class="nav-dropdown__links">
-          {%- if link.url != blank and link.url != '#' -%}
+          {%- if parent_title != 'shop all' and link.url != blank and link.url != '#' -%}
             <a href="{{ link.url | escape }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
           {%- endif -%}
           {%- for child in link.links -%}
