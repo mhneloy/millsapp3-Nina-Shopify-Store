@@ -11,7 +11,37 @@
   "sections": {
     "main": {
       "type": "nfc-collection",
-      "settings": {}
+      "settings": {
+        "eyebrow": "NUTS FOR CHRIST",
+        "heading": "All Products",
+        "per_page": 16,
+        "show_filters": true,
+        "nfc_background_color": "",
+        "nfc_heading_color": "",
+        "nfc_text_color": "",
+        "nfc_eyebrow_color": "",
+        "nfc_link_color": "",
+        "nfc_accent_color": "",
+        "nfc_border_color": "",
+        "nfc_button_text": "",
+        "nfc_button_background": "",
+        "nfc_button_border": "",
+        "nfc_button_hover_text": "",
+        "nfc_button_hover_background": "",
+        "nfc_content_position": "default",
+        "nfc_text_alignment": "default",
+        "nfc_custom_width": false,
+        "nfc_content_width": 1440,
+        "nfc_custom_typography": false,
+        "nfc_heading_size": 56,
+        "nfc_heading_size_mobile": 36,
+        "nfc_paragraph_size": 14,
+        "nfc_paragraph_size_mobile": 14,
+        "nfc_padding_desktop": "",
+        "nfc_padding_mobile": "",
+        "nfc_margin_desktop": "",
+        "nfc_margin_mobile": ""
+      }
     }
   },
   "order": [
