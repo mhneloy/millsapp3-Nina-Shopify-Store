@@ -11,6 +11,9 @@
   "sections": {
     "hero": {
       "type": "nfc-hero",
+      "custom_css": [
+        ".campaign-hero__actions a{display: none;}"
+      ],
       "settings": {
         "eyebrow": "NUTS FOR CHRIST · STREETWEAR",
         "heading": "",
