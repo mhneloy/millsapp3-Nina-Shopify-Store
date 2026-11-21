@@ -1,5 +1,20 @@
 {% render 'nfc-section-style', section: section %}
-<section class="shop-page page-width" data-catalog-section data-section-id="{{ section.id }}" data-collection-url="{{ collection.url }}"><header class="shop-heading"><p class="eyebrow">{{ section.settings.eyebrow | escape }}</p><h1>{{ section.settings.heading | default: collection.title | escape }}</h1><div class="rte">{{ collection.description }}</div></header>
+{%- assign breadcrumb_home_label = section.settings.eyebrow | strip -%}
+{%- if breadcrumb_home_label == 'NUTS FOR CHRIST / COLLECTION 001' -%}
+  {%- assign breadcrumb_home_label = 'NUTS FOR CHRIST' -%}
+{%- endif -%}
+<section class="shop-page page-width" data-catalog-section data-section-id="{{ section.id }}" data-collection-url="{{ collection.url }}">
+  <header class="shop-heading">
+    <nav class="eyebrow" aria-label="Breadcrumb">
+      {%- if breadcrumb_home_label != blank -%}
+        <a href="{{ routes.root_url }}">{{ breadcrumb_home_label | escape }}</a>
+        <span aria-hidden="true"> / </span>
+      {%- endif -%}
+      <span aria-current="page">{{ collection.title | escape }}</span>
+    </nav>
+    <h1>{{ section.settings.heading | default: collection.title | escape }}</h1>
+    <div class="rte">{{ collection.description }}</div>
+  </header>
 {% paginate collection.products by section.settings.per_page %}
 <div class="shop-toolbar"><span class="shop-toolbar__count" data-catalog-count>{{ collection.products_count }} pieces</span><form class="shop-search" data-catalog-search role="search" action="{{ collection.url }}" method="get"><label class="sr-only" for="CollectionSearch-{{ section.id }}">Search catalog</label><input id="CollectionSearch-{{ section.id }}" name="q" type="search" placeholder="Search catalog"><button class="nfc-button nfc-button--icon" aria-label="Search">{% render 'nfc-icon', name: 'search' %}</button></form>
 <form method="get" action="{{ collection.url }}" class="shop-toolbar__filters" data-filter-form>
@@ -14,8 +29,8 @@
     {
       "type": "text",
       "id": "eyebrow",
-      "label": "Eyebrow",
-      "default": "NUTS FOR CHRIST / COLLECTION 001"
+      "label": "Breadcrumb home label",
+      "default": "NUTS FOR CHRIST"
     },
     {
       "type": "text",
