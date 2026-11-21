@@ -20,9 +20,27 @@
     document.body.classList.add('dialog-open');
     return true;
   }
-  document.addEventListener('close', () => {
+  document.addEventListener('close', event => {
+    if (event.target.id === 'NfcNavigation') {
+      event.target.querySelectorAll('.nav-dropdown[open]').forEach(dropdown => { dropdown.open = false; });
+    }
     if (!document.querySelector('dialog[open]')) document.body.classList.remove('dialog-open');
   }, true);
+  function closeDesktopDropdowns(event) {
+    document.querySelectorAll('.desktop-nav .nav-dropdown[open]').forEach(dropdown => {
+      if (!dropdown.contains(event.target)) dropdown.open = false;
+    });
+  }
+  document.addEventListener('click', closeDesktopDropdowns);
+  document.addEventListener('focusin', closeDesktopDropdowns);
+  document.addEventListener('keydown', event => {
+    if (event.key !== 'Escape' || event.defaultPrevented) return;
+    const dropdown = event.target.closest('.nav-dropdown[open]');
+    if (!dropdown) return;
+    event.preventDefault();
+    dropdown.open = false;
+    dropdown.querySelector('summary').focus();
+  });
   let cartBusy = false;
   function renderCart(cart) {
     document.querySelectorAll('[data-cart-count]').forEach(el => el.textContent = cart.item_count);

@@ -1,11 +1,11 @@
 {% render 'nfc-section-style', section: section %}
 {% if section.settings.announcement != blank %}<div class="announcement-bar"><span>{{ section.settings.announcement | escape }}</span><span class="announcement-bar__separator" aria-hidden="true">✳</span><a href="{{ section.settings.announcement_link | default: routes.all_products_collection_url }}">{{ section.settings.announcement_cta | escape }} {% render 'nfc-icon', name: 'arrow' %}</a></div>{% endif %}
 <header class="site-header"><div class="site-header__inner page-width">
-<button class="nfc-button nfc-button--icon mobile-menu-button" data-open-dialog="NfcNavigation" aria-label="Open navigation" aria-haspopup="dialog">{% render 'nfc-icon', name: 'menu' %}</button>
+<button type="button" class="nfc-button nfc-button--icon mobile-menu-button" data-open-dialog="NfcNavigation" aria-label="Open navigation" aria-haspopup="dialog" aria-controls="NfcNavigation">{% render 'nfc-icon', name: 'menu' %}</button>
 <a class="wordmark" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }} home">{% if section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 400 | image_tag: widths: '100, 200, 400', class: 'brand-logo', alt: shop.name }}{% else %}<span>{{ section.settings.brand_top | escape }}</span><span>{{ section.settings.brand_bottom | escape }}</span><small>{{ section.settings.tagline | escape }}</small>{% endif %}</a>
-<nav class="desktop-nav" aria-label="Main navigation">{% render 'nfc-menu', menu: section.settings.menu %}</nav>
+<nav class="desktop-nav" aria-label="Main navigation">{% render 'nfc-menu', menu: section.settings.menu, disclosure_group: 'nfc-desktop-menu' %}</nav>
 <div class="header-actions"><a class="nfc-button nfc-button--icon" href="{{ routes.all_products_collection_url }}" data-search-open aria-haspopup="dialog" aria-controls="NfcSearch" aria-label="Search products">{% render 'nfc-icon', name: 'search' %}</a>{% if shop.customer_accounts_enabled %}<a class="account-link" href="{{ routes.account_url }}">Account</a>{% endif %}<a class="nfc-button nfc-button--icon cart-trigger" href="{{ routes.cart_url }}" data-cart-open aria-label="Shopping bag"><span class="sr-only">Shopping bag</span>{% render 'nfc-icon', name: 'bag' %}<span class="cart-trigger__count" data-cart-count>{{ cart.item_count }}</span></a></div></div></header>
-<dialog id="NfcNavigation" class="nfc-dialog mobile-nav-sheet"><div class="dialog-heading"><span class="eyebrow">Navigation</span><button class="nfc-button nfc-button--icon" data-close-dialog aria-label="Close navigation">{% render 'nfc-icon', name: 'close' %}</button></div><nav class="mobile-nav-links" aria-label="Mobile navigation">{% render 'nfc-menu', menu: section.settings.menu %}</nav></dialog>
+<dialog id="NfcNavigation" class="nfc-dialog mobile-nav-sheet" aria-labelledby="NfcNavigationHeading"><div class="dialog-heading"><span id="NfcNavigationHeading" class="eyebrow">Navigation</span><button type="button" class="nfc-button nfc-button--icon" data-close-dialog aria-label="Close navigation">{% render 'nfc-icon', name: 'close' %}</button></div><nav class="mobile-nav-links" aria-label="Mobile navigation">{% render 'nfc-menu', menu: section.settings.menu, disclosure_group: 'nfc-mobile-menu' %}</nav></dialog>
 {% schema %}
 {
   "name": "NFC header",
@@ -53,7 +53,9 @@
     {
       "type": "link_list",
       "id": "menu",
-      "label": "Navigation menu"
+      "label": "Navigation menu",
+      "default": "main-menu",
+      "info": "Nest links under a parent item in Shopify admin under Content > Menus to create a dropdown."
     },
     {
       "type": "header",
