@@ -68,6 +68,97 @@
 .product-save-row [aria-pressed=true] svg{fill:var(--gold);stroke:var(--gold)}
 .quantity-control--large{width:90px}
 .quantity-control input{width:100%;padding:10px;border:0;background:transparent;color:inherit;text-align:center}
+.product-gallery__main {
+  position: relative;
+}
+
+.product-gallery__viewport {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+}
+
+.product-gallery__viewport--draggable {
+  cursor: grab;
+  touch-action: pan-y pinch-zoom;
+  user-select: none;
+}
+
+.product-gallery__viewport.is-dragging {
+  cursor: grabbing;
+}
+
+.product-gallery__track {
+  display: flex;
+  direction: ltr;
+  height: 100%;
+  transform: translateX(calc(var(--gallery-offset, 0%) + var(--gallery-drag, 0px)));
+  transition: transform 300ms ease;
+}
+
+.product-gallery__viewport.is-dragging .product-gallery__track {
+  transition: none;
+}
+
+.product-gallery__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+.product-gallery__slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-gallery__arrow {
+  position: absolute;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--line);
+  background: var(--background);
+  color: var(--ink);
+  touch-action: manipulation;
+  transform: translateY(-50%);
+  transition: opacity 180ms ease;
+}
+
+.product-gallery__arrow--previous {
+  left: 12px;
+}
+
+.product-gallery__arrow svg {
+  pointer-events: none;
+}
+
+.product-gallery__arrow--previous svg {
+  transform: rotate(180deg);
+}
+
+.product-gallery__arrow--next {
+  right: 12px;
+}
+
+.product-gallery__arrow[aria-disabled='true'] svg {
+  opacity: 0.4;
+}
+
+.no-js .product-gallery__arrow {
+  display: none;
+}
+
+@media (hover: hover) {
+  .product-gallery__main:not(:hover):not(:focus-within) .product-gallery__arrow {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
 .product-gallery__thumbs{overflow:auto;max-width:100%;padding-bottom:5px}
 .nfc-button--gallery{flex-shrink:0}
 .product-extra-media{margin-top:20px}

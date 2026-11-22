@@ -107,13 +107,6 @@
     if (quick && document.getElementById('NfcQuickView').showModal) { event.preventDefault(); quickView(quick); return; }
     const remove = event.target.closest('[data-cart-remove]');
     if (remove) changeCart(remove.dataset.cartRemove, 0);
-    const image = event.target.closest('[data-gallery-image]');
-    if (image) {
-      const section = image.closest('[data-product-section]');
-      const main = section.querySelector('[data-gallery-main] img');
-      if (main) { main.removeAttribute('srcset'); main.src = image.dataset.galleryImage; main.alt = image.dataset.imageAlt; }
-      section.querySelectorAll('[data-gallery-image]').forEach(el => el.setAttribute('aria-pressed', String(el === image)));
-    }
   });
   document.addEventListener('submit', async event => {
     const form = event.target.closest('[data-add-to-cart]');
@@ -139,6 +132,87 @@
       submit.disabled = section ? variantSelect.disabled || !section.productData.variants.find(variant => String(variant.id) === variantSelect.value)?.available : false;
     }
   });
+  function initProductGallery(section) {
+    const gallery = section.querySelector('[data-product-gallery]');
+    const track = gallery?.querySelector('[data-gallery-track]');
+    if (!track || track.children.length < 2) return;
+
+    const viewport = gallery.querySelector('[data-gallery-viewport]');
+    const slides = Array.from(track.children);
+    const thumbs = Array.from(gallery.querySelectorAll('[data-gallery-thumb]'));
+    const arrows = Array.from(gallery.querySelectorAll('[data-gallery-step]'));
+    const status = gallery.querySelector('[data-gallery-status]');
+    const lastIndex = slides.length - 1;
+    let index = Math.max(0, slides.findIndex(slide => slide.getAttribute('aria-hidden') === 'false'));
+    let drag = null;
+
+    function showImage(nextIndex) {
+      if (nextIndex < 0 || nextIndex > lastIndex || nextIndex === index) return;
+      index = nextIndex;
+      track.style.setProperty('--gallery-offset', `${-index * 100}%`);
+      slides.forEach((slide, position) => slide.setAttribute('aria-hidden', String(position !== index)));
+      thumbs.forEach((thumb, position) => thumb.setAttribute('aria-pressed', String(position === index)));
+      arrows[0].setAttribute('aria-disabled', String(index === 0));
+      arrows[1].setAttribute('aria-disabled', String(index === lastIndex));
+      status.textContent = `Image ${index + 1} of ${slides.length}`;
+    }
+
+    gallery.addEventListener('click', event => {
+      const arrow = event.target.closest('[data-gallery-step]');
+      const thumb = event.target.closest('[data-gallery-thumb]');
+      if (arrow) showImage(index + Number(arrow.dataset.galleryStep));
+      if (thumb) showImage(Number(thumb.dataset.galleryThumb));
+    });
+
+    gallery.addEventListener('keydown', event => {
+      if (!event.target.closest('[data-gallery-step], [data-gallery-thumb]')) return;
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      event.preventDefault();
+      showImage(index + (event.key === 'ArrowLeft' ? -1 : 1));
+    });
+
+    viewport.classList.add('product-gallery__viewport--draggable');
+    viewport.addEventListener('pointerdown', event => {
+      if (!event.isPrimary || event.button !== 0 || drag) return;
+      drag = { id: event.pointerId, x: event.clientX, y: event.clientY };
+      viewport.setPointerCapture(event.pointerId);
+      viewport.classList.add('is-dragging');
+    });
+
+    viewport.addEventListener('pointermove', event => {
+      if (drag?.id !== event.pointerId) return;
+      const distance = event.clientX - drag.x;
+      const width = viewport.clientWidth;
+      const offset = Math.max(index === lastIndex ? 0 : -width, Math.min(index === 0 ? 0 : width, distance));
+      track.style.setProperty('--gallery-drag', `${offset}px`);
+    });
+
+    function endDrag(event) {
+      if (drag?.id !== event.pointerId) return;
+      const horizontal = event.clientX - drag.x;
+      const vertical = event.clientY - drag.y;
+      const threshold = Math.min(60, viewport.clientWidth * 0.15);
+      drag = null;
+      viewport.classList.remove('is-dragging');
+      track.style.removeProperty('--gallery-drag');
+      if (event.type === 'pointerup' && Math.abs(horizontal) >= threshold && Math.abs(horizontal) > Math.abs(vertical)) {
+        showImage(index + (horizontal < 0 ? 1 : -1));
+      }
+    }
+
+    viewport.addEventListener('pointerup', endDrag);
+    viewport.addEventListener('pointercancel', endDrag);
+    viewport.addEventListener('lostpointercapture', endDrag);
+
+    return image => {
+      let imageIndex = slides.findIndex(slide => slide.dataset.galleryImageId === String(image.id));
+      if (imageIndex === -1 && image.src) {
+        const path = new URL(image.src, location.origin).pathname;
+        imageIndex = slides.findIndex(slide => new URL(slide.querySelector('img').src).pathname === path);
+      }
+      showImage(imageIndex);
+    };
+  }
   function updateVariant(section, variant) {
     const button = section.querySelector('[data-add-button]');
     const id = section.querySelector('[data-variant-select]');
@@ -157,11 +231,7 @@
     id.value = variant.id;
     section.querySelector('[data-variant-price]').innerHTML = money(variant.price) + (variant.compare_at_price > variant.price ? ` <s>${money(variant.compare_at_price)}</s>` : '');
     const url = new URL(location.href); url.searchParams.set('variant', variant.id); history.replaceState({}, '', url);
-    if (variant.featured_image) {
-      const main = section.querySelector('[data-gallery-main] img');
-      if (main) { main.removeAttribute('srcset'); main.src = variant.featured_image.src; main.alt = variant.featured_image.alt || ''; }
-      section.querySelectorAll('[data-gallery-image]').forEach(el => el.setAttribute('aria-pressed', String(el.dataset.galleryImage.split('?')[0] === variant.featured_image.src.split('?')[0])));
-    }
+    if (variant.featured_image) section.showGalleryImage?.(variant.featured_image);
   }
   function initProducts(scope = document) {
     scope.querySelectorAll('[data-product-section]').forEach(section => {
@@ -169,6 +239,7 @@
       section.dataset.initialized = 'true';
       section.dataset.availableText ||= section.querySelector('[data-availability]').textContent;
       section.productData = JSON.parse(section.querySelector('[data-product-json]').textContent);
+      section.showGalleryImage = initProductGallery(section);
       if (section.querySelector('[data-option-index]')) section.querySelector('[data-variant-select]').classList.add('js-variant-select');
     });
   }

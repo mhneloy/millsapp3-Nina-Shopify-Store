@@ -10,8 +10,46 @@
     {% endif %}
     <span aria-hidden="true">/</span><span aria-current="page">{{ product.title | escape }}</span>
   </nav>
-<div class="product-detail"><div class="product-gallery"><div class="product-gallery__main" data-gallery-main>{% if current_variant.featured_image or product.featured_image %}{% assign main_image = current_variant.featured_image | default: product.featured_image %}{{ main_image | image_url: width: 1600 | image_tag: widths: '540, 750, 1100, 1600', sizes: '(max-width: 700px) 100vw, 55vw', loading: 'eager', alt: main_image.alt }}{% else %}{{ 'product-1' | placeholder_svg_tag }}{% endif %}</div>
-<div class="product-gallery__thumbs">{% for media in product.media %}{% if media.media_type == 'image' %}<button class="nfc-button nfc-button--gallery" type="button" data-gallery-image="{{ media | image_url: width: 1600 }}" data-image-alt="{{ media.alt | escape }}" aria-label="View image {{ forloop.index }}" aria-pressed="{% if media.id == main_image.id %}true{% else %}false{% endif %}">{{ media | image_url: width: 180 | image_tag: loading: 'lazy', alt: media.alt }}</button>{% endif %}{% endfor %}</div>
+<div class="product-detail"><div class="product-gallery" data-product-gallery>
+  {% liquid
+    assign main_image = current_variant.featured_image | default: product.featured_image
+    assign initial_image_index = 0
+    for image in product.images
+      if image.id == main_image.id
+        assign initial_image_index = forloop.index0
+        break
+      endif
+    endfor
+    assign initial_offset = initial_image_index | times: -100
+  %}
+  <div class="product-gallery__main">
+    {% if product.images.size > 0 %}
+      <div class="product-gallery__viewport" data-gallery-viewport>
+        <div class="product-gallery__track" data-gallery-track style="--gallery-offset: {{ initial_offset }}%;">
+          {% for image in product.images %}
+            {% assign image_loading = 'lazy' %}
+            {% if forloop.index0 == initial_image_index %}{% assign image_loading = 'eager' %}{% endif %}
+            <div class="product-gallery__slide" data-gallery-image-id="{{ image.id }}" aria-hidden="{% if forloop.index0 == initial_image_index %}false{% else %}true{% endif %}">
+              {{ image | image_url: width: 1600 | image_tag: widths: '540, 750, 1100, 1600', sizes: '(max-width: 700px) 100vw, 55vw', loading: image_loading, alt: image.alt, draggable: 'false' }}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% if product.images.size > 1 %}
+        <button class="nfc-button product-gallery__arrow product-gallery__arrow--previous" type="button" data-gallery-step="-1" aria-label="Previous product image" aria-disabled="{% if initial_image_index == 0 %}true{% else %}false{% endif %}">{% render 'nfc-icon', name: 'arrow' %}</button>
+        {% assign last_image_index = product.images.size | minus: 1 %}
+        <button class="nfc-button product-gallery__arrow product-gallery__arrow--next" type="button" data-gallery-step="1" aria-label="Next product image" aria-disabled="{% if initial_image_index == last_image_index %}true{% else %}false{% endif %}">{% render 'nfc-icon', name: 'arrow' %}</button>
+        <span class="sr-only" data-gallery-status role="status"></span>
+      {% endif %}
+    {% else %}
+      {{ 'product-1' | placeholder_svg_tag }}
+    {% endif %}
+  </div>
+  <div class="product-gallery__thumbs">
+    {% for image in product.images %}
+      <button class="nfc-button nfc-button--gallery" type="button" data-gallery-thumb="{{ forloop.index0 }}" aria-label="View image {{ forloop.index }}" aria-pressed="{% if forloop.index0 == initial_image_index %}true{% else %}false{% endif %}">{{ image | image_url: width: 180 | image_tag: loading: 'lazy', alt: '' }}</button>
+    {% endfor %}
+  </div>
 {% for media in product.media %}{% unless media.media_type == 'image' %}<div class="product-extra-media">{{ media | media_tag: image_size: '1100x', controls: true, preload: 'none' }}</div>{% endunless %}{% endfor %}</div>
 <div class="product-detail__info"><p class="eyebrow">{{ section.settings.eyebrow | escape }}{% if section.settings.show_vendor %} / {{ product.vendor | escape }}{% endif %}</p><h1>{{ product.title | escape }}</h1><span class="product-price" data-variant-price>{{ current_variant.price | money }} {% if current_variant.compare_at_price > current_variant.price %}<s>{{ current_variant.compare_at_price | money }}</s>{% endif %}</span><div class="product-detail__description rte">{{ product.description }}</div>
 {% form 'product', product, id: product_form_id, data-add-to-cart: '' %}
