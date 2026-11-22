@@ -2,5 +2,22 @@
 {%- if product_collection != blank and product_collection.handle != 'all' -%}
   {%- assign product_link = product.url | within: product_collection -%}
 {%- endif -%}
-<article class="product-card"{% if show_collection_handles %} data-product-collections="{{ product.collections | map: 'handle' | join: ' ' | escape }}"{% endif %}><div class="product-card__visual"><a href="{{ product_link | escape }}" class="product-card__image-link">{% if product.featured_image %}{{ product.featured_image | image_url: width: 900 | image_tag: widths: '240, 360, 540, 750, 900', sizes: '(max-width: 700px) 50vw, 25vw', loading: 'lazy', alt: product.title }}{% else %}<div class="product-card__no-image">{{ 'product-1' | placeholder_svg_tag }}<span>{{ product.title | escape }}</span></div>{% endif %}</a>{% unless product.available %}<span class="product-badge">Sold out</span>{% endunless %}<a href="{{ product_link | escape }}" class="nfc-button nfc-button--quick product-card__quick" data-quick-view="{{ product.url | escape }}">Quick view {% render 'nfc-icon', name: 'arrow' %}</a></div>
+{%- assign hover_image = product.images[1] -%}
+{%- assign card_image_widths = '240, 360, 540, 750, 900' -%}
+{%- assign card_image_sizes = '(max-width: 700px) 50vw, 25vw' -%}
+<article class="product-card"{% if show_collection_handles %} data-product-collections="{{ product.collections | map: 'handle' | join: ' ' | escape }}"{% endif %}>
+  <div class="product-card__visual">
+    <a href="{{ product_link | escape }}" class="product-card__image-link{% if hover_image != blank %} product-card__image-link--with-hover{% endif %}">
+      {% if product.featured_image %}
+        {{ product.featured_image | image_url: width: 900 | image_tag: widths: card_image_widths, sizes: card_image_sizes, loading: 'lazy', alt: product.title }}
+        {% if hover_image != blank %}
+          {{ hover_image | image_url: width: 900 | image_tag: widths: card_image_widths, sizes: card_image_sizes, loading: 'lazy', class: 'product-card__hover-image', alt: '' }}
+        {% endif %}
+      {% else %}
+        <div class="product-card__no-image">{{ 'product-1' | placeholder_svg_tag }}<span>{{ product.title | escape }}</span></div>
+      {% endif %}
+    </a>
+    {% unless product.available %}<span class="product-badge">Sold out</span>{% endunless %}
+    <a href="{{ product_link | escape }}" class="nfc-button nfc-button--quick product-card__quick" data-quick-view="{{ product.url | escape }}">Quick view {% render 'nfc-icon', name: 'arrow' %}</a>
+  </div>
 <div class="product-card__info"><a class="product-card__title" href="{{ product_link | escape }}">{{ product.title | escape }}</a>{% render 'nfc-price', product: product %}{% if product.available %}{% if product.has_only_default_variant %}<form method="post" action="{{ routes.cart_add_url }}" data-add-to-cart class="product-card__add"><input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}"><input type="hidden" name="quantity" value="1"><button class="nfc-button nfc-button--text" type="submit">Add to bag {% render 'nfc-icon', name: 'plus' %}</button><span class="form-note" data-form-status role="status"></span></form>{% else %}<a class="nfc-button nfc-button--text product-card__add" href="{{ product_link | escape }}">Choose options {% render 'nfc-icon', name: 'plus' %}</a>{% endif %}{% endif %}</div></article>
