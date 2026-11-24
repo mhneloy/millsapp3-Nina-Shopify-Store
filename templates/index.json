@@ -153,7 +153,9 @@
     "featured": {
       "type": "nfc-featured",
       "custom_css": [
-        "p.eyebrow {font-size: 14px; color: blue;}"
+        "p.eyebrow {font-size: 14px; color: blue;}",
+        ".collection-heading {grid-template-columns: 1fr auto 1fr; align-items: end; gap: 28px; margin-bottom: 35px; display: grid;}",
+        ".collection-heading >div {text-align: center;}"
       ],
       "settings": {
         "eyebrow": "JESUS COLLECTION",
