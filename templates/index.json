@@ -14,14 +14,13 @@
       "custom_css": [
         ".campaign-hero__actions a {display: none;}",
         ".campaign-hero__content {justify-content: space-around;}",
-        ".campaign-hero__scroll {display: none;}",
-        "p.eyebrow.campaign-hero__eyebrow {font-size: 18px;}"
+        ".campaign-hero__scroll {display: none;}"
       ],
       "settings": {
-        "eyebrow": "NUTS FOR CHRIST · STREETWEAR",
+        "eyebrow": "",
         "heading": "",
         "copy": "",
-        "image": "shopify://shop_images/Vibrant_Faith_Graffiti_Group_Portrait.webp",
+        "image": "shopify://shop_images/Nuts_for_Christ_Sunset_Header_Banner.png",
         "mobile_image": "shopify://shop_images/Nuts_for_Christ_Sunset_Street_Poster.webp",
         "mobile_image_fit": "adapt",
         "mobile_height": 640,
@@ -32,7 +31,7 @@
         "secondary_link": "",
         "index_label": "01 / 03",
         "height": 780,
-        "overlay": 50,
+        "overlay": 0,
         "nfc_background_color": "",
         "nfc_heading_color": "",
         "nfc_text_color": "",
