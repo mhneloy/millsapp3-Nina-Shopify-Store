@@ -117,7 +117,9 @@
       ],
       "custom_css": [
         ".category-tile {aspect-ratio: 1;}",
-        ".category-tile img {object-fit: fill;}"
+        ".category-tile img {object-fit: fill;}",
+        "h2 {text-align: center;}",
+        "p.eyebrow {text-align: center;}"
       ],
       "settings": {
         "eyebrow": "THE COLLECTION",
