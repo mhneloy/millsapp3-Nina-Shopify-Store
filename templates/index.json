@@ -159,8 +159,8 @@
         "@media screen and (min-width: 990px) {.collection-heading {display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 28px; margin-bottom: 35px; } .collection-heading > div {grid-column: 2; grid-row: 1; text-align: center; } .collection-heading > a.nfc-button {grid-column: 3; grid-row: 1; justify-self: end; }}"
       ],
       "settings": {
-        "eyebrow": "JESUS COLLECTION",
-        "heading": "FAITH IN EVERY FIT",
+        "eyebrow": "FAITH IN EVERY FIT",
+        "heading": "JESUS COLLECTION",
         "copy": "Wear The Name That Changes Everything!",
         "button_label": "View all products",
         "collection": "jesus-collection",
@@ -202,8 +202,8 @@
         "@media screen and (min-width: 990px) {.collection-heading {display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 28px; margin-bottom: 35px; } .collection-heading > div {grid-column: 2; grid-row: 1; text-align: center; } .collection-heading > a.nfc-button {grid-column: 3; grid-row: 1; justify-self: end; }}"
       ],
       "settings": {
-        "eyebrow": "NUTS FOR CHRIST COLLECTION",
-        "heading": "FAITH IN EVERY FIT",
+        "eyebrow": "FAITH IN EVERY FIT",
+        "heading": "NUTS FOR CHRIST COLLECTION",
         "copy": "Created To Start Conversations and Spread the Gospel!",
         "button_label": "View all products",
         "collection": "nuts-for-christ-collection",
@@ -245,8 +245,8 @@
         "@media screen and (min-width: 990px) {.collection-heading {display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 28px; margin-bottom: 35px; } .collection-heading > div {grid-column: 2; grid-row: 1; text-align: center; } .collection-heading > a.nfc-button {grid-column: 3; grid-row: 1; justify-self: end; }}"
       ],
       "settings": {
-        "eyebrow": "YOUNG RICH RULER COLLECTION",
-        "heading": "FAITH IN EVERY FIT",
+        "eyebrow": "FAITH IN EVERY FIT",
+        "heading": "YOUNG RICH RULER COLLECTION",
         "copy": "Walk In Purpose. Live With External Value.",
         "button_label": "View all products",
         "collection": "young-rich-ruler-collection",
