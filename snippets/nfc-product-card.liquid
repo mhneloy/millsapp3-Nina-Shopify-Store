@@ -3,13 +3,14 @@
   {%- assign product_link = product.url | within: product_collection -%}
 {%- endif -%}
 {%- assign hover_image = product.images[1] -%}
+{%- assign featured_image = product.featured_image -%}
 {%- assign card_image_widths = '240, 360, 540, 750, 900' -%}
 {%- assign card_image_sizes = image_sizes | default: '(max-width: 700px) 50vw, 25vw' -%}
 <article class="product-card"{% if show_collection_handles %} data-product-collections="{{ product.collections | map: 'handle' | join: ' ' | escape }}"{% endif %}>
-  <div class="product-card__visual">
+  <div class="product-card__visual"{% if featured_image %} style="--card-photo-ratio: {{ featured_image.width }} / {{ featured_image.height }};{% if hover_image != blank %} --card-hover-photo-ratio: {{ hover_image.width }} / {{ hover_image.height }};{% endif %}"{% endif %}>
     <a href="{{ product_link | escape }}" class="product-card__image-link{% if hover_image != blank %} product-card__image-link--with-hover{% endif %}">
-      {% if product.featured_image %}
-        {{ product.featured_image | image_url: width: 900 | image_tag: widths: card_image_widths, sizes: card_image_sizes, loading: 'lazy', alt: product.title }}
+      {% if featured_image %}
+        {{ featured_image | image_url: width: 900 | image_tag: widths: card_image_widths, sizes: card_image_sizes, loading: 'lazy', alt: product.title }}
         {% if hover_image != blank %}
           {{ hover_image | image_url: width: 900 | image_tag: widths: card_image_widths, sizes: card_image_sizes, loading: 'lazy', class: 'product-card__hover-image', alt: '' }}
         {% endif %}

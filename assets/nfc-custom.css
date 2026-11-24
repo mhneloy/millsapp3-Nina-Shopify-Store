@@ -167,6 +167,40 @@
 .product-badge{position:absolute;left:12px;top:12px;background:var(--ink);color:var(--on-dark);padding:5px 8px;font-size:9px;text-transform:uppercase;letter-spacing:.07em}
 .product-card__no-image svg{width:100%;height:100%;max-height:250px}
 
+@supports (width: 1cqw) {
+  .product-card__visual {
+    container-type: inline-size;
+  }
+
+  .product-card__quick {
+    --quick-view-gap: 12px;
+    --quick-view-height: 42px;
+    --photo-ratio: var(--card-photo-ratio, var(--card-frame-ratio));
+    /* Match the space left by the centered, contained image. */
+    --photo-side-space: max(0px, calc((100cqw - 100cqw / (var(--card-frame-ratio)) * (var(--photo-ratio))) / 2));
+    --photo-bottom-space: max(0px, calc(50% - 50cqw / (var(--photo-ratio))));
+    inset-inline: max(var(--quick-view-gap), min(calc(var(--quick-view-gap) + var(--photo-side-space)), calc((100% - 90px) / 2)));
+    bottom: min(calc(var(--quick-view-gap) + var(--photo-bottom-space)), max(0px, calc(100% - var(--quick-view-height))));
+  }
+
+  .product-card__image-link--with-hover:focus-visible ~ .product-card__quick {
+    --photo-ratio: var(--card-hover-photo-ratio, var(--card-photo-ratio));
+  }
+
+  @media (hover: hover) {
+    .product-card:hover .product-card__quick {
+      --photo-ratio: var(--card-hover-photo-ratio, var(--card-photo-ratio, var(--card-frame-ratio)));
+    }
+  }
+
+  @media (max-width: 700px) {
+    .product-card__quick {
+      --quick-view-gap: 7px;
+      --quick-view-height: 36px;
+    }
+  }
+}
+
 .product-card__image-link--with-hover {
   position: relative;
 }
