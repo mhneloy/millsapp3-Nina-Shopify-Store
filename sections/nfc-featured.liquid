@@ -1,5 +1,50 @@
 {% render 'nfc-section-style', section: section %}
-{% assign featured = section.settings.collection | default: collections.all %}<section class="collection-section"><div class="page-width"><div class="collection-heading"><div><div class="section-heading"><p class="eyebrow">{{ section.settings.eyebrow | escape }}</p><h2>{{ section.settings.heading | escape | newline_to_br }}</h2></div><p class="section-heading__description">{{ section.settings.copy | escape }}</p></div><a class="nfc-button nfc-button--line" href="{{ featured.url | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }} {% render 'nfc-icon', name: 'arrow' %}</a></div>{% if featured.products.size > 0 %}<div class="product-grid">{% for product in featured.products limit: section.settings.limit %}{% render 'nfc-product-card', product: product %}{% endfor %}</div>{% else %}{% render 'nfc-empty' %}{% endif %}</div></section>
+{% liquid
+  assign featured = section.settings.collection | default: collections.all
+  assign columns_desktop = section.settings.columns_desktop | default: 4
+  assign columns_mobile = section.settings.columns_mobile | default: 2
+  assign image_width_desktop = 100.0 | divided_by: columns_desktop | round: 2
+  assign image_width_mobile = 100.0 | divided_by: columns_mobile | round: 2
+%}
+{% capture card_image_sizes %}(max-width: 1024px) {{ image_width_mobile }}vw, {{ image_width_desktop }}vw{% endcapture %}
+
+{% style %}
+  #shopify-section-{{ section.id }} .nfc-featured-grid {
+    grid-template-columns: repeat({{ columns_desktop }}, minmax(0, 1fr));
+  }
+
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .nfc-featured-grid {
+      grid-template-columns: repeat({{ columns_mobile }}, minmax(0, 1fr));
+    }
+  }
+{% endstyle %}
+
+<section class="collection-section">
+  <div class="page-width">
+    <div class="collection-heading">
+      <div>
+        <div class="section-heading">
+          <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+          <h2>{{ section.settings.heading | escape | newline_to_br }}</h2>
+        </div>
+        <p class="section-heading__description">{{ section.settings.copy | escape }}</p>
+      </div>
+      <a class="nfc-button nfc-button--line" href="{{ featured.url | default: routes.all_products_collection_url }}">
+        {{ section.settings.button_label | escape }} {% render 'nfc-icon', name: 'arrow' %}
+      </a>
+    </div>
+    {% if featured.products.size > 0 %}
+      <div class="product-grid nfc-featured-grid">
+        {% for product in featured.products limit: section.settings.limit %}
+          {% render 'nfc-product-card', product: product, image_sizes: card_image_sizes %}
+        {% endfor %}
+      </div>
+    {% else %}
+      {% render 'nfc-empty' %}
+    {% endif %}
+  </div>
+</section>
 {% schema %}
 {
   "name": "NFC featured collection",
@@ -41,6 +86,24 @@
       "max": 24,
       "step": 4,
       "default": 8
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Cards per row on desktop",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "label": "Cards per row on mobile and tablet",
+      "min": 1,
+      "max": 2,
+      "step": 1,
+      "default": 2
     },
     {
       "type": "header",

@@ -4,7 +4,7 @@
 {%- endif -%}
 {%- assign hover_image = product.images[1] -%}
 {%- assign card_image_widths = '240, 360, 540, 750, 900' -%}
-{%- assign card_image_sizes = '(max-width: 700px) 50vw, 25vw' -%}
+{%- assign card_image_sizes = image_sizes | default: '(max-width: 700px) 50vw, 25vw' -%}
 <article class="product-card"{% if show_collection_handles %} data-product-collections="{{ product.collections | map: 'handle' | join: ' ' | escape }}"{% endif %}>
   <div class="product-card__visual">
     <a href="{{ product_link | escape }}" class="product-card__image-link{% if hover_image != blank %} product-card__image-link--with-hover{% endif %}">
