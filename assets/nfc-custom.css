@@ -2,6 +2,7 @@
 .nfc-storefront :is(p:not(.eyebrow), .rte, .shopify-policy__body){font-size:14px}
 .nfc-storefront :is(.desktop-nav a,.desktop-nav summary,.mobile-nav-links a,.mobile-nav-links summary,.nav-dropdown,.site-footer__column a,.social-links a){font-size:14px}
 .page-width{width:min(100% - 64px,var(--page-width,1440px))}
+.template-collection > main{background:var(--paper)}
 .category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 .category-tile{min-width:0;width:100%}
 .skip-link{position:fixed;top:8px;left:8px;z-index:1000;background:var(--ink);color:var(--on-dark);padding:12px;transform:translateY(-150%)}

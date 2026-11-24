@@ -55,14 +55,17 @@
     }
   {% endstyle %}
 {%- endif -%}
-<section class="campaign-hero" style="--hero-height:{{ section.settings.height }}px;--hero-shade:{{ section.settings.overlay | divided_by: 100.0 }}" aria-labelledby="HeroTitle-{{ section.id }}">
+{%- assign overlay_opacity = section.settings.overlay | default: 0 -%}
+<section class="campaign-hero" style="--hero-height:{{ section.settings.height }}px" aria-labelledby="HeroTitle-{{ section.id }}">
 <picture class="campaign-hero__media">
   {%- if section.settings.mobile_image != blank -%}
     <source media="(max-width: 700px)" srcset="{{ mobile_srcset | strip | escape }}" sizes="100vw" width="{{ mobile_image.width }}" height="{{ mobile_image.height }}">
   {%- endif -%}
   {% render 'nfc-image', image: section.settings.image, fallback: 'nfc-campaign-hero.jpg', class: 'campaign-hero__image', alt: section.settings.image_alt, loading: 'eager', sizes: '100vw' %}
 </picture>
-<div class="campaign-hero__shade"></div>
+{% if overlay_opacity > 0 %}
+  <div class="campaign-hero__shade" style="--hero-shade:{{ overlay_opacity | divided_by: 100.0 }}"></div>
+{% endif %}
 <div class="campaign-hero__content page-width"><p class="eyebrow campaign-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p><h1 id="HeroTitle-{{ section.id }}">{{ section.settings.heading | escape | newline_to_br }}</h1><p class="campaign-hero__copy">{{ section.settings.copy | escape }}</p><div class="campaign-hero__actions"><a class="nfc-button nfc-button--hero" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }} {% render 'nfc-icon', name: 'arrow' %}</a><a class="hero-text-link" href="{{ section.settings.secondary_link | default: routes.all_products_collection_url }}">{{ section.settings.secondary_label | escape }} {% render 'nfc-icon', name: 'arrow' %}</a></div></div>
 <a class="campaign-hero__scroll" href="#collection" aria-label="Explore the collection">{% render 'nfc-icon', name: 'down' %}</a><span class="campaign-hero__index">{{ section.settings.index_label | escape }}</span></section>
 {% schema %}
@@ -172,7 +175,7 @@
       "max": 100,
       "step": 5,
       "unit": "%",
-      "default": 85
+      "default": 0
     },
     {
       "type": "header",
