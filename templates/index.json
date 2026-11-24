@@ -152,6 +152,9 @@
     },
     "featured": {
       "type": "nfc-featured",
+      "custom_css": [
+        "p.eyebrow {font-size: 14px; color: blue;}"
+      ],
       "settings": {
         "eyebrow": "JESUS COLLECTION",
         "heading": "FAITH IN EVERY FIT",
@@ -191,6 +194,9 @@
     },
     "nfc_featured_NJBycB": {
       "type": "nfc-featured",
+      "custom_css": [
+        "p.eyebrow {font-size: 14px; color: blue;}"
+      ],
       "settings": {
         "eyebrow": "NUTS FOR CHRIST COLLECTION",
         "heading": "FAITH IN EVERY FIT",
@@ -230,6 +236,9 @@
     },
     "nfc_featured_MrQLTc": {
       "type": "nfc-featured",
+      "custom_css": [
+        "p.eyebrow {font-size: 14px; color: blue;}"
+      ],
       "settings": {
         "eyebrow": "YOUNG RICH RULER COLLECTION",
         "heading": "FAITH IN EVERY FIT",
