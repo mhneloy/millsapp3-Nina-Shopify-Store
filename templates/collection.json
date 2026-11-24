@@ -16,7 +16,7 @@
         "heading": "",
         "columns_desktop": 4,
         "columns_mobile": 1,
-        "card_image_ratio": "default",
+        "card_image_ratio": "1/1",
         "per_page": 16,
         "show_filters": true,
         "nfc_background_color": "",
