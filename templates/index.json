@@ -183,7 +183,7 @@
         "nfc_heading_size_mobile": 36,
         "nfc_paragraph_size": 14,
         "nfc_paragraph_size_mobile": 14,
-        "nfc_padding_desktop": "",
+        "nfc_padding_desktop": "60px 20px 0px 20px",
         "nfc_padding_mobile": "",
         "nfc_margin_desktop": "",
         "nfc_margin_mobile": ""
@@ -222,7 +222,7 @@
         "nfc_heading_size_mobile": 36,
         "nfc_paragraph_size": 14,
         "nfc_paragraph_size_mobile": 14,
-        "nfc_padding_desktop": "",
+        "nfc_padding_desktop": "60px 20px 0px 20px",
         "nfc_padding_mobile": "",
         "nfc_margin_desktop": "",
         "nfc_margin_mobile": ""
@@ -261,7 +261,7 @@
         "nfc_heading_size_mobile": 36,
         "nfc_paragraph_size": 14,
         "nfc_paragraph_size_mobile": 14,
-        "nfc_padding_desktop": "",
+        "nfc_padding_desktop": "60px 20px 60px 20px",
         "nfc_padding_mobile": "",
         "nfc_margin_desktop": "",
         "nfc_margin_mobile": ""
