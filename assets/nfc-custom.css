@@ -172,7 +172,7 @@
 }
 
 .product-card__image-link--with-hover > img {
-  transition-property: opacity, transform;
+  transition: opacity .55s cubic-bezier(.2,.7,.2,1);
 }
 
 .product-card__hover-image {
