@@ -154,9 +154,7 @@
       "type": "nfc-featured",
       "custom_css": [
         "p.eyebrow {font-size: 14px; color: blue;}",
-        ".collection-heading {display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 28px; margin-bottom: 35px;}",
-        ".collection-heading > div {grid-column: 2; grid-row: 1; text-align: center;}",
-        ".collection-heading > a.nfc-button {grid-column: 3; grid-row: 1; justify-self: end;}"
+        "@media screen and (min-width: 990px) {.collection-heading {display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 28px; margin-bottom: 35px; } .collection-heading > div {grid-column: 2; grid-row: 1; text-align: center; } .collection-heading > a.nfc-button {grid-column: 3; grid-row: 1; justify-self: end; }}"
       ],
       "settings": {
         "eyebrow": "JESUS COLLECTION",
@@ -199,9 +197,7 @@
       "type": "nfc-featured",
       "custom_css": [
         "p.eyebrow {font-size: 14px; color: blue;}",
-        ".collection-heading {display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 28px; margin-bottom: 35px;}",
-        ".collection-heading > div {grid-column: 2; grid-row: 1; text-align: center;}",
-        ".collection-heading > a.nfc-button {grid-column: 3; grid-row: 1; justify-self: end;}"
+        "@media screen and (min-width: 990px) {.collection-heading {display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 28px; margin-bottom: 35px; } .collection-heading > div {grid-column: 2; grid-row: 1; text-align: center; } .collection-heading > a.nfc-button {grid-column: 3; grid-row: 1; justify-self: end; }}"
       ],
       "settings": {
         "eyebrow": "NUTS FOR CHRIST COLLECTION",
@@ -244,9 +240,7 @@
       "type": "nfc-featured",
       "custom_css": [
         "p.eyebrow {font-size: 14px; color: blue;}",
-        ".collection-heading {display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 28px; margin-bottom: 35px;}",
-        ".collection-heading > div {grid-column: 2; grid-row: 1; text-align: center;}",
-        ".collection-heading > a.nfc-button {grid-column: 3; grid-row: 1; justify-self: end;}"
+        "@media screen and (min-width: 990px) {.collection-heading {display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 28px; margin-bottom: 35px; } .collection-heading > div {grid-column: 2; grid-row: 1; text-align: center; } .collection-heading > a.nfc-button {grid-column: 3; grid-row: 1; justify-self: end; }}"
       ],
       "settings": {
         "eyebrow": "YOUNG RICH RULER COLLECTION",
