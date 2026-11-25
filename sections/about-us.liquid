@@ -1,0 +1,904 @@
+{% liquid
+  assign s = section.settings
+%}
+{% style %}
+  {{ s.heading_font | font_face: font_display: 'swap' }}
+  {{ s.body_font | font_face: font_display: 'swap' }}
+  #FaithAbout-{{ section.id }} { --fa-accent: {{ s.accent }}; background: {{ s.background }}; color: {{ s.text_color }}; font-family: {{ s.body_font.family }}, {{ s.body_font.fallback_families }}; font-weight: {{ s.body_font.weight }}; padding: {{ s.padding_top }}px 20px {{ s.padding_bottom }}px; font-size: {{ s.body_size }}px; line-height: 1.75; }
+  #FaithAbout-{{ section.id }} * { box-sizing: border-box; }
+  #FaithAbout-{{ section.id }} .fa-wrap { max-width: {{ s.max_width }}px; margin: auto; }
+  #FaithAbout-{{ section.id }} .fa-intro { max-width: 820px; margin: 0 auto {{ s.block_gap }}px; text-align: {{ s.intro_align }}; }
+  #FaithAbout-{{ section.id }} h1, #FaithAbout-{{ section.id }} h2, #FaithAbout-{{ section.id }} h3 { font-family: {{ s.heading_font.family }}, {{ s.heading_font.fallback_families }}; font-weight: {{ s.heading_font.weight }}; color: inherit; line-height: 1.15; margin: 0 0 20px; letter-spacing: -.025em; }
+  #FaithAbout-{{ section.id }} h1, #FaithAbout-{{ section.id }} .fa-main-title { font-size: {{ s.heading_size }}px; }
+  #FaithAbout-{{ section.id }} h2 { font-size: {{ s.block_heading_size }}px; }
+  #FaithAbout-{{ section.id }} .fa-kicker { color: var(--fa-accent); text-transform: uppercase; letter-spacing: .18em; font-size: 12px; font-weight: 600; margin: 0 0 14px; }
+  #FaithAbout-{{ section.id }} .fa-stack { display: grid; gap: {{ s.block_gap }}px; }
+  #FaithAbout-{{ section.id }} .fa-story { display: grid; grid-template-columns: minmax(0,var(--fa-image-width)) minmax(0,1fr); align-items: var(--fa-align); gap: {{ s.column_gap }}px; padding: var(--fa-pad); background: var(--fa-bg); color: var(--fa-text); border-radius: {{ s.card_radius }}px; }
+  #FaithAbout-{{ section.id }} .fa-story.fa-right { grid-template-columns: minmax(0,1fr) minmax(0,var(--fa-image-width)); }
+  #FaithAbout-{{ section.id }} .fa-right .fa-media { order: 2; }
+  #FaithAbout-{{ section.id }} .fa-media { min-width: 0; }
+  #FaithAbout-{{ section.id }} .fa-frame { position: relative; border-radius: var(--fa-radius); }
+  #FaithAbout-{{ section.id }} .fa-frame.fa-border { outline: 1px solid var(--fa-accent); outline-offset: 6px; }
+  #FaithAbout-{{ section.id }} .fa-frame.fa-shadow { box-shadow: 0 18px 45px rgba(0,0,0,.12); }
+  #FaithAbout-{{ section.id }} .fa-image { display: block; width: 100%; height: auto; border-radius: inherit; object-fit: var(--fa-fit); aspect-ratio: var(--fa-ratio); }
+  #FaithAbout-{{ section.id }} .fa-placeholder { width: 100%; display: block; background: #e9e3d8; border-radius: inherit; }
+  #FaithAbout-{{ section.id }} .fa-copy { min-width: 0; text-align: var(--fa-copy-align); overflow-wrap: anywhere; }
+  #FaithAbout-{{ section.id }} .fa-rich p { margin: 0 0 1em; }
+  #FaithAbout-{{ section.id }} .fa-rich a { color: inherit; text-decoration: underline; }
+  #FaithAbout-{{ section.id }} .fa-quote { margin: 24px 0 0; padding: 10px 18px; border-inline-start: 2px solid var(--fa-accent); font-style: italic; }
+  #FaithAbout-{{ section.id }} .fa-ref { display: block; font-size: 12px; color: var(--fa-accent); font-style: normal; letter-spacing: .08em; margin-top: 8px; }
+  #FaithAbout-{{ section.id }} .fa-name { font-weight: 600; margin: 20px 0 0; }
+  #FaithAbout-{{ section.id }} .fa-role { font-size: .85em; margin: 0; }
+  #FaithAbout-{{ section.id }} .fa-button { display: inline-flex; align-items: center; justify-content: center; gap: 12px; background: var(--fa-button-bg); color: var(--fa-button-text); padding: 13px 24px; border-radius: {{ s.button_radius }}px; text-decoration: none; margin-top: 24px; transition: transform .2s, opacity .2s; }
+  #FaithAbout-{{ section.id }} .fa-button:hover { transform: translateY(-2px); opacity: .85; }
+  #FaithAbout-{{ section.id }} a:focus-visible { outline: 2px solid var(--fa-accent); outline-offset: 4px; }
+  #FaithAbout-{{ section.id }} .fa-values { display: grid; grid-template-columns: repeat({{ s.value_columns }},minmax(0,1fr)); gap: 16px; }
+  #FaithAbout-{{ section.id }} .fa-value, #FaithAbout-{{ section.id }} .fa-banner { background: var(--fa-bg); color: var(--fa-text); padding: var(--fa-pad); border-radius: {{ s.card_radius }}px; text-align: center; overflow-wrap: anywhere; }
+  #FaithAbout-{{ section.id }} .fa-value h3 { font-size: 25px; margin: 12px 0; }
+  #FaithAbout-{{ section.id }} .fa-symbol { font-size: 32px; line-height: 1; color: var(--fa-accent); }
+  #FaithAbout-{{ section.id }} .fa-banner .fa-rich { max-width: 760px; margin: auto; }
+  #FaithAbout-{{ section.id }} .fa-pending { opacity: 0; transform: translateY(18px); }
+  #FaithAbout-{{ section.id }} .fa-reveal { transition: opacity .65s ease, transform .65s ease; }
+  @media(max-width: 749px) {
+    #FaithAbout-{{ section.id }} { padding: {{ s.mobile_top }}px 16px {{ s.mobile_bottom }}px; font-size: {{ s.mobile_body }}px; }
+    #FaithAbout-{{ section.id }} h1, #FaithAbout-{{ section.id }} .fa-main-title { font-size: {{ s.mobile_heading }}px; }
+    #FaithAbout-{{ section.id }} h2 { font-size: {{ s.mobile_block_heading }}px; }
+    #FaithAbout-{{ section.id }} .fa-stack { gap: {{ s.mobile_gap }}px; }
+    #FaithAbout-{{ section.id }} .fa-intro { margin-bottom: {{ s.mobile_gap }}px; }
+    #FaithAbout-{{ section.id }} .fa-story, #FaithAbout-{{ section.id }} .fa-story.fa-right { grid-template-columns: minmax(0,1fr); gap: 28px; padding: var(--fa-mobile-pad); }
+    #FaithAbout-{{ section.id }} .fa-story .fa-media { order: 0; }
+    #FaithAbout-{{ section.id }} .fa-story.fa-mobile-text .fa-media { order: 2; }
+    #FaithAbout-{{ section.id }} .fa-values { grid-template-columns: repeat({{ s.mobile_columns }},minmax(0,1fr)); }
+    #FaithAbout-{{ section.id }} .fa-value, #FaithAbout-{{ section.id }} .fa-banner { padding: var(--fa-mobile-pad); }
+  }
+  @media(prefers-reduced-motion: reduce) { #FaithAbout-{{ section.id }} .fa-reveal, #FaithAbout-{{ section.id }} .fa-pending { opacity: 1; transform: none; transition: none; } }
+{% endstyle %}
+<section id="FaithAbout-{{ section.id }}" data-fa-animation="{{ s.animation }}">
+  <div class="fa-wrap">
+    {% if s.show_intro %}
+      <header class="fa-intro fa-reveal">
+        {% if s.eyebrow != blank %}<p class="fa-kicker">{{ s.eyebrow | escape }}</p>{% endif %}
+        {% if s.heading != blank %}<{{ s.heading_tag }} class="fa-main-title">{{ s.heading | escape }}</{{ s.heading_tag }}>{% endif %}
+        <div class="fa-rich">{{ s.intro }}</div>
+      </header>
+    {% endif %}
+    <div class="fa-stack">
+      {% for block in section.blocks %}
+        {% assign b = block.settings %}
+        {% assign previous_index = forloop.index0 | minus: 1 %}
+        {% assign next_index = forloop.index0 | plus: 1 %}
+        {% assign previous_block = section.blocks[previous_index] %}
+        {% assign next_block = section.blocks[next_index] %}
+        {% capture block_style %}--fa-bg:{{ b.background }};--fa-text:{{ b.text_color }};--fa-accent:{{ b.accent }};--fa-pad:{{ b.padding }}px;--fa-mobile-pad:{{ b.mobile_padding }}px;--fa-button-bg:{{ b.button_bg }};--fa-button-text:{{ b.button_text_color }};{% endcapture %}
+        {% case block.type %}
+          {% when 'story' %}
+            <article class="fa-story fa-reveal {% if b.image_position == 'right' %}fa-right{% endif %} {% if b.mobile_order == 'text' %}fa-mobile-text{% endif %}" style="{{ block_style }}--fa-image-width:{{ b.image_width }}%;--fa-radius:{{ b.image_radius }}px;--fa-ratio:{{ b.image_ratio }};--fa-fit:{{ b.image_fit }};--fa-align:{{ b.vertical_align }};--fa-copy-align:{{ b.text_align }};" {{ block.shopify_attributes }}>
+              <div class="fa-media">
+                <div class="fa-frame {% if b.border %}fa-border{% endif %} {% if b.shadow %}fa-shadow{% endif %}">
+                  {% if b.image != blank %}
+                    {% assign image_alt = b.alt | default: b.image.alt | default: b.heading %}
+                    {{ b.image | image_url: width: 1800 | image_tag: widths: '360,540,750,1000,1400,1800', sizes: '(max-width: 749px) 100vw, 50vw', class: 'fa-image', loading: 'lazy', alt: image_alt }}
+                  {% else %}{{ 'image' | placeholder_svg_tag: 'fa-placeholder' }}{% endif %}
+                </div>
+              </div>
+              <div class="fa-copy">
+                {% if b.eyebrow != blank %}<p class="fa-kicker">{{ b.eyebrow | escape }}</p>{% endif %}
+                {% if b.heading != blank %}<h2>{{ b.heading | escape }}</h2>{% endif %}
+                <div class="fa-rich">{{ b.body }}</div>
+                {% if b.quote != blank %}<blockquote class="fa-quote">{{ b.quote | escape }}{% if b.reference != blank %}<cite class="fa-ref">{{ b.reference | escape }}</cite>{% endif %}</blockquote>{% endif %}
+                {% if b.name != blank %}<p class="fa-name">{{ b.name | escape }}</p>{% endif %}
+                {% if b.role != blank %}<p class="fa-role">{{ b.role | escape }}</p>{% endif %}
+                {% if b.button_label != blank and b.button_link != blank %}<a class="fa-button" href="{{ b.button_link }}">{{ b.button_label | escape }} <span aria-hidden="true">&rarr;</span></a>{% endif %}
+              </div>
+            </article>
+          {% when 'value' %}
+            {% if forloop.first or previous_block.type != 'value' %}<div class="fa-values">{% endif %}
+            <article class="fa-value fa-reveal" style="{{ block_style }}" {{ block.shopify_attributes }}>
+              {% if b.symbol != blank %}<span class="fa-symbol" aria-hidden="true">{{ b.symbol | escape }}</span>{% endif %}
+              {% if b.heading != blank %}<h3>{{ b.heading | escape }}</h3>{% endif %}
+              <div class="fa-rich">{{ b.body }}</div>
+            </article>
+            {% if forloop.last or next_block.type != 'value' %}</div>{% endif %}
+          {% when 'banner' %}
+            <div class="fa-banner fa-reveal" style="{{ block_style }}" {{ block.shopify_attributes }}>
+              {% if b.eyebrow != blank %}<p class="fa-kicker">{{ b.eyebrow | escape }}</p>{% endif %}
+              {% if b.heading != blank %}<h2>{{ b.heading | escape }}</h2>{% endif %}
+              <div class="fa-rich">{{ b.body }}</div>
+              {% if b.button_label != blank and b.button_link != blank %}<a class="fa-button" href="{{ b.button_link }}">{{ b.button_label | escape }} <span aria-hidden="true">&rarr;</span></a>{% endif %}
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<script>
+(() => {
+  const id = 'FaithAbout-{{ section.id }}';
+  const root = document.getElementById(id);
+  if (!root || root.dataset.faReady) return;
+  root.dataset.faReady = 'true';
+  if (root.dataset.faAnimation !== 'true' || !('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches || (window.Shopify && Shopify.designMode)) return;
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('fa-pending');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05 });
+  root.querySelectorAll('.fa-reveal').forEach(el => {
+    if (el.getBoundingClientRect().top > window.innerHeight) el.classList.add('fa-pending');
+    observer.observe(el);
+  });
+  const unload = event => {
+    if (event.detail.sectionId === '{{ section.id }}') {
+      observer.disconnect();
+      document.removeEventListener('shopify:section:unload', unload);
+    }
+  };
+  document.addEventListener('shopify:section:unload', unload);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Faith About Us",
+  "tag": "section",
+  "max_blocks": 30,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Introduction"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_intro",
+      "label": "Show introduction",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Faith • Family • Purpose"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Rooted in Faith. Driven by Purpose."
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Introduction",
+      "default": "<p>More than a brand. A journey of faith, love, and purpose.</p>"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading HTML tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "intro_align",
+      "label": "Introduction alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Colors and typography"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#FAF5EB"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#282119"
+    },
+    {
+      "type": "color",
+      "id": "accent",
+      "label": "Accent",
+      "default": "#987025"
+    },
+    {
+      "type": "font_picker",
+      "id": "heading_font",
+      "label": "Heading font",
+      "default": "playfair_display_n4"
+    },
+    {
+      "type": "font_picker",
+      "id": "body_font",
+      "label": "Body font",
+      "default": "assistant_n4"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Main heading size",
+      "min": 28,
+      "max": 80,
+      "step": 2,
+      "default": 54
+    },
+    {
+      "type": "range",
+      "id": "block_heading_size",
+      "label": "Block heading size",
+      "min": 24,
+      "max": 64,
+      "step": 2,
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Body size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 17
+    },
+    {
+      "type": "header",
+      "content": "Desktop layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Content width",
+      "min": 800,
+      "max": 1800,
+      "step": 20,
+      "default": 1240
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "block_gap",
+      "label": "Block spacing",
+      "min": 12,
+      "max": 100,
+      "step": 4,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "label": "Column spacing",
+      "min": 16,
+      "max": 96,
+      "step": 4,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "label": "Button radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "value_columns",
+      "label": "Value columns",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Mobile layout"
+    },
+    {
+      "type": "range",
+      "id": "mobile_top",
+      "label": "Mobile top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "mobile_bottom",
+      "label": "Mobile bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "mobile_gap",
+      "label": "Mobile block spacing",
+      "min": 12,
+      "max": 60,
+      "step": 4,
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading",
+      "label": "Mobile main heading",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "mobile_block_heading",
+      "label": "Mobile block heading",
+      "min": 20,
+      "max": 44,
+      "step": 2,
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_body",
+      "label": "Mobile body size",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "mobile_columns",
+      "label": "Mobile value columns",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "animation",
+      "label": "Enable scroll animation",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "story",
+      "name": "Image and story / bio",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Custom image alt text"
+        },
+        {
+          "type": "select",
+          "id": "image_position",
+          "label": "Desktop image position",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "select",
+          "id": "mobile_order",
+          "label": "Mobile order",
+          "options": [
+            {
+              "value": "image",
+              "label": "Image first"
+            },
+            {
+              "value": "text",
+              "label": "Text first"
+            }
+          ],
+          "default": "image"
+        },
+        {
+          "type": "range",
+          "id": "image_width",
+          "label": "Desktop image width (%)",
+          "min": 30,
+          "max": 60,
+          "step": 5,
+          "default": 45
+        },
+        {
+          "type": "select",
+          "id": "image_ratio",
+          "label": "Image aspect ratio",
+          "options": [
+            {
+              "value": "auto",
+              "label": "Original"
+            },
+            {
+              "value": "2 / 3",
+              "label": "Portrait 2:3"
+            },
+            {
+              "value": "3 / 4",
+              "label": "Portrait 3:4"
+            },
+            {
+              "value": "1 / 1",
+              "label": "Square"
+            },
+            {
+              "value": "4 / 3",
+              "label": "Landscape 4:3"
+            },
+            {
+              "value": "16 / 9",
+              "label": "Wide 16:9"
+            }
+          ],
+          "default": "auto"
+        },
+        {
+          "type": "select",
+          "id": "image_fit",
+          "label": "Image fit",
+          "options": [
+            {
+              "value": "contain",
+              "label": "Contain"
+            },
+            {
+              "value": "cover",
+              "label": "Cover"
+            }
+          ],
+          "default": "contain"
+        },
+        {
+          "type": "range",
+          "id": "image_radius",
+          "label": "Image corner radius",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "default": 4
+        },
+        {
+          "type": "checkbox",
+          "id": "border",
+          "label": "Decorative border",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "shadow",
+          "label": "Image shadow",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "vertical_align",
+          "label": "Vertical alignment",
+          "options": [
+            {
+              "value": "start",
+              "label": "Top"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "end",
+              "label": "Bottom"
+            }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "Text alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "header",
+          "content": "Story content"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "Our story"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "United by Faith. Inspired by Love."
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Story or biography",
+          "default": "<p>Add your approved story or biography here.</p>"
+        },
+        {
+          "type": "text",
+          "id": "quote",
+          "label": "Scripture or quote"
+        },
+        {
+          "type": "text",
+          "id": "reference",
+          "label": "Quote reference"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Designation"
+        },
+        {
+          "type": "header",
+          "content": "Block appearance"
+        },
+        {
+          "type": "color",
+          "id": "background",
+          "label": "Background",
+          "default": "#FAF5EB"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#282119"
+        },
+        {
+          "type": "color",
+          "id": "accent",
+          "label": "Accent color",
+          "default": "#987025"
+        },
+        {
+          "type": "range",
+          "id": "padding",
+          "label": "Desktop inner padding",
+          "min": 0,
+          "max": 80,
+          "step": 4,
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding",
+          "label": "Mobile inner padding",
+          "min": 0,
+          "max": 48,
+          "step": 4,
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Button"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "color",
+          "id": "button_bg",
+          "label": "Button background",
+          "default": "#282119"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Button text",
+          "default": "#FFFFFF"
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "name": "Value card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "symbol",
+          "label": "Symbol",
+          "default": "✝"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Faith"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Description",
+          "default": "<p>Share what this value means to your brand.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Block appearance"
+        },
+        {
+          "type": "color",
+          "id": "background",
+          "label": "Background",
+          "default": "#201E19"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "accent",
+          "label": "Accent color",
+          "default": "#D7B66E"
+        },
+        {
+          "type": "range",
+          "id": "padding",
+          "label": "Desktop inner padding",
+          "min": 0,
+          "max": 80,
+          "step": 4,
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding",
+          "label": "Mobile inner padding",
+          "min": 0,
+          "max": 48,
+          "step": 4,
+          "default": 16
+        }
+      ]
+    },
+    {
+      "type": "banner",
+      "name": "Mission / quote banner",
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "Our mission"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Faith in every step. Purpose in everything we do."
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Description"
+        },
+        {
+          "type": "header",
+          "content": "Block appearance"
+        },
+        {
+          "type": "color",
+          "id": "background",
+          "label": "Background",
+          "default": "#F5EDDE"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#282119"
+        },
+        {
+          "type": "color",
+          "id": "accent",
+          "label": "Accent color",
+          "default": "#987025"
+        },
+        {
+          "type": "range",
+          "id": "padding",
+          "label": "Desktop inner padding",
+          "min": 0,
+          "max": 80,
+          "step": 4,
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding",
+          "label": "Mobile inner padding",
+          "min": 0,
+          "max": 48,
+          "step": 4,
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Button"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "color",
+          "id": "button_bg",
+          "label": "Button background",
+          "default": "#282119"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Button text",
+          "default": "#FFFFFF"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Faith About Us",
+      "blocks": [
+        {
+          "type": "story",
+          "settings": {
+            "quote": "Her worth is far above rubies.",
+            "reference": "Proverbs 31:10"
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "symbol": "✝",
+            "heading": "Faith"
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "symbol": "♡",
+            "heading": "Love"
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "symbol": "✦",
+            "heading": "Purpose"
+          }
+        },
+        {
+          "type": "story",
+          "settings": {
+            "eyebrow": "Meet our founder",
+            "heading": "The Heart Behind Our Mission",
+            "image_position": "right",
+            "background": "#FFFFFF",
+            "border": false,
+            "body": "<p>Add the approved founder biography here.</p>"
+          }
+        },
+        {
+          "type": "banner"
+        }
+      ]
+    }
+  ],
+  "class": "faith-about-section"
+}
+{% endschema %}
