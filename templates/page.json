@@ -84,7 +84,7 @@
           "settings": {
             "symbol": "✝",
             "heading": "Faith",
-            "body": "<p>Share what this value means to your brand.</p>",
+            "body": "",
             "background": "#201E19",
             "text_color": "#FFFFFF",
             "accent": "#D7B66E",
@@ -97,7 +97,7 @@
           "settings": {
             "symbol": "♡",
             "heading": "Love",
-            "body": "<p>Share what this value means to your brand.</p>",
+            "body": "",
             "background": "#201E19",
             "text_color": "#FFFFFF",
             "accent": "#D7B66E",
@@ -110,7 +110,7 @@
           "settings": {
             "symbol": "✦",
             "heading": "Purpose",
-            "body": "<p>Share what this value means to your brand.</p>",
+            "body": "",
             "background": "#201E19",
             "text_color": "#FFFFFF",
             "accent": "#D7B66E",
