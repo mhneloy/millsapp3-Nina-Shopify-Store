@@ -76,7 +76,7 @@
             "button_label": "",
             "button_link": "",
             "button_bg": "#282119",
-            "button_text_color": "#FFFFFF"
+            "button_text_color": "#ffffff"
           }
         },
         "value_mHDNTR": {
@@ -85,9 +85,9 @@
             "symbol": "✝",
             "heading": "Faith",
             "body": "",
-            "background": "#201E19",
-            "text_color": "#FFFFFF",
-            "accent": "#D7B66E",
+            "background": "#201e19",
+            "text_color": "#ffffff",
+            "accent": "#d7b66e",
             "padding": 24,
             "mobile_padding": 16
           }
@@ -98,9 +98,9 @@
             "symbol": "♡",
             "heading": "Love",
             "body": "",
-            "background": "#201E19",
-            "text_color": "#FFFFFF",
-            "accent": "#D7B66E",
+            "background": "#201e19",
+            "text_color": "#ffffff",
+            "accent": "#d7b66e",
             "padding": 24,
             "mobile_padding": 16
           }
@@ -111,9 +111,9 @@
             "symbol": "✦",
             "heading": "Purpose",
             "body": "",
-            "background": "#201E19",
-            "text_color": "#FFFFFF",
-            "accent": "#D7B66E",
+            "background": "#201e19",
+            "text_color": "#ffffff",
+            "accent": "#d7b66e",
             "padding": 24,
             "mobile_padding": 16
           }
@@ -140,7 +140,7 @@
             "reference": "Proverbs 31:10",
             "name": "",
             "role": "",
-            "background": "#FAF5EB",
+            "background": "#faf5eb",
             "text_color": "#282119",
             "accent": "#987025",
             "padding": 24,
@@ -148,7 +148,7 @@
             "button_label": "",
             "button_link": "",
             "button_bg": "#282119",
-            "button_text_color": "#FFFFFF"
+            "button_text_color": "#ffffff"
           }
         },
         "banner_xiE6xk": {
@@ -158,7 +158,7 @@
             "eyebrow": "Our mission",
             "heading": "Faith in every step. Purpose in everything we do.",
             "body": "",
-            "background": "#F5EDDE",
+            "background": "#f5edde",
             "text_color": "#282119",
             "accent": "#987025",
             "padding": 24,
@@ -166,7 +166,7 @@
             "button_label": "",
             "button_link": "",
             "button_bg": "#282119",
-            "button_text_color": "#FFFFFF"
+            "button_text_color": "#ffffff"
           }
         }
       },
@@ -186,7 +186,7 @@
         "intro": "<p>More than a brand. A journey of faith, love, and purpose.</p>",
         "heading_tag": "h2",
         "intro_align": "center",
-        "background": "#FAF5EB",
+        "background": "#F5F3EE",
         "text_color": "#282119",
         "accent": "#987025",
         "heading_font": "playfair_display_n4",
