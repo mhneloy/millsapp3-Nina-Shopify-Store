@@ -58,7 +58,7 @@
             "image_radius": 4,
             "border": true,
             "shadow": false,
-            "vertical_align": "center",
+            "vertical_align": "start",
             "text_align": "left",
             "eyebrow": "Our story",
             "heading": "United by Faith. Inspired by Love.",
