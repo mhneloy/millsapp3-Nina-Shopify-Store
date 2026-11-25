@@ -11,6 +11,7 @@
   "sections": {
     "main": {
       "type": "nfc-page",
+      "disabled": true,
       "settings": {
         "eyebrow": "NUTS FOR CHRIST",
         "heading": "",
