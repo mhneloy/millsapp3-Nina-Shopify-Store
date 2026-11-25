@@ -11,10 +11,208 @@
   "sections": {
     "main": {
       "type": "nfc-page",
-      "settings": {}
+      "settings": {
+        "eyebrow": "NUTS FOR CHRIST",
+        "heading": "",
+        "copy": "",
+        "nfc_background_color": "",
+        "nfc_heading_color": "",
+        "nfc_text_color": "",
+        "nfc_eyebrow_color": "",
+        "nfc_link_color": "",
+        "nfc_accent_color": "",
+        "nfc_border_color": "",
+        "nfc_button_text": "",
+        "nfc_button_background": "",
+        "nfc_button_border": "",
+        "nfc_button_hover_text": "",
+        "nfc_button_hover_background": "",
+        "nfc_content_position": "default",
+        "nfc_text_alignment": "default",
+        "nfc_custom_width": false,
+        "nfc_content_width": 1440,
+        "nfc_custom_typography": false,
+        "nfc_heading_size": 56,
+        "nfc_heading_size_mobile": 36,
+        "nfc_paragraph_size": 14,
+        "nfc_paragraph_size_mobile": 14,
+        "nfc_padding_desktop": "",
+        "nfc_padding_mobile": "",
+        "nfc_margin_desktop": "",
+        "nfc_margin_mobile": ""
+      }
+    },
+    "about_us_VUGybi": {
+      "type": "about-us",
+      "blocks": {
+        "story_HX4dtG": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/praston-wife.webp",
+            "alt": "",
+            "image_position": "left",
+            "mobile_order": "image",
+            "image_width": 45,
+            "image_ratio": "auto",
+            "image_fit": "contain",
+            "image_radius": 4,
+            "border": true,
+            "shadow": false,
+            "vertical_align": "center",
+            "text_align": "left",
+            "eyebrow": "Our story",
+            "heading": "United by Faith. Inspired by Love.",
+            "body": "<p>Add your approved story or biography here.</p>",
+            "quote": "Her worth is far above rubies.",
+            "reference": "Proverbs 31:10",
+            "name": "",
+            "role": "",
+            "background": "#FAF5EB",
+            "text_color": "#282119",
+            "accent": "#987025",
+            "padding": 24,
+            "mobile_padding": 16,
+            "button_label": "",
+            "button_link": "",
+            "button_bg": "#282119",
+            "button_text_color": "#FFFFFF"
+          }
+        },
+        "value_mHDNTR": {
+          "type": "value",
+          "settings": {
+            "symbol": "✝",
+            "heading": "Faith",
+            "body": "<p>Share what this value means to your brand.</p>",
+            "background": "#201E19",
+            "text_color": "#FFFFFF",
+            "accent": "#D7B66E",
+            "padding": 24,
+            "mobile_padding": 16
+          }
+        },
+        "value_by8TFR": {
+          "type": "value",
+          "settings": {
+            "symbol": "♡",
+            "heading": "Love",
+            "body": "<p>Share what this value means to your brand.</p>",
+            "background": "#201E19",
+            "text_color": "#FFFFFF",
+            "accent": "#D7B66E",
+            "padding": 24,
+            "mobile_padding": 16
+          }
+        },
+        "value_DpnTGH": {
+          "type": "value",
+          "settings": {
+            "symbol": "✦",
+            "heading": "Purpose",
+            "body": "<p>Share what this value means to your brand.</p>",
+            "background": "#201E19",
+            "text_color": "#FFFFFF",
+            "accent": "#D7B66E",
+            "padding": 24,
+            "mobile_padding": 16
+          }
+        },
+        "story_WmU6UP": {
+          "type": "story",
+          "settings": {
+            "alt": "",
+            "image_position": "right",
+            "mobile_order": "image",
+            "image_width": 45,
+            "image_ratio": "auto",
+            "image_fit": "contain",
+            "image_radius": 4,
+            "border": false,
+            "shadow": false,
+            "vertical_align": "center",
+            "text_align": "left",
+            "eyebrow": "Meet our founder",
+            "heading": "The Heart Behind Our Mission",
+            "body": "<p>Add the approved founder biography here.</p>",
+            "quote": "",
+            "reference": "",
+            "name": "",
+            "role": "",
+            "background": "#ffffff",
+            "text_color": "#282119",
+            "accent": "#987025",
+            "padding": 24,
+            "mobile_padding": 16,
+            "button_label": "",
+            "button_link": "",
+            "button_bg": "#282119",
+            "button_text_color": "#FFFFFF"
+          }
+        },
+        "banner_xiE6xk": {
+          "type": "banner",
+          "disabled": true,
+          "settings": {
+            "eyebrow": "Our mission",
+            "heading": "Faith in every step. Purpose in everything we do.",
+            "body": "",
+            "background": "#F5EDDE",
+            "text_color": "#282119",
+            "accent": "#987025",
+            "padding": 24,
+            "mobile_padding": 16,
+            "button_label": "",
+            "button_link": "",
+            "button_bg": "#282119",
+            "button_text_color": "#FFFFFF"
+          }
+        }
+      },
+      "block_order": [
+        "story_HX4dtG",
+        "value_mHDNTR",
+        "value_by8TFR",
+        "value_DpnTGH",
+        "story_WmU6UP",
+        "banner_xiE6xk"
+      ],
+      "name": "Faith About Us",
+      "settings": {
+        "show_intro": true,
+        "eyebrow": "Faith • Family • Purpose",
+        "heading": "Rooted in Faith. Driven by Purpose.",
+        "intro": "<p>More than a brand. A journey of faith, love, and purpose.</p>",
+        "heading_tag": "h2",
+        "intro_align": "center",
+        "background": "#FAF5EB",
+        "text_color": "#282119",
+        "accent": "#987025",
+        "heading_font": "playfair_display_n4",
+        "body_font": "assistant_n4",
+        "heading_size": 54,
+        "block_heading_size": 42,
+        "body_size": 17,
+        "max_width": 1240,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "block_gap": 48,
+        "column_gap": 48,
+        "card_radius": 8,
+        "button_radius": 4,
+        "value_columns": 3,
+        "mobile_top": 40,
+        "mobile_bottom": 40,
+        "mobile_gap": 28,
+        "mobile_heading": 36,
+        "mobile_block_heading": 30,
+        "mobile_body": 16,
+        "mobile_columns": 1,
+        "animation": true
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "about_us_VUGybi"
   ]
 }
