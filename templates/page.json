@@ -178,11 +178,15 @@
         "story_HX4dtG",
         "banner_xiE6xk"
       ],
+      "custom_css": [
+        "header.fa-intro.fa-reveal {display: flex; justify-content: center; align-items: center; flex-direction: column;}",
+        "h2.fa-main-title {max-width: 500px;}"
+      ],
       "name": "Faith About Us",
       "settings": {
         "show_intro": true,
         "eyebrow": "Faith • Family • Purpose",
-        "heading": "Rooted in Faith. Driven by Purpose.",
+        "heading": "Rooted in Faith Driven by Purpose",
         "intro": "<p>More than a brand. A journey of faith, love, and purpose.</p>",
         "heading_tag": "h2",
         "intro_align": "center",
