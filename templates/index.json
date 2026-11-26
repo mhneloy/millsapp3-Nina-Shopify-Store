@@ -120,7 +120,7 @@
         ".category-tile img {object-fit: fill;}",
         "h2 {text-align: center;}",
         "p.eyebrow {text-align: center;}",
-        "@media(max-width:786px){.category-tile__number {margin: 12px; max-width: 74px;}}"
+        "@media (max-width: 786px) {.category-tile__number {margin: 12px; max-width: 74px; align-self: flex-start; }}"
       ],
       "settings": {
         "eyebrow": "THE COLLECTION",
